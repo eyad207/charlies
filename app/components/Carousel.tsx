@@ -9,21 +9,21 @@ import Button from './Button'
 const slides = [
   {
     id: 1,
-    title: 'Autentisk Kebab',
-    subtitle: 'Laget med lidenskap siden 1995',
-    description:
-      'Opplev den beste kebaben i byen med ferske ingredienser og tradisjonelle oppskrifter',
-    image: '/kebabpizza.webp',
-    cta: 'Bestill Nå',
-  },
-  {
-    id: 2,
     title: 'Vegetar Alternativer',
     subtitle: 'Sunt og deilig',
     description:
       'Våre vegetarkebaber er laget med kjærlighet og de beste grønnsakene',
     image: '/Vegetar-kebab med hjemmelaget saus - Skikkelig digg.avif',
     cta: 'Se Menyen',
+  },
+  {
+    id: 2,
+    title: 'Autentisk Kebab',
+    subtitle: 'Laget med lidenskap siden 1995',
+    description:
+      'Opplev den beste kebaben i byen med ferske ingredienser og tradisjonelle oppskrifter',
+    image: '/Pizza.webp',
+    cta: 'Bestill Nå',
   },
   {
     id: 3,
@@ -215,6 +215,87 @@ export default function Carousel() {
                 </motion.div>
               ))}
             </div>
+          </div>
+
+          {/* Smoke Animation - Enhanced shader-like effect */}
+          <div className='absolute bottom-0 left-0 right-0 h-full pointer-events-none overflow-hidden z-10'>
+            {/* Multiple layers for depth */}
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={`smoke-${i}`}
+                className='absolute'
+                style={{
+                  left: `${(i / 20) * 100 + (Math.random() - 0.5) * 5}%`,
+                  bottom: '-30px',
+                  filter: 'blur(40px) contrast(1.2)',
+                }}
+                animate={{
+                  y: [0, -150, -300, -450, -600],
+                  opacity: [0, 0.4, 0.6, 0.4, 0],
+                  scale: [0.3, 0.7, 1.2, 1.8, 2.5],
+                  x: [
+                    0,
+                    Math.sin(i * 0.5) * 20,
+                    Math.sin(i * 0.5) * 40,
+                    Math.sin(i * 0.5) * 60,
+                    Math.sin(i * 0.5) * 80,
+                  ],
+                }}
+                transition={{
+                  duration: 3 + Math.random() * 1,
+                  repeat: Infinity,
+                  delay: i * 0.3,
+                  ease: 'linear',
+                }}
+              >
+                <div
+                  className='w-28 h-28 rounded-full'
+                  style={{
+                    background: `radial-gradient(circle, 
+                      rgba(240, 127, 19, ${0.6 - i * 0.02}) 0%, 
+                      rgba(200, 200, 200, ${0.4 - i * 0.015}) 30%, 
+                      rgba(255, 255, 255, ${0.3 - i * 0.01}) 60%, 
+                      transparent 100%)`,
+                  }}
+                ></div>
+              </motion.div>
+            ))}
+
+            {/* Secondary smoke layer for density */}
+            {[...Array(15)].map((_, i) => (
+              <motion.div
+                key={`smoke-dense-${i}`}
+                className='absolute'
+                style={{
+                  left: `${(i / 15) * 100 + 3}%`,
+                  bottom: '-20px',
+                  filter: 'blur(30px)',
+                }}
+                animate={{
+                  y: [0, -180, -360, -540],
+                  opacity: [0, 0.5, 0.3, 0],
+                  scale: [0.2, 0.9, 1.5, 2.2],
+                  rotate: [0, 10, -10, 0],
+                }}
+                transition={{
+                  duration: 4 + Math.random() * 1,
+                  repeat: Infinity,
+                  delay: i * 0.45 + 0.2,
+                  ease: 'easeOut',
+                }}
+              >
+                <div
+                  className='w-32 h-32 rounded-full'
+                  style={{
+                    background: `radial-gradient(circle, 
+                      rgba(128, 9, 9, 0.4) 0%, 
+                      rgba(200, 150, 100, 0.3) 40%, 
+                      rgba(255, 255, 255, 0.2) 70%, 
+                      transparent 100%)`,
+                  }}
+                ></div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </AnimatePresence>
