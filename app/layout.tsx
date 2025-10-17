@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Outfit } from 'next/font/google'
 import './globals.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import CartSidebar from './components/CartSidebar'
 import { CartProvider } from './context/CartContext'
 
-const inter = Inter({
+const outfit = Outfit({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800', '900'],
 })
@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='no'>
-      <body className={`${inter.className} antialiased bg-white`}>
+      <body className={`${outfit.className} antialiased bg-white`}>
         <CartProvider>
           <Header />
           <CartSidebar />

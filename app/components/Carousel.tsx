@@ -1,7 +1,7 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { motion, AnimatePresence, type PanInfo } from 'framer-motion'
+import { useState, useEffect, type PointerEvent } from 'react'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Button from './Button'
@@ -76,8 +76,34 @@ export default function Carousel() {
     setLastInteraction(Date.now())
   }
 
+  const handleDragEnd = (
+    _event: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo
+  ) => {
+    if (isAnimating) return
+
+    // Professional snap-to-slide behavior
+    // Requires deliberate drag to change slides
+    const swipeThreshold = 100 // Minimum 100px drag required
+    const swipeVelocityThreshold = 600 // OR high velocity
+
+    if (
+      info.offset.x > swipeThreshold ||
+      info.velocity.x > swipeVelocityThreshold
+    ) {
+      // Swiped right - go to previous slide
+      prevSlide()
+    } else if (
+      info.offset.x < -swipeThreshold ||
+      info.velocity.x < -swipeVelocityThreshold
+    ) {
+      // Swiped left - go to next slide
+      nextSlide()
+    }
+  }
+
   return (
-    <div className='relative h-[650px] overflow-hidden bg-gradient-to-br from-black via-gray-900 to-black'>
+    <div className='relative w-full h-[500px] xs:h-[400px] sm:h-[700px] md:h-[600px] lg:h-[650px] overflow-hidden bg-gradient-to-br from-black via-gray-900 to-black'>
       <AnimatePresence mode='wait'>
         <motion.div
           key={currentSlide}
@@ -87,6 +113,10 @@ export default function Carousel() {
           transition={{ duration: 0.7, ease: 'easeInOut' }}
           onAnimationStart={() => setIsAnimating(true)}
           onAnimationComplete={() => setIsAnimating(false)}
+          drag='x'
+          dragElastic={0.1}
+          dragConstraints={{ left: 0, right: 0 }}
+          onDragEnd={handleDragEnd}
           className='absolute inset-0'
         >
           {/* Background Image with Overlay */}
@@ -95,27 +125,27 @@ export default function Carousel() {
               src={slides[currentSlide].image}
               alt={slides[currentSlide].title}
               fill
-              className='object-cover opacity-40'
+              className='object-cover opacity-90'
               priority
             />
             <div className='absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent'></div>
           </div>
 
           {/* Content */}
-          <div className='relative h-full container mx-auto px-4 flex items-center'>
-            <div className='max-w-2xl text-white z-10'>
+          <div className='relative h-full container mx-auto px-13 sm:px-5 md:px-6 lg:px-8 flex items-center'>
+            <div className='max-w-3xl text-white z-10'>
               <motion.div
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
               >
-                <h3 className='text-[#FDB714] text-xl md:text-2xl font-semibold mb-2'>
+                <h3 className='text-[#FDB714] text-md xs:text-base sm:text-lg md:text-2xl lg:text-2xl font-semibold mb-2'>
                   {slides[currentSlide].subtitle}
                 </h3>
-                <h1 className='text-5xl md:text-7xl font-bold mb-4 leading-tight'>
+                <h1 className='text-4xl xs:text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black mb-3 sm:mb-4 leading-tight'>
                   {slides[currentSlide].title}
                 </h1>
-                <p className='text-lg md:text-xl text-gray-300 mb-8 leading-relaxed'>
+                <p className='text-md xs:text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 mb-6 md:mb-8 leading-relaxed'>
                   {slides[currentSlide].description}
                 </p>
 
@@ -124,7 +154,7 @@ export default function Carousel() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.5, duration: 0.6 }}
                 >
-                  <Button size='lg'>{slides[currentSlide].cta}</Button>
+                  <Button size='responsive'>{slides[currentSlide].cta}</Button>
                 </motion.div>
               </motion.div>
             </div>
@@ -192,26 +222,26 @@ export default function Carousel() {
       {/* Navigation Buttons */}
       <button
         onClick={prevSlide}
-        className='absolute left-4 top-1/2 -translate-y-1/2 bg-[#FDB714] text-black p-3 rounded-full hover:bg-[#E5A613] transition-all z-20 hover:scale-110 cursor-pointer'
+        className='absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-[#FDB714] text-black p-2 sm:p-3 rounded-full hover:bg-[#E5A613] transition-all z-20 hover:scale-110 cursor-pointer'
       >
-        <ChevronLeft size={28} />
+        <ChevronLeft size={20} className='sm:w-7 sm:h-7' />
       </button>
       <button
         onClick={nextSlide}
-        className='absolute right-4 top-1/2 -translate-y-1/2 bg-[#FDB714] text-black p-3 rounded-full hover:bg-[#E5A613] transition-all z-20 hover:scale-110 cursor-pointer'
+        className='absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-[#FDB714] text-black p-2 sm:p-3 rounded-full hover:bg-[#E5A613] transition-all z-20 hover:scale-110 cursor-pointer'
       >
-        <ChevronRight size={28} />
+        <ChevronRight size={20} className='sm:w-7 sm:h-7' />
       </button>
 
       {/* Slide Indicators */}
-      <div className='absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20'>
+      <div className='absolute bottom-20 sm:bottom-24 md:bottom-32 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3 z-20'>
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => handleIndicatorClick(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer ${
+            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 cursor-pointer ${
               index === currentSlide
-                ? 'bg-[#FDB714] w-8'
+                ? 'bg-[#FDB714] w-6 sm:w-8'
                 : 'bg-white/50 hover:bg-white/80'
             }`}
           />

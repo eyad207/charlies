@@ -7,7 +7,7 @@ interface ButtonProps {
   children: ReactNode
   onClick?: () => void
   variant?: 'primary' | 'secondary' | 'outline'
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'md' | 'lg' | 'responsive'
   className?: string
 }
 
@@ -34,6 +34,7 @@ export default function Button({
     sm: 'px-4 py-2 text-sm',
     md: 'px-6 py-3 text-base',
     lg: 'px-8 py-4 text-lg',
+    responsive: 'px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base',
   }
 
   return (

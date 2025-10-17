@@ -59,135 +59,145 @@ export default function ProductModal({
 
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 50 }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 50 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className='fixed inset-0 z-[201] flex items-center justify-center p-4'
+            className='fixed inset-0 z-[201] flex items-center justify-center p-3 sm:p-4 md:p-6'
           >
-            <div className='bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl'>
-              <div className='relative'>
-                {/* Close Button */}
-                <button
-                  onClick={onClose}
-                  className='absolute top-4 right-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition-all cursor-pointer'
-                >
-                  <X size={24} className='text-gray-900' />
-                </button>
+            <div className='bg-white rounded-3xl w-full max-w-5xl max-h-[95vh] overflow-hidden shadow-2xl flex flex-col md:flex-row '>
+              {/* Close Button */}
+              <button
+                onClick={onClose}
+                className='absolute top-4 right-4 sm:top-6 sm:right-6 z-50 bg-white hover:bg-gray-100 rounded-full p-2 sm:p-3 shadow-lg transition-all cursor-pointer'
+              >
+                <X size={24} className='text-gray-900' />
+              </button>
 
-                {/* Image */}
-                <div className='relative h-[300px] md:h-[400px] overflow-hidden rounded-t-2xl'>
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className='object-cover'
-                  />
-                  {product.isVegetarian && (
-                    <div className='absolute top-4 left-4 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg'>
-                      Vegetar
-                    </div>
-                  )}
-                </div>
-
-                {/* Content */}
-                <div className='p-6 md:p-8'>
+              {/* Image Section */}
+              <div className=' relative h-60 sm:h-80 md:h-full md:w-1/2 md:min-h-96 rounded-b-2xl'>
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className='flex justify-center object-cover rounded-2xl'
+                />
+                <div className='absolute inset-0' />
+                {product.isVegetarian && (
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className='absolute top-4 left-4 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg'
                   >
-                    <h2 className='text-3xl md:text-4xl font-bold text-gray-900 mb-4'>
+                    🥗 Vegetar
+                  </motion.div>
+                )}
+              </div>
+
+              {/* Content Section - Scrollable */}
+              <div className='w-full md:w-1/2 p-6 sm:p-8 md:p-10 flex flex-col justify-between overflow-y-auto'>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className='space-y-6'
+                >
+                  {/* Title */}
+                  <div>
+                    <h2 className='text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 mb-2'>
                       {product.name}
                     </h2>
+                    <div className='w-12 h-1 bg-[#FDB714] rounded-full'></div>
+                  </div>
 
-                    <p className='text-gray-600 text-lg leading-relaxed mb-6'>
-                      {product.description}
-                    </p>
+                  {/* Description */}
+                  <p className='text-gray-600 text-base sm:text-lg leading-relaxed'>
+                    {product.description}
+                  </p>
 
-                    {/* Additional Info */}
-                    <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 bg-gray-50 p-4 rounded-xl'>
-                      <div className='text-center'>
-                        <div className='text-2xl mb-1'>🔥</div>
-                        <p className='text-sm text-gray-600'>Fersk Tilberedt</p>
-                      </div>
-                      <div className='text-center'>
-                        <div className='text-2xl mb-1'>⏱️</div>
-                        <p className='text-sm text-gray-600'>Klar på 10 min</p>
-                      </div>
-                      <div className='text-center'>
-                        <div className='text-2xl mb-1'>🌟</div>
-                        <p className='text-sm text-gray-600'>Anbefalt</p>
-                      </div>
+                  {/* Ingredients */}
+                  <div>
+                    <h3 className='font-black text-lg sm:text-xl text-gray-900 mb-3'>
+                      Ingredienser
+                    </h3>
+                    <div className='flex flex-wrap gap-2'>
+                      {[
+                        'Kebabkjøtt',
+                        'Salat',
+                        'Tomat',
+                        'Agurk',
+                        'Rødløk',
+                        'Spesialsaus',
+                      ].map((ingredient, index) => (
+                        <motion.span
+                          key={index}
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.1 + index * 0.05 }}
+                          className='bg-blue-50 text-blue-700 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold border border-blue-100'
+                        >
+                          {ingredient}
+                        </motion.span>
+                      ))}
                     </div>
+                  </div>
+                </motion.div>
 
-                    {/* Ingredients */}
-                    <div className='mb-6'>
-                      <h3 className='font-bold text-lg text-gray-900 mb-3'>
-                        Ingredienser:
-                      </h3>
-                      <div className='flex flex-wrap gap-2'>
-                        {[
-                          'Kebabkjøtt',
-                          'Salat',
-                          'Tomat',
-                          'Agurk',
-                          'Rødløk',
-                          'Spesialsaus',
-                        ].map((ingredient, index) => (
-                          <span
-                            key={index}
-                            className='bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm'
-                          >
-                            {ingredient}
-                          </span>
-                        ))}
-                      </div>
+                {/* Price and Action Section */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className='space-y-4 mt-8 pt-6 border-t border-gray-200'
+                >
+                  {/* Price */}
+                  <div className='flex items-end justify-between'>
+                    {/* Total Price */}
+                    <div>
+                      <p className='text-xs sm:text-sm text-gray-600 font-semibold mb-1'>
+                        TOTAL
+                      </p>
+                      <p className='text-3xl sm:text-4xl font-black text-[#FDB714]'>
+                        {(
+                          parseInt(product.price.replace(/\D/g, '')) * quantity
+                        ).toFixed(0)}
+                        ,-
+                      </p>
                     </div>
-
-                    {/* Price and Quantity */}
-                    <div className='flex items-center justify-between mb-6 pb-6 border-b border-gray-200'>
-                      <div>
-                        <p className='text-sm text-gray-600 mb-1'>Pris</p>
-                        <p className='text-4xl font-bold text-[#FDB714]'>
-                          {product.price}
-                        </p>
-                      </div>
-
-                      <div className='flex items-center gap-3 bg-gray-100 rounded-lg p-2'>
+                    <div className='text-right'>
+                      <p className='text-xs sm:text-sm text-gray-600 font-semibold mb-2'>
+                        ANTALL
+                      </p>
+                      <div className='flex items-center gap-2 bg-gray-100 rounded-xl p-2'>
                         <button
                           onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                          className='w-10 h-10 flex items-center justify-center bg-white hover:bg-gray-200 rounded-lg transition-colors shadow-sm cursor-pointer'
+                          className='w-9 sm:w-10 h-9 sm:h-10 flex items-center justify-center bg-white hover:bg-gray-200 rounded-lg transition-colors shadow-sm cursor-pointer font-bold'
                         >
-                          <Minus size={18} />
+                          <Minus size={18} className='text-black' />
                         </button>
-                        <span className='w-12 text-center font-bold text-xl'>
+                        <span className='w-10 sm:w-12 text-center text-black text-lg sm:text-xl'>
                           {quantity}
                         </span>
                         <button
                           onClick={() => setQuantity(quantity + 1)}
-                          className='w-10 h-10 flex items-center justify-center bg-[#FDB714] hover:bg-[#E5A613] rounded-lg transition-colors shadow-sm cursor-pointer'
+                          className='w-9 sm:w-10 h-9 sm:h-10 flex items-center justify-center bg-[#FDB714] hover:bg-[#E5A613] rounded-lg transition-colors shadow-sm cursor-pointer font-bold'
                         >
-                          <Plus size={18} />
+                          <Plus size={18} className='text-black' />
                         </button>
                       </div>
                     </div>
+                  </div>
 
-                    {/* Add to Cart Button */}
-                    <Button
-                      size='lg'
-                      className='w-full'
-                      onClick={handleAddToCart}
-                    >
-                      <ShoppingCart size={20} />
-                      Legg til i handlekurv -{' '}
-                      {(
-                        parseInt(product.price.replace(/\D/g, '')) * quantity
-                      ).toFixed(0)}
-                      ,-
-                    </Button>
-                  </motion.div>
-                </div>
+                  {/* Add to Cart Button */}
+                  <Button
+                    size='lg'
+                    className='w-full'
+                    onClick={handleAddToCart}
+                  >
+                    <ShoppingCart size={20} />
+                    Legg til i handlekurv
+                  </Button>
+                </motion.div>
               </div>
             </div>
           </motion.div>

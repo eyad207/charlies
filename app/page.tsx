@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Carousel from './components/Carousel'
 import MenuItem from './components/MenuItem'
 import Button from './components/Button'
-import { Flame, Clock, Award, Heart } from 'lucide-react'
+import { useState } from 'react'
 
 const menuItems = [
   {
@@ -16,6 +16,7 @@ const menuItems = [
       'Saftig kebabkjøtt, fersk salat, tomat, agurk, rødløk og vår hemmelige saus',
     price: '129,-',
     image: '/KebabRull.avif',
+    category: 'Kebab',
   },
   {
     id: '2',
@@ -25,6 +26,7 @@ const menuItems = [
     price: '119,-',
     image: '/Vegetar-kebab med hjemmelaget saus - Skikkelig digg.avif',
     isVegetarian: true,
+    category: 'Kebab',
   },
   {
     id: '3',
@@ -33,73 +35,32 @@ const menuItems = [
       'Saftig kebabkjøtt servert med pommes frites, salat og valgfri saus',
     price: '149,-',
     image: '/Kebab i pita med hjemmelaget kebabsaus.png',
-  },
-  {
-    id: '4',
-    name: 'Familie Meny',
-    description:
-      '4 kebaber, 2 store pommes frites og 4 brus - perfekt for familien!',
-    price: '449,-',
-    image: '/burger-with-cola.jpg',
-  },
-  {
-    id: '5',
-    name: 'Kebab Pizza',
-    description:
-      'Crispy pizza med kebabkjøtt, løk, paprika, mais og vår spesielle dressing',
-    price: '159,-',
-    image: '/kebabpizza.webp',
-  },
-  {
-    id: '6',
-    name: 'Kylling Kebab',
-    description: 'Marinert kylling, frisk salat, tomat, agurk og hvitløkssaus',
-    price: '139,-',
-    image: '/Shawarma - döner kebab.webp',
+    category: 'Tallerken',
   },
 ]
 
-const features = [
-  {
-    icon: <Flame className='w-12 h-12' />,
-    title: 'Grillet til Perfeksjon',
-    description: 'Hver kebab grilles med presisjon for den perfekte smaken',
-    image: '/hot-and-spicy-burgers-bee6c8f.jpg',
-  },
-  {
-    icon: <Clock className='w-12 h-12' />,
-    title: 'Rask Servering',
-    description: 'Din mat er klar på under 10 minutter',
-    image: '/Skau-kebab.webp',
-  },
-  {
-    icon: <Award className='w-12 h-12' />,
-    title: 'Prisbelønt Kvalitet',
-    description: 'Kåret til beste kebab i Oslo 3 år på rad',
-    image: '/MSG-Smash-Burger.jpg',
-  },
-  {
-    icon: <Heart className='w-12 h-12' />,
-    title: 'Laget med Kjærlighet',
-    description: 'Vi bruker kun de beste og ferskeste ingrediensene',
-    image: '/Smak´s kebab rull – Smak og gaa.webp',
-  },
-]
+const categories = ['Alle', 'Kebab', 'Pizza', 'Tallerken', 'Pakker']
 
 export default function Home() {
+  const [selectedCategory, setSelectedCategory] = useState('Alle')
+
+  const filteredMenuItems = menuItems.filter((item) =>
+    selectedCategory === 'Alle' ? true : item.category === selectedCategory
+  )
+
   return (
     <div className='bg-white'>
       {/* Hero Carousel */}
       <Carousel />
 
-      {/* Menu Section */}
+      {/* Menu Section with Category Filter */}
       <section className='py-20 bg-white'>
         <div className='container mx-auto px-4'>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className='text-center mb-16'
+            className='text-center mb-12'
           >
             <h2 className='text-4xl md:text-5xl font-bold text-gray-900 mb-4'>
               Vår Meny
@@ -110,8 +71,32 @@ export default function Home() {
             <div className='w-24 h-1 bg-[#FDB714] mx-auto'></div>
           </motion.div>
 
+          {/* Category Filter Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className='flex flex-wrap justify-center gap-3 mb-12'
+          >
+            {categories.map((category) => (
+              <motion.button
+                key={category}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-6 py-2 rounded-full font-semibold transition-all ${
+                  selectedCategory === category
+                    ? 'bg-[#FDB714] text-black shadow-lg'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                {category}
+              </motion.button>
+            ))}
+          </motion.div>
+
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-            {menuItems.map((item) => (
+            {filteredMenuItems.map((item) => (
               <MenuItem
                 key={item.id}
                 id={item.id}
@@ -123,109 +108,80 @@ export default function Home() {
               />
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Features Section */}
-      <section className='py-16 md:py-24 bg-white'>
-        <div className='container mx-auto px-4'>
+          {/* View Full Menu CTA */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className='text-center mb-12 md:mb-24'
+            className='flex justify-center text-center mt-12'
           >
-            <h2 className='text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-3 md:mb-6'>
-              Hvorfor Velge Oss?
-            </h2>
-            <p className='text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto px-2'>
-              Vi tilbyr mer enn bare mat - vi tilbyr en opplevelse av autentisk
-              og deilig kebab
-            </p>
-          </motion.div>
-
-          <div className='space-y-12 md:space-y-20'>
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className={`flex flex-col ${
-                  index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'
-                } items-center gap-6 md:gap-8 lg:gap-12`}
-              >
-                {/* Image */}
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                  className='w-full md:flex-1 relative h-48 md:h-64 lg:h-80 rounded-xl md:rounded-2xl overflow-hidden shadow-lg md:shadow-2xl'
-                >
-                  <Image
-                    src={feature.image}
-                    alt={feature.title}
-                    fill
-                    className='object-cover'
-                  />
-                  <div className='absolute inset-0 bg-gradient-to-tr from-black/40 to-transparent'></div>
-                </motion.div>
-
-                {/* Content */}
-                <motion.div
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
-                  className='w-full md:flex-1'
-                >
-                  <div className='flex items-center gap-3 md:gap-4 mb-3 md:mb-4'>
-                    <motion.div
-                      whileHover={{ scale: 1.2, rotate: 10 }}
-                      className='flex-shrink-0 bg-[#FDB714] rounded-full p-3 md:p-4 text-white shadow-lg'
-                    >
-                      <div className='scale-125 md:scale-150'>
-                        {feature.icon}
-                      </div>
-                    </motion.div>
-                    <h3 className='text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900'>
-                      {feature.title}
-                    </h3>
-                  </div>
-
-                  <div className='w-8 md:w-12 h-1 bg-[#FDB714] rounded-full mb-4 md:mb-6'></div>
-
-                  <p className='text-base md:text-lg text-gray-600 leading-relaxed mb-4 md:mb-6'>
-                    {feature.description}
-                  </p>
-
-                  <motion.button
-                    whileHover={{ x: 10, scale: 1.05 }}
-                    transition={{ duration: 0.2 }}
-                    className='inline-flex items-center gap-2 text-[#FDB714] font-bold text-base md:text-lg hover:text-[#E5A613] transition-colors'
-                  >
-                    Les mer →
-                  </motion.button>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Bottom CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className='mt-16 md:mt-24 text-center'
-          >
-            <p className='text-gray-600 text-base md:text-lg mb-6'>
-              Opplev kvaliteten selv - besøk oss i dag!
-            </p>
             <Link href='/meny'>
               <Button size='lg'>Se Full Meny</Button>
             </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Delivery Section - NEW */}
+      <section className='md:py-20 bg-gradient-to-br from-gray-50 to-gray-100'>
+        <div className='px-3 mx-auto'>
+          {/* Delivery Section - Full Width with Text Overlay */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className='relative h-150 sm:h-[500px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl mb-16'
+          >
+            <Image
+              src='/Skau-kebab.webp'
+              alt='Charlie Kebab Levering'
+              fill
+              className='object-cover'
+            />
+            {/* Gradient Overlay */}
+            <div className='absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70' />
+
+            {/* Text Content Overlay - Centered */}
+            <div className='absolute inset-0 flex items-center justify-center px-6 sm:px-12 md:px-16 py-8'>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className='max-w-3xl text-center space-y-4 sm:space-y-6'
+              >
+                <motion.h2
+                  initial={{ opacity: 0, y: -30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className='text-5xl sm:text-6xl md:text-7xl font-black leading-tight text-white'
+                >
+                  Rask & Enkel
+                </motion.h2>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className='text-2xl sm:text-3xl md:text-4xl font-bold text-[#FDB714] leading-relaxed'
+                >
+                  Levering på 20-30 minutter eller hent selv på 10 minutter
+                </motion.p>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className='text-lg sm:text-xl text-gray-100 leading-relaxed'
+                >
+                  Bestill online, ring oss, eller kom forbi. Vi er åpen daglig
+                  11:00-23:00.
+                </motion.p>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>
