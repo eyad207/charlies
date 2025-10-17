@@ -43,18 +43,26 @@ export default function Carousel() {
   const [isAnimating, setIsAnimating] = useState(false)
 
   // Pre-calculate random values to avoid hydration mismatch
-  const smokeOffsets = useMemo(() => [
-    0, 2.5, -1.2, 3.1, -0.8, 1.7, -2.3, 4.2, 0.5, -1.5,
-    2.8, -0.3, 3.5, 1.1, -2.7, 0.9, -1.8, 2.2, 3.8, -0.6
-  ], [])
-  const primaryDurations = useMemo(() => [
-    3.2, 3.7, 3.1, 3.8, 3.3, 3.6, 3.4, 3.9, 3.5, 3.2,
-    3.7, 3.1, 3.8, 3.3, 3.6, 3.4, 3.9, 3.5, 3.2, 3.7
-  ], [])
-  const secondaryDurations = useMemo(() => [
-    4.3, 4.8, 4.1, 4.6, 4.4, 4.9, 4.2, 4.7, 4.5, 4.3,
-    4.8, 4.1, 4.6, 4.4, 4.9
-  ], [])
+  const smokeOffsets = useMemo(
+    () => [
+      0, 2.5, -1.2, 3.1, -0.8, 1.7, -2.3, 4.2, 0.5, -1.5, 2.8, -0.3, 3.5, 1.1,
+      -2.7, 0.9, -1.8, 2.2, 3.8, -0.6,
+    ],
+    []
+  )
+  const primaryDurations = useMemo(
+    () => [
+      3.2, 3.7, 3.1, 3.8, 3.3, 3.6, 3.4, 3.9, 3.5, 3.2, 3.7, 3.1, 3.8, 3.3, 3.6,
+      3.4, 3.9, 3.5, 3.2, 3.7,
+    ],
+    []
+  )
+  const secondaryDurations = useMemo(
+    () => [
+      4.3, 4.8, 4.1, 4.6, 4.4, 4.9, 4.2, 4.7, 4.5, 4.3, 4.8, 4.1, 4.6, 4.4, 4.9,
+    ],
+    []
+  )
 
   useEffect(() => {
     const timer = setInterval(() => {
