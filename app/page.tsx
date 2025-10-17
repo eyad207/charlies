@@ -127,7 +127,7 @@ export default function Home() {
 
       {/* Delivery Section - NEW */}
       <section className='md:py-20 bg-gradient-to-br from-gray-50 to-gray-100'>
-        <div className='px-3 mx-auto'>
+        <div className='px-1 mx-auto'>
           {/* Delivery Section - Full Width with Text Overlay */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -185,6 +185,110 @@ export default function Home() {
               </motion.div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Delivery Services Section - Wolt & Foodora */}
+      <section className='py-16 md:py-20 bg-white'>
+        <div className='container mx-auto px-4'>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className='text-center mb-16'
+          >
+            <h2 className='text-4xl md:text-5xl font-bold text-gray-900 mb-4'>
+              Bestill Gjennom
+            </h2>
+            <p className='text-xl text-gray-600 mb-4'>
+              Rask og enkel bestilling via dine favorittapper
+            </p>
+            <div className='w-24 h-1 bg-[#FDB714] mx-auto'></div>
+          </motion.div>
+
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto'>
+            {/* Wolt */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              whileHover={{ y: -5 }}
+              className='group bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#FDB714]/50'
+            >
+              <div className='flex flex-col items-center text-center space-y-6'>
+                <div className='w-32 h-32 relative rounded-xl overflow-hidden shadow-lg group-hover:shadow-xl transition-shadow duration-300'>
+                  <Image
+                    src='/wolt.jpg'
+                    alt='Wolt'
+                    fill
+                    className='object-cover'
+                  />
+                </div>
+                <div className='space-y-3'>
+                  <h3 className='text-2xl font-bold text-gray-900'>Wolt</h3>
+                  <p className='text-gray-600 leading-relaxed'>
+                    Bestill gjennom Wolt og få maten levert rett hjem til deg.
+                    Spor bestillingen din i sanntid.
+                  </p>
+                  <div className='flex items-center justify-center gap-2 text-sm text-gray-500'>
+                    <span className='flex items-center gap-1'>
+                      <span className='w-2 h-2 bg-green-500 rounded-full'></span>
+                      Levering: 25-35 min
+                    </span>
+                  </div>
+                </div>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className='w-full bg-gradient-to-r bg-cyan-600 text-black font-bold py-3 px-6 rounded-xl hover:shadow-lg transition-all duration-300'
+                >
+                  Bestill på Wolt
+                </motion.button>
+              </div>
+            </motion.div>
+
+            {/* Foodora */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              whileHover={{ y: -5 }}
+              className='group bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#FDB714]/50'
+            >
+              <div className='flex flex-col items-center text-center space-y-6'>
+                <div className='w-32 h-32 relative rounded-xl overflow-hidden shadow-lg group-hover:shadow-xl transition-shadow duration-300'>
+                  <Image
+                    src='/foodora.png'
+                    alt='Foodora'
+                    fill
+                    className='object-cover'
+                  />
+                </div>
+                <div className='space-y-3'>
+                  <h3 className='text-2xl font-bold text-gray-900'>Foodora</h3>
+                  <p className='text-gray-600 leading-relaxed'>
+                    Enkel bestilling gjennom Foodora. Fraktfri over 300 kr. Rask
+                    levering til døren.
+                  </p>
+                  <div className='flex items-center justify-center gap-2 text-sm text-gray-500'>
+                    <span className='flex items-center gap-1'>
+                      <span className='w-2 h-2 bg-green-500 rounded-full'></span>
+                      Levering: 25-35 min
+                    </span>
+                  </div>
+                </div>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className='w-full bg-gradient-to-r bg-pink-600 text-black font-bold py-3 px-6 rounded-xl hover:shadow-lg transition-all duration-300'
+                >
+                  Bestill på Foodora
+                </motion.button>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
