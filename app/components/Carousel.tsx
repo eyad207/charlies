@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence, type PanInfo } from 'framer-motion'
-import { useState, useEffect, type PointerEvent } from 'react'
+import { useState, useEffect, useMemo, type PointerEvent } from 'react'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Button from './Button'
@@ -41,6 +41,20 @@ export default function Carousel() {
   const [lastInteraction, setLastInteraction] = useState(0)
   const [direction, setDirection] = useState<'left' | 'right'>('right')
   const [isAnimating, setIsAnimating] = useState(false)
+
+  // Pre-calculate random values to avoid hydration mismatch
+  const smokeOffsets = useMemo(() => [
+    0, 2.5, -1.2, 3.1, -0.8, 1.7, -2.3, 4.2, 0.5, -1.5,
+    2.8, -0.3, 3.5, 1.1, -2.7, 0.9, -1.8, 2.2, 3.8, -0.6
+  ], [])
+  const primaryDurations = useMemo(() => [
+    3.2, 3.7, 3.1, 3.8, 3.3, 3.6, 3.4, 3.9, 3.5, 3.2,
+    3.7, 3.1, 3.8, 3.3, 3.6, 3.4, 3.9, 3.5, 3.2, 3.7
+  ], [])
+  const secondaryDurations = useMemo(() => [
+    4.3, 4.8, 4.1, 4.6, 4.4, 4.9, 4.2, 4.7, 4.5, 4.3,
+    4.8, 4.1, 4.6, 4.4, 4.9
+  ], [])
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -225,7 +239,7 @@ export default function Carousel() {
                 key={`smoke-${i}`}
                 className='absolute'
                 style={{
-                  left: `${(i / 20) * 100 + (Math.random() - 0.5) * 5}%`,
+                  left: `${(i / 20) * 100 + smokeOffsets[i]}%`,
                   bottom: '-30px',
                   filter: 'blur(40px) contrast(1.2)',
                 }}
@@ -242,7 +256,7 @@ export default function Carousel() {
                   ],
                 }}
                 transition={{
-                  duration: 3 + Math.random() * 1,
+                  duration: primaryDurations[i],
                   repeat: Infinity,
                   delay: i * 0.3,
                   ease: 'linear',
@@ -278,7 +292,7 @@ export default function Carousel() {
                   rotate: [0, 10, -10, 0],
                 }}
                 transition={{
-                  duration: 4 + Math.random() * 1,
+                  duration: secondaryDurations[i],
                   repeat: Infinity,
                   delay: i * 0.45 + 0.2,
                   ease: 'easeOut',
