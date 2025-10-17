@@ -103,7 +103,7 @@ export default function Carousel() {
   }
 
   return (
-    <div className='relative w-full h-[500px] xs:h-[400px] sm:h-[700px] md:h-[600px] lg:h-[650px] overflow-hidden bg-gradient-to-br from-black via-gray-900 to-black'>
+    <div className='flex justify-center relative rounded-3xl w-400 h-[500px] xs:h-[400px] sm:h-[700px] md:h-[600px] lg:h-[650px] overflow-hidden bg-gradient-to-br from-black via-gray-900 to-black'>
       <AnimatePresence mode='wait'>
         <motion.div
           key={currentSlide}

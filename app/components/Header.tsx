@@ -21,7 +21,7 @@ export default function Header() {
   ]
 
   return (
-    <header className='bg-[#FDB714] shadow-xl sticky top-0 z-50 md:px-50 sm:px-30 rounded-b-xl'>
+    <header className='bg-[#FDB714] mb-5 shadow-xl sticky top-0 z-50 md:px-50 sm:px-30 rounded-b-4xl'>
       <nav className='container mx-auto px-4'>
         <div className='flex justify-between items-center'>
           {/* Logo */}
@@ -33,7 +33,7 @@ export default function Header() {
           >
             <Link
               href='/'
-              className='relative w-24 h-24 md:w-32 md:h-32 hover:scale-110 transition-transform duration-300'
+              className='relative w-24 h-24 md:w-32 md:h-25 hover:scale-110 transition-transform duration-300'
             >
               <Image
                 src='/logo/Charlies logo.png'

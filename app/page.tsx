@@ -51,7 +51,9 @@ export default function Home() {
   return (
     <div className='bg-white'>
       {/* Hero Carousel */}
-      <Carousel />
+      <div className='flex justify-center  '>
+        <Carousel />
+      </div>
 
       {/* Menu Section with Category Filter */}
       <section className='py-20 bg-white'>
