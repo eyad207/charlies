@@ -21,7 +21,7 @@ export default function Header() {
   ]
 
   return (
-    <header className='bg-[#FDB714] mb-5 shadow-xl sticky top-0 z-50 md:px-50 sm:px-30 rounded-b-4xl'>
+    <header className='bg-[#FDB714] mb-5 shadow-xl sticky top-0 z-50 md:px-50 sm:px-30 rounded-b-2xl'>
       <nav className='container mx-auto px-4'>
         <div className='flex justify-between items-center'>
           {/* Logo */}
