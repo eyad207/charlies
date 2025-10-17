@@ -108,9 +108,9 @@ export default function CartSidebar() {
                                 }
                                 className='w-7 h-7 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded transition-colors cursor-pointer'
                               >
-                                <Minus size={14} />
+                                <Minus size={14} className='text-black' />
                               </button>
-                              <span className='w-8 text-center font-semibold'>
+                              <span className='w-8 text-center font-semibold text-black'>
                                 {item.quantity}
                               </span>
                               <button
@@ -119,7 +119,7 @@ export default function CartSidebar() {
                                 }
                                 className='w-7 h-7 flex items-center justify-center bg-[#FDB714] hover:bg-[#E5A613] rounded transition-colors cursor-pointer'
                               >
-                                <Plus size={14} />
+                                <Plus size={14} className='text-black' />
                               </button>
                             </div>
 

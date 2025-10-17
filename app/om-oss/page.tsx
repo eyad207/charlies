@@ -2,16 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import {
-  Heart,
-  Award,
-  Zap,
-  MapPin,
-  Users,
-  CheckCircle,
-  Star,
-  TrendingUp,
-} from 'lucide-react'
+import { Heart, Award, Zap, MapPin } from 'lucide-react'
 import Link from 'next/link'
 
 const values = [
@@ -34,56 +25,6 @@ const values = [
     icon: <MapPin className='w-8 h-8' />,
     title: 'Lokalt Engasjement',
     description: 'Vi støtter lokale leverandører og samfunnet omkring oss',
-  },
-]
-
-const whyChooseUs = [
-  {
-    title: 'Friske Ingredienser Daglig',
-    description:
-      'Vi kjøper inn kjøtt og grønnsaker hver morgen for å sikre maksimal friskhet',
-    icon: <CheckCircle className='w-6 h-6' />,
-  },
-  {
-    title: 'Erfarne Kokker',
-    description:
-      'Vårt team har over 100 år samlet erfaring fra kebab-industrien',
-    icon: <Star className='w-6 h-6' />,
-  },
-  {
-    title: 'Miljøvennlig',
-    description: 'Vi bruker bærekraftig emballasje og minimaliserer matsvinn',
-    icon: <TrendingUp className='w-6 h-6' />,
-  },
-  {
-    title: 'Prisbelønt Smaker',
-    description: 'Kåret til beste kebab 3 år på rad av lokale matmagasiner',
-    icon: <Award className='w-6 h-6' />,
-  },
-]
-
-const timeline = [
-  {
-    year: '1995',
-    title: 'Begynnelsen',
-    description:
-      'Charlie Hansen åpner sitt første kjente kebab-sted i Oslo med en drøm om autentisk mat',
-  },
-  {
-    year: '2005',
-    title: 'Ekspansjon',
-    description: 'Økt popularitet fører til utvidelse og flere driftige timer',
-  },
-  {
-    year: '2015',
-    title: 'Anerkjennelse',
-    description: 'Første gang kåret til beste kebab i Oslo av lokale kritikere',
-  },
-  {
-    year: '2024',
-    title: 'I Dag',
-    description:
-      'Et etablert ikon i Oslo med dedikerte kunder og et team som elsker det de gjør',
   },
 ]
 
@@ -238,57 +179,6 @@ export default function OmOss() {
         </div>
       </section>
 
-      {/* Timeline Section */}
-      <section className='py-16 md:py-24 bg-gray-50'>
-        <div className='container mx-auto px-4'>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className='text-center mb-16'
-          >
-            <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4'>
-              Vår Reise
-            </h2>
-            <p className='text-gray-600 text-lg max-w-2xl mx-auto'>
-              Fra små begynnelser til et kjent ikon i Oslo
-            </p>
-          </motion.div>
-
-          <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-8'>
-            {timeline.map((event, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className='relative'
-              >
-                {/* Vertical Line */}
-                {index !== timeline.length - 1 && (
-                  <div className='hidden lg:block absolute top-20 left-full w-full h-0.5 bg-gradient-to-r from-[#FDB714] to-transparent' />
-                )}
-
-                <div className='bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all'>
-                  <div className='flex items-center gap-4 mb-4'>
-                    <div className='w-16 h-16 rounded-full bg-[#FDB714] flex items-center justify-center flex-shrink-0'>
-                      <span className='text-black font-bold text-lg'>
-                        {event.year}
-                      </span>
-                    </div>
-                  </div>
-                  <h3 className='text-xl font-bold text-gray-900 mb-3'>
-                    {event.title}
-                  </h3>
-                  <p className='text-gray-600 text-sm'>{event.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Values Section - Redesigned */}
       <section className='py-16 md:py-24 bg-white'>
         <div className='container mx-auto px-4'>
@@ -315,7 +205,7 @@ export default function OmOss() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -8 }}
-                className='p-8 border-2 border-gray-100 rounded-xl hover:border-[#FDB714] transition-all duration-300 hover:shadow-lg'
+                className='p-8 border-2 border-gray-100 rounded-xl hover:border-[#FDB714] transition-all duration-150 hover:shadow-lg'
               >
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 10 }}
@@ -335,8 +225,8 @@ export default function OmOss() {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className='py-16 md:py-24 bg-gray-50'>
+      {/* Team Section - Modern Cards */}
+      <section className='py-16 md:py-24 bg-white'>
         <div className='container mx-auto px-4'>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -345,35 +235,66 @@ export default function OmOss() {
             className='text-center mb-16'
           >
             <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4'>
-              Hvorfor Velge Oss?
+              Møt Ledergruppen
             </h2>
             <p className='text-gray-600 text-lg max-w-2xl mx-auto'>
-              Vi er ikke bare en restaurant, vi er en del av din daglige
-              lidenskap
+              De som sikrer at hver kebab er perfekt
             </p>
           </motion.div>
 
-          <div className='grid md:grid-cols-2 gap-8'>
-            {whyChooseUs.map((item, index) => (
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+            {[
+              {
+                name: 'Charlie Hansen',
+                role: 'Grunnlegger & Kjøkkensjerf',
+                description:
+                  'Over 40 års erfaring i steking av perfekt kebab. Charlie&apos;s visjoner driver oss videre.',
+                image:
+                  '/historie-bilder/515141514_24465350516402907_8270721479262644512_n.jpg',
+              },
+              {
+                name: 'Maria Olsen',
+                role: 'Daglig Leder',
+                description:
+                  'Sikrer at hver detalj er perfekt, fra bestillinger til servering. Hjerte for kundeservice.',
+                image:
+                  '/historie-bilder/515358692_24486887090915916_3789506594272121272_n.jpg',
+              },
+              {
+                name: 'Ahmed Ali',
+                role: 'Kjøkkenmester',
+                description:
+                  'Mester grilleren som sikrer konsistent kvalitet. 25 år med tradisjonell kebab-teknikk.',
+                image:
+                  '/historie-bilder/515444375_24486887437582548_8547740095225050264_n.jpg',
+              },
+            ].map((member, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className='bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all flex gap-6'
+                className='group bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-150 border border-gray-100 hover:border-[#FDB714]'
               >
-                <div className='flex-shrink-0'>
-                  <div className='flex items-center justify-center h-12 w-12 rounded-md bg-[#FDB714] text-black'>
-                    {item.icon}
-                  </div>
+                <div className='w-24 h-24 rounded-full overflow-hidden mx-auto mb-6 flex-shrink-0 border-4 border-[#FDB714]'>
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    width={96}
+                    height={96}
+                    className='w-full h-full object-cover'
+                  />
                 </div>
-                <div className='flex-1'>
-                  <h3 className='text-lg font-bold text-gray-900 mb-2'>
-                    {item.title}
-                  </h3>
-                  <p className='text-gray-600'>{item.description}</p>
-                </div>
+                <h3 className='text-2xl font-bold text-gray-900 mb-2 text-center'>
+                  {member.name}
+                </h3>
+                <p className='text-[#FDB714] font-semibold text-center mb-4'>
+                  {member.role}
+                </p>
+                <p className='text-gray-600 text-center leading-relaxed'>
+                  {member.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -425,110 +346,6 @@ export default function OmOss() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Team Section - Modern Cards */}
-      <section className='py-16 md:py-24 bg-white'>
-        <div className='container mx-auto px-4'>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className='text-center mb-16'
-          >
-            <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4'>
-              Møt Ledergruppen
-            </h2>
-            <p className='text-gray-600 text-lg max-w-2xl mx-auto'>
-              De som sikrer at hver kebab er perfekt
-            </p>
-          </motion.div>
-
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-            {[
-              {
-                name: 'Charlie Hansen',
-                role: 'Grunnlegger & Kjøkkensjerf',
-                description:
-                  'Over 40 års erfaring i steking av perfekt kebab. Charlie&apos;s visjoner driver oss videre.',
-              },
-              {
-                name: 'Maria Olsen',
-                role: 'Daglig Leder',
-                description:
-                  'Sikrer at hver detalj er perfekt, fra bestillinger til servering. Hjerte for kundeservice.',
-              },
-              {
-                name: 'Ahmed Ali',
-                role: 'Kjøkkenmester',
-                description:
-                  'Mester grilleren som sikrer konsistent kvalitet. 25 år med tradisjonell kebab-teknikk.',
-              },
-            ].map((member, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className='group bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#FDB714]'
-              >
-                <div className='w-24 h-24 rounded-full bg-gradient-to-br from-[#FDB714] to-orange-500 mx-auto mb-6 flex items-center justify-center flex-shrink-0'>
-                  <Users className='w-12 h-12 text-white' />
-                </div>
-                <h3 className='text-2xl font-bold text-gray-900 mb-2 text-center'>
-                  {member.name}
-                </h3>
-                <p className='text-[#FDB714] font-semibold text-center mb-4'>
-                  {member.role}
-                </p>
-                <p className='text-gray-600 text-center leading-relaxed'>
-                  {member.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className='py-16 md:py-24 bg-gradient-to-r from-[#FDB714] to-orange-500 text-black'>
-        <div className='container mx-auto px-4 text-center'>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold mb-6'>
-              Klar til å Oppleve Charlie&apos;s?
-            </h2>
-            <p className='text-lg mb-8 opacity-90 max-w-2xl mx-auto'>
-              Besøk oss i dag og smak på det som gjør oss spesielle. Vi åpner
-              daglig fra 11:00 til 23:00.
-            </p>
-            <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-              <Link href='/meny'>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className='px-8 py-4 bg-black text-[#FDB714] font-bold rounded-lg hover:bg-gray-900 transition-all'
-                >
-                  Se Menyen Vår
-                </motion.button>
-              </Link>
-              <Link href='/kontakt-oss'>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className='px-8 py-4 bg-white text-black font-bold rounded-lg hover:bg-gray-100 transition-all'
-                >
-                  Kontakt Oss
-                </motion.button>
-              </Link>
-            </div>
-          </motion.div>
         </div>
       </section>
     </div>

@@ -51,7 +51,7 @@ export default function KontaktOss() {
                   className='flex items-start gap-4 p-6 bg-gray-50 rounded-xl'
                 >
                   <div className='bg-[#FDB714] p-3 rounded-lg'>
-                    <MapPin className='w-6 h-6 text-black' />
+                    <MapPin className='w-6 h-6 text-gray-400' />
                   </div>
                   <div>
                     <h3 className='font-bold text-lg text-gray-900 mb-1'>
@@ -67,7 +67,7 @@ export default function KontaktOss() {
                   className='flex items-start gap-4 p-6 bg-gray-50 rounded-xl'
                 >
                   <div className='bg-[#FDB714] p-3 rounded-lg'>
-                    <Phone className='w-6 h-6 text-black' />
+                    <Phone className='w-6 h-6 text-gray-400' />
                   </div>
                   <div>
                     <h3 className='font-bold text-lg text-gray-900 mb-1'>
@@ -85,7 +85,7 @@ export default function KontaktOss() {
                   className='flex items-start gap-4 p-6 bg-gray-50 rounded-xl'
                 >
                   <div className='bg-[#FDB714] p-3 rounded-lg'>
-                    <Mail className='w-6 h-6 text-black' />
+                    <Mail className='w-6 h-6 text-gray-400' />
                   </div>
                   <div>
                     <h3 className='font-bold text-lg text-gray-900 mb-1'>
@@ -101,7 +101,7 @@ export default function KontaktOss() {
                   className='flex items-start gap-4 p-6 bg-gray-50 rounded-xl'
                 >
                   <div className='bg-[#FDB714] p-3 rounded-lg'>
-                    <Clock className='w-6 h-6 text-black' />
+                    <Clock className='w-6 h-6 text-gray-400' />
                   </div>
                   <div>
                     <h3 className='font-bold text-lg text-gray-900 mb-1'>
@@ -135,7 +135,7 @@ export default function KontaktOss() {
                     </label>
                     <input
                       type='text'
-                      className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDB714] transition-all'
+                      className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDB714] transition-all placeholder:text-gray-400'
                       placeholder='Ditt fulle navn'
                     />
                   </div>
@@ -146,7 +146,7 @@ export default function KontaktOss() {
                     </label>
                     <input
                       type='email'
-                      className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDB714] transition-all'
+                      className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDB714] transition-all placeholder:text-gray-400'
                       placeholder='din@epost.no'
                     />
                   </div>
@@ -157,7 +157,7 @@ export default function KontaktOss() {
                     </label>
                     <input
                       type='tel'
-                      className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDB714] transition-all'
+                      className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDB714] transition-all placeholder:text-gray-400'
                       placeholder='+47 123 45 678'
                     />
                   </div>
@@ -166,12 +166,14 @@ export default function KontaktOss() {
                     <label className='block text-gray-700 font-semibold mb-2'>
                       Emne
                     </label>
-                    <select className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDB714] transition-all'>
-                      <option>Generell forespørsel</option>
-                      <option>Bestilling</option>
-                      <option>Catering</option>
-                      <option>Tilbakemelding</option>
-                      <option>Annet</option>
+                    <select className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDB714] transition-all text-gray-400 '>
+                      <option className='text-gray-400'>
+                        Generell forespørsel
+                      </option>
+                      <option className='text-gray-400'>Bestilling</option>
+                      <option className='text-gray-400'>Catering</option>
+                      <option className='text-gray-400'>Tilbakemelding</option>
+                      <option className='text-gray-400'>Annet</option>
                     </select>
                   </div>
 
@@ -181,7 +183,7 @@ export default function KontaktOss() {
                     </label>
                     <textarea
                       rows={5}
-                      className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDB714] transition-all resize-none'
+                      className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDB714] transition-all resize-none placeholder:text-gray-400'
                       placeholder='Skriv din melding her...'
                     ></textarea>
                   </div>
