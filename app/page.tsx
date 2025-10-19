@@ -51,16 +51,7 @@ const menuItems = [
     description:
       'Saftig kebabkjøtt servert med pommes frites, salat og valgfri saus',
     price: '149,-',
-    image: '/Kebab i pita med hjemmelaget kebabsaus.png',
-    category: 'Tallerken',
-  },
-  {
-    id: '5',
-    name: 'Kebab Tallerken',
-    description:
-      'Saftig kebabkjøtt servert med pommes frites, salat og valgfri saus',
-    price: '149,-',
-    image: '/Kebab i pita med hjemmelaget kebabsaus.png',
+    image: '/Kebab i pita med hjemmelaget kebabsaus.jpg',
     category: 'Tallerken',
   },
 ]
@@ -456,7 +447,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className='text-center mb-20'
+            className='text-center mb-10'
           >
             {/* Animated Icon */}
             <motion.div
@@ -485,7 +476,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className='text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-gray-900 mb-6'
+              className='text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 mb-6'
             >
               <span className='inline-block'>Populære</span>{' '}
               <span className='bg-gradient-to-r from-[#FDB714] via-amber-500 to-orange-400 bg-clip-text text-transparent inline-block'>
@@ -557,10 +548,9 @@ export default function Home() {
                   type: 'spring',
                   stiffness: 200,
                 }}
-                whileHover={{ scale: 1.1, y: -4 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedCategory(category)}
-                className={`relative px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-black text-sm sm:text-base md:text-lg transition-all duration-300 ${
+                className={`relative px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-black text-sm sm:text-base md:text-lg transition-all duration-300 cursor-pointer ${
                   selectedCategory === category
                     ? 'bg-gradient-to-r from-[#FDB714] via-amber-500 to-[#FDB714] text-black shadow-2xl shadow-[#FDB714]/40'
                     : 'bg-white text-gray-700 hover:bg-gray-50 border-2 border-gray-200 hover:border-[#FDB714]/50 shadow-md hover:shadow-lg'

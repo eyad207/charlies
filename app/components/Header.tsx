@@ -218,16 +218,16 @@ export default function Header() {
           />
 
           {/* Centered Logo */}
-          <div className='absolute inset-0 flex items-center justify-center z-10 md:mb-12'>
+          <div className='absolute inset-0 flex items-center justify-center z-10 md:mb-12 '>
             <motion.div
               initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              className='flex items-center'
+              className='flex items-center '
             >
               <Link href='/'>
                 <motion.div
                   whileTap={{ scale: 0.95 }}
-                  className='relative w-40 h-27 transition-transform duration-300'
+                  className='relative w-40 h-27 transition-transform duration-300 cursor-pointer'
                 >
                   <Image
                     src='/logo/Charlies logo.png'
