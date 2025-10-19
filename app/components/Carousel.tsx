@@ -133,7 +133,7 @@ const slides = [
     subtitle: 'Laget med lidenskap siden 1995',
     description:
       'Opplev den beste kebaben i byen med ferske ingredienser og tradisjonelle oppskrifter',
-    image: '/Pizza.jpg',
+    image: '/pizza.jpg',
     cta: 'Bestill Nå',
   },
   {
