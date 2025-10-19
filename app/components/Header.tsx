@@ -78,7 +78,7 @@ export default function Header() {
 
       <motion.header
         initial={{ y: 0 }}
-        animate={{ y: isVisible ? 0 : -160 }}
+        animate={{ y: isVisible ? 0 : -250 }}
         transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
         className='bg-transparent shadow-none fixed left-0 right-0 z-50'
         style={{

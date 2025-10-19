@@ -84,7 +84,7 @@ export default function Home() {
         <Carousel />
       </div>
       {/* Featured Categories - Premium Design */}
-      <section className=' bg-gradient-to-b from-white via-gray-50 to-white'>
+      <section className='py-15 bg-gradient-to-b from-white via-gray-50 to-white'>
         <div className='container mx-auto px-4'>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -393,7 +393,7 @@ export default function Home() {
       </section>
 
       {/* Delivery Section - Completely Redesigned */}
-      <section className='py-20 md:py-32 bg-gradient-to-br relative overflow-hidden'>
+      <section className='py-20 md:py-25 bg-gradient-to-br relative overflow-hidden'>
         {/* Animated Background Elements */}
         <motion.div
           animate={{
