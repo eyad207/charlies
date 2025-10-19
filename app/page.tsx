@@ -625,14 +625,14 @@ export default function Home() {
                 transition={{ type: 'spring', stiffness: 300 }}
                 className='group relative'
               >
-                <div className='absolute inset-0 bg-gradient-to-r from-[#FDB714] to-[#E5A613] rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-opacity duration-500' />
-                <div className='relative bg-white rounded-3xl p-8 md:p-12 shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-[#FDB714]/20 group-hover:border-[#FDB714]/40'>
+                <div className='absolute inset-0 bg-gradient-to-r from-[#14edfd] to-[#14edfd] rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-opacity duration-500' />
+                <div className='relative bg-white rounded-3xl p-8 md:p-12 shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-[#14edfd]/20 group-hover:border-[#14edfd]/40'>
                   <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ type: 'spring', stiffness: 200 }}
-                    className='w-32 h-32 md:w-40 md:h-40 relative mx-auto mb-8 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-[#FDB714]/20 group-hover:ring-[#FDB714]/40 transition-all duration-500'
+                    className='w-32 h-32 md:w-40 md:h-40 relative mx-auto mb-8 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-[#14edfd]/20 group-hover:ring-[#14edfd]/40 transition-all duration-500'
                   >
                     <Image
                       src='/wolt.jpg'
@@ -663,7 +663,7 @@ export default function Home() {
                         transition={{ delay: i * 0.1 }}
                         className='flex items-center gap-3'
                       >
-                        <div className='w-6 h-6 bg-gradient-to-r from-[#FDB714] to-[#E5A613] rounded-full flex items-center justify-center'>
+                        <div className='w-6 h-6 bg-gradient-to-r from-[#14fdfd] to-[#13b0e5] rounded-full flex items-center justify-center'>
                           <span className='text-white text-xs'>✓</span>
                         </div>
                         <span className='text-gray-700'>{feature}</span>
@@ -674,7 +674,7 @@ export default function Home() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className='w-full bg-gradient-to-r from-[#FDB714] to-[#E5A613] text-white font-black py-4 rounded-2xl hover:shadow-2xl transition-all duration-300 text-lg group-hover:from-[#FDB714] group-hover:to-[#E5A613]'
+                    className='w-full bg-gradient-to-r from-[#14fdfd] to-[#13b0e5]  text-white font-black py-4 rounded-2xl hover:shadow-2xl transition-all duration-300 text-lg group-hover:from-[#14e2fd] group-hover:to-[#1371e5]'
                   >
                     <span className='flex items-center justify-center gap-2'>
                       Bestill Nå
