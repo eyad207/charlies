@@ -146,7 +146,7 @@ const slides = [
     description:
       'Saftig kebabkjøtt servert med pommes frites, salat og valgfri saus',
     price: '149,-',
-    image: '/Kebab i pita med hjemmelaget kebabsaus.png',
+    image: '/Kebab i pita med hjemmelaget kebabsaus.jpg',
     cta: 'Se Menyen',
     badge: 'KAMPANJE',
   },

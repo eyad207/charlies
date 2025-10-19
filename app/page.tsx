@@ -80,11 +80,11 @@ export default function Home() {
       <div className='h-[40px]' />
 
       {/* Hero Carousel - Header Overlays */}
-      <div className='relative py-25 md:py-30'>
+      <div className='relative pt-25 md:pt-30'>
         <Carousel />
       </div>
       {/* Featured Categories - Premium Design */}
-      <section className='py-20 md:py-20 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden'>
+      <section className='py-20 md:py-10 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden'>
         {/* Decorative Background Elements */}
         <div className='absolute top-10 right-0 w-96 h-96 bg-gradient-to-br from-[#FDB714]/5 to-amber-500/5 rounded-full blur-3xl' />
         <div className='absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-yellow-400/5 to-orange-500/5 rounded-full blur-3xl' />
@@ -98,7 +98,7 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className='mb-16 overflow-hidden'
           >
-            <div className='relative bg-white rounded-3xl p-8 md:p-12 shadow-2xl border-2 border-gray-100'>
+            <div className='relative bg-white rounded-3xl p-8 md:p-12border-2 border-gray-100'>
               {/* Google Reviews Header */}
               <div className='flex items-center justify-center gap-4 md:gap-6 mb-8 flex-wrap'>
                 <div className='flex items-center gap-3'>
