@@ -80,27 +80,216 @@ export default function Home() {
       <div className='h-[40px]' />
 
       {/* Hero Carousel - Header Overlays */}
-      <div className='relative'>
+      <div className='relative py-25 md:py-30'>
         <Carousel />
       </div>
       {/* Featured Categories - Premium Design */}
-      <section className='py-15 bg-gradient-to-b from-white via-gray-50 to-white'>
-        <div className='container mx-auto px-4'>
+      <section className='py-20 md:py-20 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden'>
+        {/* Decorative Background Elements */}
+        <div className='absolute top-10 right-0 w-96 h-96 bg-gradient-to-br from-[#FDB714]/5 to-amber-500/5 rounded-full blur-3xl' />
+        <div className='absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-yellow-400/5 to-orange-500/5 rounded-full blur-3xl' />
+
+        <div className='container mx-auto px-4 relative z-10'>
+          {/* Google Reviews Carousel */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className='mb-16 overflow-hidden'
+          >
+            <div className='relative bg-white rounded-3xl p-8 md:p-12 shadow-2xl border-2 border-gray-100'>
+              {/* Google Reviews Header */}
+              <div className='flex items-center justify-center gap-4 md:gap-6 mb-8 flex-wrap'>
+                <div className='flex items-center gap-3'>
+                  <div className='w-14 h-14 bg-white rounded-lg shadow-md flex items-center justify-center'>
+                    <svg viewBox='0 0 24 24' className='w-8 h-8'>
+                      <path
+                        fill='#4285F4'
+                        d='M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z'
+                      />
+                      <path
+                        fill='#34A853'
+                        d='M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z'
+                      />
+                      <path
+                        fill='#FBBC05'
+                        d='M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z'
+                      />
+                      <path
+                        fill='#EA4335'
+                        d='M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z'
+                      />
+                    </svg>
+                  </div>
+                  <div className='text-left'>
+                    <div className='text-base md:text-lg font-bold text-gray-900'>
+                      Google
+                    </div>
+                    <div className='text-sm text-gray-600'>Anmeldelser</div>
+                  </div>
+                </div>
+                <div className='flex items-center gap-2'>
+                  <span className='text-4xl md:text-5xl font-black text-gray-900'>
+                    4.2
+                  </span>
+                  <div className='flex'>
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-6 h-6 md:w-7 md:h-7 ${
+                          i < 4
+                            ? 'text-[#FDB714] fill-[#FDB714]'
+                            : 'text-gray-300'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <span className='text-base md:text-lg text-gray-600 font-semibold'>
+                  (650+ anmeldelser)
+                </span>
+              </div>
+
+              {/* Reviews Carousel */}
+              <div className='relative overflow-hidden'>
+                <motion.div
+                  animate={{ x: [0, -2000] }}
+                  transition={{
+                    duration: 40,
+                    repeat: Infinity,
+                    ease: 'linear',
+                  }}
+                  className='flex gap-6'
+                >
+                  {[
+                    {
+                      name: 'Lars Hansen',
+                      rating: 5,
+                      text: 'Fantastisk kebab! Alltid fersk og god mat. Anbefales på det sterkeste!',
+                      date: '2 uker siden',
+                      avatar: 'LH',
+                    },
+                    {
+                      name: 'Maria Olsen',
+                      rating: 5,
+                      text: 'Best kebab i området! Rask levering og hyggelig personale.',
+                      date: '1 måned siden',
+                      avatar: 'MO',
+                    },
+                    {
+                      name: 'Erik Johansen',
+                      rating: 4,
+                      text: 'Veldig god mat og stor porsjon. Kommer garantert tilbake!',
+                      date: '3 uker siden',
+                      avatar: 'EJ',
+                    },
+                    {
+                      name: 'Sofie Berg',
+                      rating: 5,
+                      text: 'Herlig pizza og kebab! Alltid konsistent kvalitet.',
+                      date: '1 uke siden',
+                      avatar: 'SB',
+                    },
+                    {
+                      name: 'Thomas Andersen',
+                      rating: 5,
+                      text: 'Utrolig god mat! Rask service og hyggelig betjening. Anbefales!',
+                      date: '2 måneder siden',
+                      avatar: 'TA',
+                    },
+                    {
+                      name: 'Nina Kristiansen',
+                      rating: 4,
+                      text: 'God mat til rimelig pris. Perfekt for en rask lunsj!',
+                      date: '3 uker siden',
+                      avatar: 'NK',
+                    },
+                    // Duplicate for seamless loop
+                    {
+                      name: 'Lars Hansen',
+                      rating: 5,
+                      text: 'Fantastisk kebab! Alltid fersk og god mat. Anbefales på det sterkeste!',
+                      date: '2 uker siden',
+                      avatar: 'LH',
+                    },
+                    {
+                      name: 'Maria Olsen',
+                      rating: 5,
+                      text: 'Best kebab i området! Rask levering og hyggelig personale.',
+                      date: '1 måned siden',
+                      avatar: 'MO',
+                    },
+                    {
+                      name: 'Erik Johansen',
+                      rating: 4,
+                      text: 'Veldig god mat og stor porsjon. Kommer garantert tilbake!',
+                      date: '3 uker siden',
+                      avatar: 'EJ',
+                    },
+                    {
+                      name: 'Sofie Berg',
+                      rating: 5,
+                      text: 'Herlig pizza og kebab! Alltid konsistent kvalitet.',
+                      date: '1 uke siden',
+                      avatar: 'SB',
+                    },
+                  ].map((review, index) => (
+                    <div
+                      key={index}
+                      className='flex-shrink-0 w-96 bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 md:p-7 border border-gray-200 shadow-md'
+                    >
+                      <div className='flex items-center gap-4 mb-4'>
+                        <div className='w-14 h-14 bg-gradient-to-br from-[#FDB714] to-amber-500 rounded-full flex items-center justify-center text-white font-black text-sm flex-shrink-0'>
+                          {review.avatar}
+                        </div>
+                        <div className='flex-1 min-w-0'>
+                          <div className='font-bold text-gray-900 text-base truncate'>
+                            {review.name}
+                          </div>
+                          <div className='flex items-center gap-1'>
+                            {[...Array(5)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className={`w-4 h-4 ${
+                                  i < review.rating
+                                    ? 'text-[#FDB714] fill-[#FDB714]'
+                                    : 'text-gray-300'
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      <span className='text-xs text-gray-500 block mb-3'>
+                        {review.date}
+                      </span>
+                      <p className='text-gray-700 text-base leading-relaxed'>
+                        {review.text}
+                      </p>
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className='text-center mb-16'
+            className='text-center mb-20'
           >
             <motion.span
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className='inline-block px-6 py-2 bg-[#FDB714]/20 text-[#FDB714] rounded-full text-sm font-bold mb-4'
+              className='inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FDB714]/20 via-amber-500/20 to-[#FDB714]/20 text-[#FDB714] rounded-full text-sm font-bold mb-6 border-2 border-[#FDB714]/30'
             >
-              UTFORSK VÅR MENY
+              <Award className='w-4 h-4' />
+              PREMIUM KVALITET
             </motion.span>
             {/* Title with Gradient Animation */}
             <motion.h2
@@ -115,35 +304,61 @@ export default function Home() {
                 retter
               </span>
             </motion.h2>
-            <p className='text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed'>
+            <p className='text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8'>
               Håndlagde retter med autentiske smaker og de ferskeste
-              ingrediensene
+              ingrediensene. Hver rett er laget med kjærlighet og dedikasjon til
+              kvalitet.
             </p>
+
+            {/* Trust Badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className='flex flex-wrap items-center justify-center gap-4 text-sm text-gray-600'
+            >
+              <span className='flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-md'>
+                <Star className='w-4 h-4 text-[#FDB714] fill-[#FDB714]' />
+                Ferske Ingredienser
+              </span>
+              <span className='flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-md'>
+                <Clock className='w-4 h-4 text-[#FDB714]' />
+                Hurtig Levering
+              </span>
+              <span className='flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-md'>
+                <Award className='w-4 h-4 text-[#FDB714]' />
+                Prisbelønt Kvalitet
+              </span>
+            </motion.div>
           </motion.div>
 
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mb-12'>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8'>
             {[
               {
                 title: 'Kebab Klassiker',
-                desc: 'Våre mest populære kebab retter',
+                desc: 'Våre mest populære kebab retter laget med premium kjøtt',
                 image: '/KebabRull.avif',
                 color: 'from-orange-500/10 to-red-500/10',
                 items: '15+ retter',
+                rating: '4.9',
               },
               {
                 title: 'Pizza Favoritter',
-                desc: 'Steinovnsbakte med italiensk stil',
+                desc: 'Steinovnsbakte med italiensk stil og ferske ingredienser',
                 image: '/pizza.jpg',
                 color: 'from-yellow-400/10 to-amber-500/10',
                 items: '20+ varianter',
+                rating: '4.8',
               },
               {
                 title: 'Veganske Valg',
-                desc: 'Helt plantebaserte delikatesser',
+                desc: 'Helt plantebaserte delikatesser for den moderne smak',
                 image:
                   '/Vegetar-kebab med hjemmelaget saus - Skikkelig digg.avif',
                 color: 'from-green-500/10 to-emerald-500/10',
                 items: '10+ alternativer',
+                rating: '4.7',
               },
             ].map((category, index) => (
               <motion.div
@@ -151,54 +366,86 @@ export default function Home() {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                whileHover={{ y: -10, scale: 1.02 }}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+                whileHover={{ y: -12, scale: 1.02 }}
                 className='group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer'
               >
-                <div className='relative h-80'>
+                <div className='relative h-96'>
                   <Image
                     src={category.image}
                     alt={category.title}
                     fill
                     className='object-cover transition-transform duration-700 group-hover:scale-110'
                   />
-                  <div className='absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500' />
+                  <div className='absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20 opacity-70 group-hover:opacity-90 transition-opacity duration-500' />
 
                   {/* Animated Border */}
-                  <div className='absolute inset-0 border-2 border-[#FDB714] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl' />
+                  <div className='absolute inset-0 border-4 border-[#FDB714] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl' />
+
+                  {/* Rating Badge */}
+                  <motion.div
+                    initial={{ scale: 0, rotate: -180 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.4 + index * 0.1, type: 'spring' }}
+                    className='absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-2 rounded-full flex items-center gap-1 shadow-lg'
+                  >
+                    <Star className='w-4 h-4 text-[#FDB714] fill-[#FDB714]' />
+                    <span className='text-sm font-black text-gray-900'>
+                      {category.rating}
+                    </span>
+                  </motion.div>
                 </div>
 
-                <div className='absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500'>
+                <div className='absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500'>
                   <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     transition={{ delay: 0.3 }}
-                    className='mb-3'
+                    className='mb-4'
                   >
-                    <span className='inline-block px-3 py-1 bg-[#FDB714] text-black text-xs font-bold rounded-full'>
+                    <span className='inline-block px-4 py-2 bg-gradient-to-r from-[#FDB714] to-amber-500 text-black text-sm font-black rounded-full shadow-lg'>
                       {category.items}
                     </span>
                   </motion.div>
-                  <h3 className='text-2xl md:text-3xl font-black mb-2'>
+                  <h3 className='text-3xl md:text-4xl font-black mb-3 drop-shadow-lg'>
                     {category.title}
                   </h3>
-                  <p className='text-gray-200 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100'>
+                  <p className='text-gray-100 text-base mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 leading-relaxed'>
                     {category.desc}
                   </p>
                   <motion.div className='opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200'>
-                    <span className='inline-flex items-center text-[#FDB714] font-bold text-sm'>
-                      Utforsk <TrendingUp className='ml-2 w-4 h-4' />
+                    <span className='inline-flex items-center gap-2 text-[#FDB714] font-black text-base bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full'>
+                      Utforsk <TrendingUp className='w-5 h-5' />
                     </span>
                   </motion.div>
                 </div>
               </motion.div>
             ))}
           </div>
+
+          {/* Seamless Section Divider */}
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0 }}
+            whileInView={{ opacity: 1, scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className='mt-20 mb-8 relative'
+          >
+            <div className='absolute inset-0 flex items-center'>
+              <div className='w-full border-t-2 border-gray-200'></div>
+            </div>
+            <div className='relative flex justify-center'>
+              <span className='px-6 py-3 bg-gradient-to-r from-[#FDB714] to-amber-500 text-white font-black rounded-full shadow-xl text-sm'>
+                UTFORSK HELE MENYEN
+              </span>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Menu Section with Category Filter - Enhanced & Professional */}
-      <section className='py-24 md:py-25 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden'>
+      <section className='py-24 md:py-20 bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden'>
         {/* Decorative Background Elements - Enhanced */}
         <div className='absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-[#FDB714]/10 to-amber-500/10 rounded-full blur-3xl' />
         <div className='absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-br from-yellow-400/10 to-orange-500/10 rounded-full blur-3xl' />
@@ -252,10 +499,28 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className='text-xl md:text-2xl lg:text-3xl text-gray-600 mb-8 max-w-4xl mx-auto font-medium'
+              className='text-lg md:text-xl text-gray-600 mb-6 max-w-4xl mx-auto'
             >
-              Utforsk våre mestselgende retter laget med lidenskap
+              Utforsk våre mestselgende retter laget med lidenskap og dedikasjon
             </motion.p>
+
+            {/* Quick Info Pills */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className='flex flex-wrap items-center justify-center gap-3 mb-8'
+            >
+              <span className='inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 rounded-full text-sm font-semibold border border-green-200'>
+                <Clock className='w-4 h-4' />
+                Klar på 20-30 min
+              </span>
+              <span className='inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 rounded-full text-sm font-semibold border border-blue-200'>
+                <Star className='w-4 h-4 fill-blue-700' />
+                Topprangerte
+              </span>
+            </motion.div>
 
             {/* Decorative Line */}
             <motion.div
@@ -328,36 +593,39 @@ export default function Home() {
             ))}
           </motion.div>
 
-          {/* Menu Items Grid - Professional Layout */}
-          <motion.div
-            layout
-            className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5 md:gap-6 lg:gap-7'
-          >
-            {filteredMenuItems.map((item, index) => (
-              <motion.div
-                key={item.id}
-                layout
-                initial={{ opacity: 0, scale: 0.8, y: 30 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.8, y: 30 }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.08,
-                  type: 'spring',
-                  stiffness: 200,
-                }}
-              >
-                <MenuItem
-                  id={item.id}
-                  name={item.name}
-                  description={item.description}
-                  price={item.price}
-                  image={item.image}
-                  isVegetarian={item.isVegetarian}
-                />
-              </motion.div>
-            ))}
-          </motion.div>
+          {/* Menu Items Grid - Professional Layout with Bigger Cards on Desktop */}
+          <div className='flex justify-center'>
+            <motion.div
+              layout
+              className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 lg:gap-8'
+            >
+              {filteredMenuItems.map((item, index) => (
+                <motion.div
+                  key={item.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.8, y: 30 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.8, y: 30 }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.08,
+                    type: 'spring',
+                    stiffness: 200,
+                  }}
+                  className='w-full max-w-sm'
+                >
+                  <MenuItem
+                    id={item.id}
+                    name={item.name}
+                    description={item.description}
+                    price={item.price}
+                    image={item.image}
+                    isVegetarian={item.isVegetarian}
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
 
           {/* View Full Menu CTA - Enhanced */}
           <motion.div
@@ -390,10 +658,25 @@ export default function Home() {
             </Link>
           </motion.div>
         </div>
+
+        {/* Wave Divider for Seamless Transition */}
+        <div className='absolute bottom-0 left-0 right-0 overflow-hidden leading-none'>
+          <svg
+            className='relative block w-full h-16 md:h-24'
+            xmlns='http://www.w3.org/2000/svg'
+            viewBox='0 0 1200 120'
+            preserveAspectRatio='none'
+          >
+            <path
+              d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z'
+              className='fill-white'
+            ></path>
+          </svg>
+        </div>
       </section>
 
       {/* Delivery Section - Completely Redesigned */}
-      <section className='py-20 md:py-25 bg-gradient-to-br relative overflow-hidden'>
+      <section className='py-20 md:py-20 bg-gradient-to-br relative overflow-hidden'>
         {/* Animated Background Elements */}
         <motion.div
           animate={{
@@ -430,7 +713,7 @@ export default function Home() {
             </motion.span>
             <h2 className='text-5xl md:text-7xl font-black text-black mb-6'>
               Mat Levert på
-              <span className='block text-[#FDB714] mt-2'>Rekordtid</span>
+              <span className='block text-[#FDB714] mt-2'>Korttid</span>
             </h2>
             <p className='text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto'>
               Bestill nå og få mat på døren på 20-30 minutter
@@ -501,7 +784,7 @@ export default function Home() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className='w-full bg-gradient-to-r bg-[#FDB714]  text-white font-bold py-4 rounded-2xl hover:shadow-2xl transition-all duration-300'
+                  className='w-full bg-gradient-to-r bg-[#FDB714]  text-white font-bold py-4 rounded-2xl hover:shadow-2xl transition-all duration-300 cursor-pointer'
                 >
                   Bestill Hjemlevering
                 </motion.button>
@@ -572,7 +855,7 @@ export default function Home() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className='w-full bg-gradient-to-r from-[#FDB714] to-[#E5A613] text-white font-bold py-4 rounded-2xl hover:shadow-2xl transition-all duration-300'
+                  className=' cursor-pointer w-full bg-gradient-to-r from-[#FDB714] to-[#E5A613] text-white font-bold py-4 rounded-2xl hover:shadow-2xl transition-all duration-300'
                 >
                   Bestill Takeaway
                 </motion.button>
@@ -674,7 +957,7 @@ export default function Home() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className='w-full bg-gradient-to-r from-[#14fdfd] to-[#13b0e5]  text-white font-black py-4 rounded-2xl hover:shadow-2xl transition-all duration-300 text-lg group-hover:from-[#14e2fd] group-hover:to-[#1371e5]'
+                    className='cursor-pointer w-full bg-gradient-to-r from-[#14fdfd] to-[#13b0e5]  text-white font-black py-4 rounded-2xl hover:shadow-2xl transition-all duration-300 text-lg group-hover:from-[#14e2fd] group-hover:to-[#1371e5]'
                   >
                     <span className='flex items-center justify-center gap-2'>
                       Bestill Nå
@@ -744,7 +1027,7 @@ export default function Home() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className='w-full bg-gradient-to-r from-pink-600 to-rose-600 text-white font-black py-4 rounded-2xl hover:shadow-2xl transition-all duration-300 text-lg group-hover:from-pink-500 group-hover:to-rose-500'
+                    className='cursor-pointer w-full bg-gradient-to-r from-pink-600 to-rose-600 text-white font-black py-4 rounded-2xl hover:shadow-2xl transition-all duration-300 text-lg group-hover:from-pink-500 group-hover:to-rose-500'
                   >
                     <span className='flex items-center justify-center gap-2'>
                       Bestill Nå
@@ -853,7 +1136,7 @@ export default function Home() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Link href='/meny'>
-                  <button className='group relative px-10 py-5 bg-gradient-to-r from-[#FDB714] via-orange-500 to-[#FDB714] text-black font-black rounded-2xl text-lg shadow-2xl hover:shadow-[0_0_40px_rgba(253,183,20,0.6)] transition-all duration-300 overflow-hidden'>
+                  <button className='cursor-pointer group relative px-10 py-5 bg-gradient-to-r from-[#FDB714] via-orange-500 to-[#FDB714] text-black font-black rounded-2xl text-lg shadow-2xl hover:shadow-[0_0_40px_rgba(253,183,20,0.6)] transition-all duration-300 overflow-hidden'>
                     <span className='relative z-10 flex items-center gap-3'>
                       <ShoppingBag className='w-6 h-6' />
                       Bestill Nå
@@ -878,7 +1161,7 @@ export default function Home() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <button className='group px-10 py-5 bg-white/10 backdrop-blur-md text-white font-black rounded-2xl text-lg border-2 border-white/30 hover:bg-white/20 hover:border-[#FDB714] transition-all duration-300 shadow-xl'>
+                <button className=' cursor-pointer group px-10 py-5 bg-white/10 backdrop-blur-md text-white font-black rounded-2xl text-lg border-2 border-white/30 hover:bg-white/20 hover:border-[#FDB714] transition-all duration-300 shadow-xl'>
                   <span className='flex items-center gap-3'>
                     <Clock className='w-6 h-6' />
                     Ring: +47 123 45 678

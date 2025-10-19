@@ -135,7 +135,7 @@ const slides = [
     description:
       'Saftig kebabkjøtt, fersk salat, tomat, agurk og vår hemmelige saus',
     price: '129,-',
-    image: '/KebabRull.avif',
+    image: '/bislett.jpg',
     cta: 'Bestill Nå',
     badge: 'BESTSELGER',
   },
@@ -219,7 +219,7 @@ export default function Carousel() {
   }
 
   return (
-    <div className='flex justify-center rounded-b-4xl relative w-full h-[650px] xs:h-[500px] sm:h-[700px] md:h-[750px] lg:h-[800px] overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-900'>
+    <div className='flex justify-center rounded-b-4xl relative w-full h-[550px] xs:h-[500px] sm:h-[700px] md:h-[750px] lg:h-[800px] overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-900'>
       <AnimatePresence mode='wait'>
         <motion.div
           key={currentSlide}
@@ -305,28 +305,27 @@ export default function Carousel() {
                 className='flex justify-center items-center'
               >
                 <motion.button
-                  whileHover={{ scale: 1.05, y: -4 }}
                   whileTap={{ scale: 0.95 }}
-                  className='group relative bg-gradient-to-r from-[#FDB714] via-amber-500 to-yellow-400 rounded-2xl shadow-2xl hover:shadow-[0_0_50px_rgba(253,183,20,0.8)] transition-all duration-300 overflow-hidden'
+                  className='group relative bg-gradient-to-r from-[#FDB714] via-amber-500 to-yellow-400 rounded-2xl shadow-2xl hover:shadow-[0_0_50px_rgba(253,183,20,0.8)] transition-all duration-300 overflow-hidden cursor-pointer'
                 >
                   {/* Glow Effect */}
                   <div className='absolute inset-0 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-2xl blur-xl opacity-60 group-hover:opacity-80 transition-opacity'></div>
 
                   {/* Button Content */}
-                  <div className='relative flex items-center gap-6 px-8 py-5 border-2 border-white/20'>
+                  <div className='relative flex items-center gap-2 sm:gap-4 md:gap-6 px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-3 md:py-4 lg:py-5 border-2 border-white/20'>
                     {/* Price Section */}
-                    <div className='flex items-baseline gap-2 border-r-2 border-black/20 pr-6'>
-                      <span className='text-sm font-bold text-black/80 uppercase'>
+                    <div className='flex items-baseline gap-1 sm:gap-2 border-r-2 border-black/20 pr-2 sm:pr-3 md:pr-4 lg:pr-6'>
+                      <span className='text-xs sm:text-sm font-bold text-black/80 uppercase'>
                         Kun
                       </span>
-                      <span className='text-4xl sm:text-5xl font-black text-black'>
+                      <span className='text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black text-black'>
                         {slides[currentSlide].price}
                       </span>
                     </div>
 
                     {/* CTA Section */}
-                    <div className='flex items-center gap-3'>
-                      <span className='text-lg sm:text-xl font-black text-black uppercase tracking-wide'>
+                    <div className='flex items-center gap-1 sm:gap-2 md:gap-3'>
+                      <span className='text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-black text-black uppercase tracking-wide'>
                         {slides[currentSlide].cta}
                       </span>
                       <motion.span
@@ -336,7 +335,7 @@ export default function Carousel() {
                           duration: 1.5,
                           ease: 'easeInOut',
                         }}
-                        className='text-2xl font-black text-black'
+                        className='text-base sm:text-lg md:text-xl lg:text-2xl font-black text-black'
                       >
                         →
                       </motion.span>
@@ -368,20 +367,18 @@ export default function Carousel() {
 
       {/* Navigation Buttons - Redesigned */}
       <motion.button
-        whileHover={{ scale: 1.1, x: -3 }}
         whileTap={{ scale: 0.9 }}
         onClick={prevSlide}
-        className='absolute left-1 sm:left-8 top-1/2 -translate-y-1/2 bg-gradient-to-r from-yellow-400 to-amber-500 text-black p-3 sm:p-4 rounded-full shadow-2xl hover:shadow-yellow-500/50 transition-all z-20 backdrop-blur-sm border border-white/20'
+        className='absolute left-1 sm:left-8 top-1/2 -translate-y-1/2 bg-gradient-to-r from-yellow-400 to-amber-500 text-black p-3 sm:p-4 rounded-full shadow-2xl hover:shadow-yellow-500/50 transition-all z-20 backdrop-blur-sm border border-white/20 cursor-pointer'
       >
-        <ChevronLeft size={20} className='sm:w-7 sm:h-7' />
+        <ChevronLeft size={18} className='sm:w-7 sm:h-7' />
       </motion.button>
       <motion.button
-        whileHover={{ scale: 1.1, x: 3 }}
         whileTap={{ scale: 0.9 }}
         onClick={nextSlide}
-        className='absolute right-1 sm:right-8 top-1/2 -translate-y-1/2 bg-gradient-to-r from-yellow-400 to-amber-500 text-black p-3 sm:p-4 rounded-full shadow-2xl hover:shadow-yellow-500/50 transition-all z-20 backdrop-blur-sm border border-white/20'
+        className='absolute right-1 sm:right-8 top-1/2 -translate-y-1/2 bg-gradient-to-r from-yellow-400 to-amber-500 text-black p-3 sm:p-4 rounded-full shadow-2xl hover:shadow-yellow-500/50 transition-all z-20 backdrop-blur-sm border border-white/20 cursor-pointer'
       >
-        <ChevronRight size={20} className='sm:w-7 sm:h-7' />
+        <ChevronRight size={18} className='sm:w-7 sm:h-7' />
       </motion.button>
 
       {/* Slide Indicators - Redesigned */}

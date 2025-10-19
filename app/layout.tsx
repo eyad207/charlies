@@ -23,12 +23,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='no' className='light'>
-      <body className={`${outfit.className} antialiased !bg-white relative`}>
+    <html lang='no' className='light overflow-x-hidden'>
+      <body
+        className={`${outfit.className} antialiased !bg-white relative overflow-x-hidden`}
+      >
         <CartProvider>
           <Header />
           <CartSidebar />
-          <main className='min-h-screen bg-white'>{children}</main>
+          <main className='min-h-screen bg-white overflow-x-hidden'>
+            {children}
+          </main>
           <Footer />
         </CartProvider>
       </body>

@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { useCart } from '../context/CartContext'
 import ProductModal from './ProductModal'
-import { ShoppingBag } from 'lucide-react'
+import { ShoppingBag, Star } from 'lucide-react'
 
 interface MenuItemProps {
   id: string
@@ -52,7 +52,7 @@ export default function MenuItem({
           transition: { duration: 0.3, type: 'spring', stiffness: 300 },
         }}
         onClick={() => setIsModalOpen(true)}
-        className='group relative bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 border-2 border-gray-100 hover:border-yellow-200 cursor-pointer flex flex-col h-full'
+        className='w-full group relative bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 border-2 border-gray-100 hover:border-yellow-200 cursor-pointer flex flex-col h-full'
       >
         {/* Hover Glow Effect */}
         <div className='absolute inset-0 bg-gradient-to-br from-yellow-400/0 to-amber-500/0 group-hover:from-yellow-400/10 group-hover:to-amber-500/10 transition-all duration-500 rounded-2xl' />
@@ -114,9 +114,22 @@ export default function MenuItem({
           </div>
 
           {/* Description */}
-          <p className='text-gray-600 text-xs md:text-sm leading-relaxed mb-4 flex-grow line-clamp-2 group-hover:text-gray-700 transition-colors duration-300'>
+          <p className='text-gray-600 text-xs md:text-sm leading-relaxed mb-3 flex-grow line-clamp-2 group-hover:text-gray-700 transition-colors duration-300'>
             {description}
           </p>
+
+          {/* Rating Display */}
+          <div className='flex items-center gap-1 mb-4'>
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                className='w-3 h-3 md:w-4 md:h-4 text-[#FDB714] fill-[#FDB714]'
+              />
+            ))}
+            <span className='text-xs text-gray-500 ml-1 font-semibold'>
+              (4.8)
+            </span>
+          </div>
 
           {/* Add Button - Enhanced */}
           <motion.button

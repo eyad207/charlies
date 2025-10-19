@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { X, Plus, Minus, ShoppingCart } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { useCart } from '../context/CartContext'
 
 interface ProductModalProps {
@@ -25,32 +26,23 @@ export default function ProductModal({
   product,
 }: ProductModalProps) {
   const [quantity, setQuantity] = useState(1)
+  const [mounted, setMounted] = useState(false)
   const { addToCart, toggleCart } = useCart()
 
-  // Prevent body scroll when modal is open
+  // Check if we're mounted on the client
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Prevent body scroll when modal is open (but allow modal scroll)
   useEffect(() => {
     if (isOpen) {
-      // Prevent scroll on body
+      // Prevent scroll on body only
       document.body.style.overflow = 'hidden'
-      document.documentElement.style.overflow = 'hidden'
-
-      // Prevent wheel and touch scroll
-      const preventScroll = (e: WheelEvent | TouchEvent) => {
-        e.preventDefault()
-      }
-
-      document.addEventListener('wheel', preventScroll, { passive: false })
-      document.addEventListener('touchmove', preventScroll, { passive: false })
 
       return () => {
-        document.removeEventListener('wheel', preventScroll)
-        document.removeEventListener('touchmove', preventScroll)
         document.body.style.overflow = 'unset'
-        document.documentElement.style.overflow = 'unset'
       }
-    } else {
-      document.body.style.overflow = 'unset'
-      document.documentElement.style.overflow = 'unset'
     }
   }, [isOpen])
 
@@ -70,7 +62,10 @@ export default function ProductModal({
     toggleCart()
   }
 
-  return (
+  // Don't render on server or if not mounted
+  if (!mounted) return null
+
+  const modalContent = (
     <AnimatePresence>
       {isOpen && (
         <>
@@ -80,7 +75,7 @@ export default function ProductModal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className='fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] cursor-pointer'
+            className='fixed inset-0 bg-black/80 backdrop-blur-sm z-[99999] cursor-pointer'
           />
 
           {/* Modal */}
@@ -89,11 +84,15 @@ export default function ProductModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 50 }}
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-            className='fixed inset-0 z-[201] flex items-center justify-center p-3 sm:p-4 md:p-6 pointer-events-none'
+            className='fixed inset-0 z-[999999] flex items-center justify-center p-2 sm:p-3 md:p-4 pointer-events-none overflow-hidden'
           >
             <div
               onClick={(e) => e.stopPropagation()}
-              className='bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl w-full max-w-5xl max-h-[95vh] overflow-hidden shadow-2xl flex flex-col pointer-events-auto border-2 border-yellow-100'
+              className='bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl w-full max-w-4xl max-h-[95vh] overflow-y-auto overflow-x-hidden shadow-2xl pointer-events-auto border-2 border-yellow-100'
+              style={{
+                scrollbarWidth: 'thin',
+                scrollbarColor: '#FDB714 #f3f4f6',
+              }}
             >
               {/* Close Button - Enhanced */}
               <motion.button
@@ -106,7 +105,7 @@ export default function ProductModal({
               </motion.button>
 
               {/* Image Section - Enhanced */}
-              <div className='relative w-full h-64 sm:h-80 md:h-96 flex-shrink-0'>
+              <div className='relative w-full h-48 sm:h-56 md:h-64 flex-shrink-0'>
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -165,23 +164,23 @@ export default function ProductModal({
               </div>
 
               {/* Content Section - Enhanced */}
-              <div className='w-full flex-1 p-5 sm:p-6 lg:p-8 flex flex-col justify-between overflow-hidden'>
+              <div className='w-full p-4 sm:p-5 lg:p-6'>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
-                  className='space-y-6'
+                  className='space-y-4 mb-4'
                 >
                   {/* Title Section - Enhanced */}
-                  <div className='space-y-3'>
+                  <div className='space-y-2'>
                     <div className='flex items-start gap-3'>
-                      <div className='w-1.5 h-14 bg-gradient-to-b from-yellow-400 to-amber-500 rounded-full'></div>
+                      <div className='w-1.5 h-10 bg-gradient-to-b from-yellow-400 to-amber-500 rounded-full'></div>
                       <div className='flex-1'>
                         <motion.h2
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.2 }}
-                          className='text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 leading-tight bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text'
+                          className='text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 leading-tight bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text'
                         >
                           {product.name}
                         </motion.h2>
@@ -189,7 +188,7 @@ export default function ProductModal({
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.3 }}
-                          className='text-sm sm:text-base text-yellow-600 font-bold mt-2'
+                          className='text-xs sm:text-sm text-yellow-600 font-bold mt-1'
                         >
                           ⭐ Premium Kvalitet
                         </motion.p>
@@ -202,9 +201,9 @@ export default function ProductModal({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4 }}
-                    className='bg-gradient-to-r from-yellow-50 to-amber-50 p-4 rounded-2xl border border-yellow-100'
+                    className='bg-gradient-to-r from-yellow-50 to-amber-50 p-3 rounded-2xl border border-yellow-100'
                   >
-                    <p className='text-gray-700 text-sm sm:text-base leading-relaxed font-medium'>
+                    <p className='text-gray-700 text-xs sm:text-sm leading-relaxed font-medium'>
                       {product.description}
                     </p>
                   </motion.div>
@@ -214,13 +213,13 @@ export default function ProductModal({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5 }}
-                    className='space-y-3'
+                    className='space-y-2'
                   >
-                    <h3 className='font-black text-base sm:text-lg text-gray-900 flex items-center gap-2'>
-                      <span className='text-2xl'>🥘</span>
+                    <h3 className='font-black text-sm sm:text-base text-gray-900 flex items-center gap-2'>
+                      <span className='text-xl'>🥘</span>
                       Ingredienser
                     </h3>
-                    <div className='flex flex-wrap gap-2'>
+                    <div className='flex flex-wrap gap-1.5'>
                       {['Kjøtt', 'Salat', 'Tomat', 'Agurk', 'Løk', 'Saus'].map(
                         (ingredient, i) => (
                           <motion.span
@@ -243,10 +242,10 @@ export default function ProductModal({
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.7 }}
-                  className='space-y-4 mt-auto pt-4 border-t-2 border-gray-200'
+                  className='space-y-3 mt-auto pt-3 border-t-2 border-gray-200'
                 >
                   {/* Quantity and Price Row */}
-                  <div className='bg-gradient-to-r from-gray-50 to-yellow-50 rounded-2xl p-4 sm:p-5 border-2 border-yellow-100'>
+                  <div className='bg-gradient-to-r from-gray-50 to-yellow-50 rounded-2xl p-3 sm:p-4 border-2 border-yellow-100'>
                     <div className='flex items-center justify-between gap-4'>
                       {/* Quantity Selector - Enhanced */}
                       <div className='flex-1'>
@@ -304,7 +303,7 @@ export default function ProductModal({
                     whileHover={{ scale: 1.02, y: -2 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={handleAddToCart}
-                    className='relative w-full bg-gradient-to-r from-[#FDB714] via-yellow-500 to-[#FDB714] text-black font-black py-4 sm:py-5 rounded-2xl shadow-2xl hover:shadow-[0_0_40px_rgba(253,183,20,0.6)] transition-all duration-300 text-base sm:text-lg overflow-hidden group'
+                    className='relative w-full bg-gradient-to-r from-[#FDB714] via-yellow-500 to-[#FDB714] text-black font-black py-3 sm:py-4 rounded-2xl shadow-2xl hover:shadow-[0_0_40px_rgba(253,183,20,0.6)] transition-all duration-300 text-sm sm:text-base overflow-hidden group'
                   >
                     <span className='relative z-10 flex items-center justify-center gap-3'>
                       <ShoppingCart className='w-5 h-5' />
@@ -338,4 +337,7 @@ export default function ProductModal({
       )}
     </AnimatePresence>
   )
+
+  // Render modal using portal to body element
+  return createPortal(modalContent, document.body)
 }

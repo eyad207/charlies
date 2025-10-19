@@ -58,7 +58,7 @@ export default function Header() {
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: isVisible ? 0 : -50, opacity: isVisible ? 1 : 0 }}
         transition={{ duration: 0.3 }}
-        className='fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-black via-gray-900 to-black text-white py-2 px-4'
+        className='fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-black via-gray-900 to-black text-white p-3 md:py-2 px-4'
       >
         <div className='container mx-auto flex items-center justify-center gap-4 text-sm md:text-base'>
           <Truck className='w-5 h-5 text-[#FDB714]' />
