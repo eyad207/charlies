@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='no' className='light'>
-      <body className={`${outfit.className} antialiased !bg-white`}>
+      <body className={`${outfit.className} antialiased !bg-white relative`}>
         <CartProvider>
           <Header />
           <CartSidebar />

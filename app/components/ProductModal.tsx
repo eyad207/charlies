@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { X, Plus, Minus, ShoppingCart } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { useCart } from '../context/CartContext'
-import Button from './Button'
 
 interface ProductModalProps {
   isOpen: boolean
@@ -81,31 +80,33 @@ export default function ProductModal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className='fixed inset-0 bg-black/70 z-[200] cursor-pointer'
+            className='fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] cursor-pointer'
           />
 
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.9, y: 50 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            exit={{ opacity: 0, scale: 0.9, y: 50 }}
+            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
             className='fixed inset-0 z-[201] flex items-center justify-center p-3 sm:p-4 md:p-6 pointer-events-none'
           >
             <div
               onClick={(e) => e.stopPropagation()}
-              className='bg-white rounded-2xl sm:rounded-3xl w-full max-w-4xl max-h-[95vh] overflow-hidden shadow-2xl flex flex-col pointer-events-auto'
+              className='bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl w-full max-w-5xl max-h-[95vh] overflow-hidden shadow-2xl flex flex-col pointer-events-auto border-2 border-yellow-100'
             >
-              {/* Close Button */}
-              <button
+              {/* Close Button - Enhanced */}
+              <motion.button
+                whileHover={{ scale: 1.1, rotate: 90 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={onClose}
-                className='absolute top-4 right-4 sm:top-6 sm:right-6 z-50 bg-black/20 hover:bg-black/40 rounded-full p-2 sm:p-3 transition-all cursor-pointer backdrop-blur-sm'
+                className='absolute top-4 right-4 sm:top-6 sm:right-6 z-50 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 rounded-full p-3 transition-all cursor-pointer shadow-xl'
               >
-                <X size={24} className='text-white' />
-              </button>
+                <X size={24} className='text-black' />
+              </motion.button>
 
-              {/* Image Section - Top */}
-              <div className='relative w-full h-56 sm:h-64 md:h-72 flex-shrink-0'>
+              {/* Image Section - Enhanced */}
+              <div className='relative w-full h-64 sm:h-80 md:h-96 flex-shrink-0'>
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -113,148 +114,222 @@ export default function ProductModal({
                   className='object-cover'
                   priority
                 />
-                <div className='absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent' />
+                <div className='absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent' />
+
+                {/* Shine Effect */}
+                <motion.div
+                  animate={{
+                    x: ['-100%', '200%'],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatDelay: 3,
+                    ease: 'easeInOut',
+                  }}
+                  className='absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12'
+                />
+
                 {product.isVegetarian && (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.2 }}
-                    className='absolute top-4 left-4 sm:top-6 sm:left-6 bg-green-500 text-white px-4 sm:px-5 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-bold shadow-lg backdrop-blur-sm'
+                    transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+                    className='absolute top-4 left-4 sm:top-6 sm:left-6 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-5 py-2.5 rounded-full text-sm font-black shadow-2xl backdrop-blur-sm border border-white/20'
                   >
                     🥗 Vegetar
                   </motion.div>
                 )}
+
+                {/* Price Badge - Floating */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                  transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
+                  className='absolute bottom-4 right-4 sm:bottom-6 sm:right-6'
+                >
+                  <div className='relative'>
+                    <div className='absolute inset-0 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-2xl blur-xl opacity-60'></div>
+                    <div className='relative bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-400 px-6 py-3 rounded-2xl shadow-2xl border-2 border-white/20'>
+                      <div className='flex items-baseline gap-2'>
+                        <span className='text-xs font-bold text-black/80'>
+                          KUN
+                        </span>
+                        <span className='text-3xl sm:text-4xl font-black text-black'>
+                          {product.price}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
               </div>
 
-              {/* Content Section - Bottom, No Scroll */}
-              <div className='w-full flex-1 p-4 sm:p-5 lg:p-6 flex flex-col justify-between overflow-hidden'>
+              {/* Content Section - Enhanced */}
+              <div className='w-full flex-1 p-5 sm:p-6 lg:p-8 flex flex-col justify-between overflow-hidden'>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
-                  className='space-y-8'
+                  className='space-y-6'
                 >
-                  {/* Title Section */}
-                  <div className='space-y-2'>
-                    <div className='flex items-start gap-2'>
-                      <div className='w-1 h-10 bg-gradient-to-b from-[#FDB714] to-[#FDB714]/50 rounded-full'></div>
-                      <div>
-                        <h2 className='text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 leading-tight'>
+                  {/* Title Section - Enhanced */}
+                  <div className='space-y-3'>
+                    <div className='flex items-start gap-3'>
+                      <div className='w-1.5 h-14 bg-gradient-to-b from-yellow-400 to-amber-500 rounded-full'></div>
+                      <div className='flex-1'>
+                        <motion.h2
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.2 }}
+                          className='text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 leading-tight bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text'
+                        >
                           {product.name}
-                        </h2>
-                        <p className='text-xs sm:text-sm text-gray-500 font-semibold mt-0.5'>
-                          Premium Kebab
-                        </p>
+                        </motion.h2>
+                        <motion.p
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.3 }}
+                          className='text-sm sm:text-base text-yellow-600 font-bold mt-2'
+                        >
+                          ⭐ Premium Kvalitet
+                        </motion.p>
                       </div>
                     </div>
                   </div>
 
-                  {/* Description */}
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.15 }}
-                    className='text-gray-600 text-sm sm:text-base leading-relaxed font-medium'
-                  >
-                    {product.description}
-                  </motion.p>
-
-                  {/* Ingredients - Compact */}
+                  {/* Description - Enhanced */}
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 0.2 }}
-                    className='space-y-2'
+                    transition={{ delay: 0.4 }}
+                    className='bg-gradient-to-r from-yellow-50 to-amber-50 p-4 rounded-2xl border border-yellow-100'
                   >
-                    <h3 className='font-black text-sm sm:text-base text-gray-900 flex items-center gap-2'>
-                      <span className='text-lg'>🥘</span>
+                    <p className='text-gray-700 text-sm sm:text-base leading-relaxed font-medium'>
+                      {product.description}
+                    </p>
+                  </motion.div>
+
+                  {/* Ingredients - Enhanced */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    className='space-y-3'
+                  >
+                    <h3 className='font-black text-base sm:text-lg text-gray-900 flex items-center gap-2'>
+                      <span className='text-2xl'>🥘</span>
                       Ingredienser
                     </h3>
-                    <div className='flex flex-wrap gap-1.5 sm:gap-2'>
-                      {[
-                        'Kebabkjøtt',
-                        'Salat',
-                        'Tomat',
-                        'Agurk',
-                        'Rødløk',
-                        'Spesialsaus',
-                      ].map((ingredient, index) => (
-                        <motion.span
-                          key={index}
-                          initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                          animate={{ opacity: 1, scale: 1, y: 0 }}
-                          transition={{ delay: 0.25 + index * 0.06 }}
-                          className='bg-gradient-to-br from-blue-50 to-blue-100/50 text-blue-700 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs font-bold border border-blue-200 shadow-sm'
-                        >
-                          {ingredient}
-                        </motion.span>
-                      ))}
+                    <div className='flex flex-wrap gap-2'>
+                      {['Kjøtt', 'Salat', 'Tomat', 'Agurk', 'Løk', 'Saus'].map(
+                        (ingredient, i) => (
+                          <motion.span
+                            key={ingredient}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.6 + i * 0.05 }}
+                            className='px-3 py-1.5 bg-white border-2 border-yellow-200 text-gray-700 text-xs sm:text-sm font-bold rounded-xl shadow-sm hover:shadow-md transition-all duration-300 hover:border-yellow-400 hover:scale-105'
+                          >
+                            {ingredient}
+                          </motion.span>
+                        )
+                      )}
                     </div>
                   </motion.div>
                 </motion.div>
 
-                {/* Price and Action Section */}
+                {/* Price and Action Section - Enhanced */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className='space-y-3 mt-4 pt-3 border-t border-gray-200'
+                  transition={{ delay: 0.7 }}
+                  className='space-y-4 mt-auto pt-4 border-t-2 border-gray-200'
                 >
-                  {/* Price Display */}
-                  <div className='bg-gradient-to-r from-[#FDB714]/10 to-[#FDB714]/5 rounded-lg p-3 sm:p-4 border border-[#FDB714]/20'>
-                    <div className='flex items-end justify-between gap-3'>
-                      <div>
-                        <p className='text-xs text-gray-600 font-bold uppercase tracking-wider mb-1'>
-                          Pris
-                        </p>
-                        <p className='text-3xl sm:text-4xl font-black text-[#FDB714] leading-none'>
-                          {(
-                            parseInt(product.price.replace(/\D/g, '')) *
-                            quantity
-                          ).toFixed(0)}
-                          ,-
-                        </p>
-                      </div>
-
-                      {/* Quantity Selector */}
-                      <div className='text-right'>
-                        <p className='text-xs text-gray-600 font-bold uppercase tracking-wider mb-1.5'>
+                  {/* Quantity and Price Row */}
+                  <div className='bg-gradient-to-r from-gray-50 to-yellow-50 rounded-2xl p-4 sm:p-5 border-2 border-yellow-100'>
+                    <div className='flex items-center justify-between gap-4'>
+                      {/* Quantity Selector - Enhanced */}
+                      <div className='flex-1'>
+                        <p className='text-xs text-gray-600 font-bold uppercase tracking-wider mb-2'>
                           Antall
                         </p>
-                        <div className='flex items-center gap-1.5 bg-white border-2 border-gray-200 rounded-lg p-1'>
-                          <button
+                        <div className='flex items-center gap-2 bg-white border-2 border-gray-200 rounded-xl p-1.5 shadow-sm w-fit'>
+                          <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
                             onClick={() =>
                               setQuantity(Math.max(1, quantity - 1))
                             }
-                            className='w-8 sm:w-9 h-8 sm:h-9 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded transition-all cursor-pointer font-bold text-gray-900'
+                            className='w-10 h-10 flex items-center justify-center bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 rounded-lg transition-all cursor-pointer font-bold text-gray-900 shadow-sm'
                           >
-                            <Minus size={16} />
-                          </button>
-                          <span className='w-8 text-center text-gray-900 text-base font-bold'>
+                            <Minus size={18} />
+                          </motion.button>
+                          <span className='w-12 text-center text-gray-900 text-xl font-black'>
                             {quantity}
                           </span>
-                          <button
+                          <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
                             onClick={() => setQuantity(quantity + 1)}
-                            className='w-8 sm:w-9 h-8 sm:h-9 flex items-center justify-center bg-[#FDB714] hover:bg-[#E5A613] rounded transition-all cursor-pointer font-bold text-black'
+                            className='w-10 h-10 flex items-center justify-center bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 rounded-lg transition-all cursor-pointer font-bold text-black shadow-md'
                           >
-                            <Plus size={16} />
-                          </button>
+                            <Plus size={18} />
+                          </motion.button>
+                        </div>
+                      </div>
+
+                      {/* Price Display - Enhanced */}
+                      <div className='text-right'>
+                        <p className='text-xs text-gray-600 font-bold uppercase tracking-wider mb-2'>
+                          Totalpris
+                        </p>
+                        <div className='relative'>
+                          <div className='absolute inset-0 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-xl blur-lg opacity-30'></div>
+                          <div className='relative bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-400 px-5 py-2 rounded-xl shadow-xl'>
+                            <p className='text-3xl sm:text-4xl font-black text-black leading-none'>
+                              {(
+                                parseInt(product.price.replace(/\D/g, '')) *
+                                quantity
+                              ).toFixed(0)}
+                              ,-
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Add to Cart Button */}
-                  <motion.div whileHover={{ scale: 1 }}>
-                    <Button
-                      size='md'
-                      className='w-full text-sm sm:text-base font-bold shadow-lg'
-                      onClick={handleAddToCart}
-                    >
-                      <ShoppingCart size={18} />
+                  {/* Add to Cart Button - Enhanced */}
+                  <motion.button
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={handleAddToCart}
+                    className='relative w-full bg-gradient-to-r from-[#FDB714] via-yellow-500 to-[#FDB714] text-black font-black py-4 sm:py-5 rounded-2xl shadow-2xl hover:shadow-[0_0_40px_rgba(253,183,20,0.6)] transition-all duration-300 text-base sm:text-lg overflow-hidden group'
+                  >
+                    <span className='relative z-10 flex items-center justify-center gap-3'>
+                      <ShoppingCart className='w-5 h-5' />
                       Legg til i handlekurv
-                    </Button>
-                  </motion.div>
+                      <motion.span
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ repeat: Infinity, duration: 1.5 }}
+                      >
+                        →
+                      </motion.span>
+                    </span>
+                    {/* Button Shine */}
+                    <motion.div
+                      animate={{
+                        x: ['-100%', '200%'],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        repeatDelay: 1,
+                        ease: 'easeInOut',
+                      }}
+                      className='absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12'
+                    />
+                  </motion.button>
                 </motion.div>
               </div>
             </div>
