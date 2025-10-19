@@ -133,25 +133,80 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Overlay */}
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className='lg:hidden mt-4 pb-4 space-y-2'
-          >
-            {menuItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className='block py-3 px-4 text-black font-semibold hover:bg-black hover:text-[#FDB714] rounded-lg transition-all duration-300 cursor-pointer'
-                onClick={() => setIsOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </motion.div>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className='fixed inset-0 bg-black/50 z-[60] lg:hidden'
+              onClick={() => setIsOpen(false)}
+            />
+
+            {/* Menu */}
+            <motion.div
+              initial={{ opacity: 0, x: '100%' }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: '100%' }}
+              transition={{ type: 'tween', duration: 0.3 }}
+              className='fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-[#FDB714] shadow-2xl z-[70] lg:hidden'
+            >
+              <div className='flex flex-col h-full'>
+                {/* Close Button */}
+                <div className='flex justify-end p-4'>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className='text-black hover:bg-black hover:text-[#FDB714] p-2 rounded-lg transition-colors duration-300 cursor-pointer'
+                  >
+                    <X size={24} />
+                  </button>
+                </div>
+
+                {/* Menu Items */}
+                <div className='flex-1 px-6 py-4 space-y-2'>
+                  {menuItems.map((item, index) => (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <Link
+                        href={item.href}
+                        className='block py-4 px-4 text-black font-semibold hover:bg-black hover:text-[#FDB714] rounded-lg transition-all duration-300 cursor-pointer text-lg'
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Cart Button in Menu */}
+                <div className='p-6 border-t border-black/20'>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      toggleCart()
+                      setIsOpen(false)
+                    }}
+                    className='w-full bg-black text-[#FDB714] py-3 px-4 rounded-lg font-semibold hover:bg-gray-900 transition-colors duration-300 cursor-pointer flex items-center justify-center gap-2'
+                  >
+                    <ShoppingCart size={20} />
+                    Handlekurv
+                    {getTotalItems() > 0 && (
+                      <span className='bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold'>
+                        {getTotalItems()}
+                      </span>
+                    )}
+                  </motion.button>
+                </div>
+              </div>
+            </motion.div>
+          </>
         )}
       </nav>
     </motion.header>

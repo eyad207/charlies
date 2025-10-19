@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Search, Filter } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import MenuItem from '../components/MenuItem'
 
 const allMenuItems = [
@@ -126,7 +127,7 @@ export default function Meny() {
       if (currentScrollY < lastScrollY || currentScrollY < 350) {
         // Scrolling up or above the hero section
         setIsSearchVisible(true)
-      } else if (currentScrollY > lastScrollY && currentScrollY > 400) {
+      } else if (currentScrollY > lastScrollY && currentScrollY > 450) {
         // Scrolling down and past threshold
         setIsSearchVisible(false)
       }
@@ -150,15 +151,33 @@ export default function Meny() {
   return (
     <div className='bg-white min-h-screen'>
       {/* Hero Section */}
-      <section className='relative h-[300px] bg-gradient-to-r from-black via-gray-900 to-black flex items-center justify-center'>
+      <section className='relative h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden'>
+        {/* Background Image */}
+        <div className='absolute inset-0'>
+          <Image
+            src='/serving kebab.webp'
+            alt='Delicious Kebab'
+            fill
+            className='object-cover'
+            priority
+          />
+          {/* Overlay for better text readability */}
+          <div className='absolute inset-0 bg-black/60'></div>
+        </div>
+
+        {/* Content */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className='text-center text-white z-10'
+          transition={{ duration: 0.8 }}
+          className='text-center text-white z-10 relative'
         >
-          <h1 className='text-5xl md:text-6xl font-bold mb-4'>Vår Meny</h1>
-          <p className='text-xl md:text-2xl text-gray-300'>
-            Utforsk våre deilige retter
+          <h1 className='text-5xl md:text-7xl font-bold mb-4 drop-shadow-lg'>
+            Vår Meny
+          </h1>
+          <p className='text-xl md:text-2xl text-gray-200 drop-shadow-md max-w-2xl mx-auto'>
+            Utforsk våre deilige retter laget med kjærlighet og de beste
+            ingrediensene
           </p>
         </motion.div>
       </section>
@@ -223,7 +242,7 @@ export default function Meny() {
       </motion.section>
 
       {/* Menu Items Grid */}
-      <section className='py-20'>
+      <section className='py-10'>
         <div className='container mx-auto px-4'>
           {filteredItems.length === 0 ? (
             <motion.div
