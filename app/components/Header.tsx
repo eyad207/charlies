@@ -46,7 +46,7 @@ export default function Header() {
       initial={{ y: 0 }}
       animate={{ y: isVisible ? 0 : -100 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className='bg-[#FDB714] mb-5 shadow-xl sticky top-0 z-50 md:px-50 sm:px-30 rounded-b-2xl'
+      className='bg-[#FDB714] shadow-xl sticky top-0 z-50 md:px-50 sm:px-30 '
     >
       <nav className='container mx-auto px-4'>
         <div className='flex justify-between items-center'>
