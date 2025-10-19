@@ -37,6 +37,24 @@ const menuItems = [
     image: '/Kebab i pita med hjemmelaget kebabsaus.png',
     category: 'Tallerken',
   },
+  {
+    id: '4',
+    name: 'Kebab Tallerken',
+    description:
+      'Saftig kebabkjøtt servert med pommes frites, salat og valgfri saus',
+    price: '149,-',
+    image: '/Kebab i pita med hjemmelaget kebabsaus.png',
+    category: 'Tallerken',
+  },
+  {
+    id: '5',
+    name: 'Kebab Tallerken',
+    description:
+      'Saftig kebabkjøtt servert med pommes frites, salat og valgfri saus',
+    price: '149,-',
+    image: '/Kebab i pita med hjemmelaget kebabsaus.png',
+    category: 'Tallerken',
+  },
 ]
 
 const categories = ['Alle', 'Kebab', 'Pizza', 'Tallerken', 'Pakker']
@@ -97,7 +115,7 @@ export default function Home() {
             ))}
           </motion.div>
 
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+          <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6'>
             {filteredMenuItems.map((item) => (
               <MenuItem
                 key={item.id}
@@ -127,7 +145,7 @@ export default function Home() {
 
       {/* Delivery Section - NEW */}
       <section className='md:py-20 bg-gradient-to-br from-gray-50 to-gray-100'>
-        <div className='px-1 mx-auto'>
+        <div className='md:px-30 mx-auto'>
           {/* Delivery Section - Full Width with Text Overlay */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -137,7 +155,7 @@ export default function Home() {
             className='relative h-150 sm:h-[500px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl mb-16'
           >
             <Image
-              src='/Skau-kebab.webp'
+              src='/Vegetar-kebab med hjemmelaget saus - Skikkelig digg.avif'
               alt='Charlie Kebab Levering'
               fill
               className='object-cover'

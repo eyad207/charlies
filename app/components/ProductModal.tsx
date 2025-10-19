@@ -75,7 +75,7 @@ export default function ProductModal({
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Overlay */}
+          {/* Overlay - Click to close */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -90,9 +90,12 @@ export default function ProductModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className='fixed inset-0 z-[201] flex items-center justify-center p-3 sm:p-4 md:p-6'
+            className='fixed inset-0 z-[201] flex items-center justify-center p-3 sm:p-4 md:p-6 pointer-events-none'
           >
-            <div className='bg-white rounded-2xl sm:rounded-3xl w-full max-w-4xl max-h-[95vh] overflow-hidden shadow-2xl flex flex-col'>
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className='bg-white rounded-2xl sm:rounded-3xl w-full max-w-4xl max-h-[95vh] overflow-hidden shadow-2xl flex flex-col pointer-events-auto'
+            >
               {/* Close Button */}
               <button
                 onClick={onClose}

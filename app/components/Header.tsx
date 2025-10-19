@@ -4,12 +4,33 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X, ShoppingCart } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useCart } from '../context/CartContext'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
   const { toggleCart, getTotalItems } = useCart()
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+
+      if (currentScrollY < lastScrollY || currentScrollY < 50) {
+        // Scrolling up or at top
+        setIsVisible(true)
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down and past threshold
+        setIsVisible(false)
+      }
+
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
 
   const menuItems = [
     { name: 'Hjem', href: '/' },
@@ -21,7 +42,12 @@ export default function Header() {
   ]
 
   return (
-    <header className='bg-[#FDB714] mb-5 shadow-xl sticky top-0 z-50 md:px-50 sm:px-30 rounded-b-2xl'>
+    <motion.header
+      initial={{ y: 0 }}
+      animate={{ y: isVisible ? 0 : -100 }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
+      className='bg-[#FDB714] mb-5 shadow-xl sticky top-0 z-50 md:px-50 sm:px-30 rounded-b-2xl'
+    >
       <nav className='container mx-auto px-4'>
         <div className='flex justify-between items-center'>
           {/* Logo */}
@@ -128,6 +154,6 @@ export default function Header() {
           </motion.div>
         )}
       </nav>
-    </header>
+    </motion.header>
   )
 }

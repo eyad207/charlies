@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Search, Filter } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import MenuItem from '../components/MenuItem'
 
 const allMenuItems = [
@@ -116,6 +116,27 @@ const categories = ['Alle', 'Kebab', 'Pizza', 'Burger', 'Tallerken', 'Pakker']
 export default function Meny() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('Alle')
+  const [isSearchVisible, setIsSearchVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+
+      if (currentScrollY < lastScrollY || currentScrollY < 350) {
+        // Scrolling up or above the hero section
+        setIsSearchVisible(true)
+      } else if (currentScrollY > lastScrollY && currentScrollY > 400) {
+        // Scrolling down and past threshold
+        setIsSearchVisible(false)
+      }
+
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
 
   const filteredItems = allMenuItems.filter((item) => {
     const matchesSearch =
@@ -141,9 +162,13 @@ export default function Meny() {
           </p>
         </motion.div>
       </section>
-
       {/* Search and Filter Section */}
-      <section className='py-8 bg-gray-50 sticky top-20 md:top-30 z-40 shadow-md'>
+      <motion.section
+        initial={{ y: 0 }}
+        animate={{ y: isSearchVisible ? 0 : -400 }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+        className='py-8 bg-gray-50 sticky top-23 z-40 shadow-md'
+      >
         <div className='container mx-auto px-4'>
           <div className='flex flex-col md:flex-row gap-4 items-center'>
             {/* Search Bar */}
@@ -195,7 +220,7 @@ export default function Meny() {
             retter
           </motion.p>
         </div>
-      </section>
+      </motion.section>
 
       {/* Menu Items Grid */}
       <section className='py-20'>
@@ -210,7 +235,7 @@ export default function Meny() {
               <p className='text-gray-400'>Prøv å søke etter noe annet</p>
             </motion.div>
           ) : (
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8'>
+            <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6'>
               {filteredItems.map((item) => (
                 <MenuItem
                   key={item.id}

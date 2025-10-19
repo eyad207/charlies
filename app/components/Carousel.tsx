@@ -133,7 +133,7 @@ const slides = [
     subtitle: 'Laget med lidenskap siden 1995',
     description:
       'Opplev den beste kebaben i byen med ferske ingredienser og tradisjonelle oppskrifter',
-    image: '/Pizza.webp',
+    image: '/Pizza.jpg',
     cta: 'Bestill Nå',
   },
   {
@@ -142,7 +142,7 @@ const slides = [
     subtitle: 'Perfekt for enhver anledning',
     description:
       'Spar penger med våre fantastiske familiepakker - mat til alle!',
-    image: '/MSG-Smash-Burger.jpg',
+    image: '/burger.avif',
     cta: 'Se Tilbud',
   },
 ]
