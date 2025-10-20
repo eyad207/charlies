@@ -83,26 +83,29 @@ const loyaltyTiers = [
 export default function Kampanjer() {
   return (
     <div className='bg-white'>
-      {/* Hero Section */}
-      <section className='relative h-[400px] bg-gradient-to-r from-black via-gray-900 to-black flex items-center justify-center overflow-hidden'>
+      {/* Hero Section - Modern & Exciting */}
+      <section className='relative h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden'>
         <div className='absolute inset-0'>
           <Image
             src='/KebabRull.avif'
             alt='Kampanjer'
             fill
-            className='object-cover opacity-30'
+            className='object-cover scale-110'
+            priority
           />
+          <div className='absolute inset-0 bg-gradient-to-br from-black/85 via-black/70 to-black/60' />
         </div>
 
         {/* Animated Confetti */}
-        <div className='absolute inset-0 overflow-hidden'>
-          {[...Array(20)].map((_, i) => (
+        <div className='absolute inset-0 overflow-hidden pointer-events-none'>
+          {[...Array(30)].map((_, i) => (
             <motion.div
               key={i}
-              className='absolute w-3 h-3 bg-[#FDB714]'
+              className='absolute w-3 h-3 rounded-full'
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `-10%`,
+                backgroundColor: i % 2 === 0 ? '#FDB714' : '#F97316',
               }}
               animate={{
                 y: ['0vh', '110vh'],
@@ -121,18 +124,32 @@ export default function Kampanjer() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className='relative z-10 text-center text-white'
+          className='relative z-10 text-center text-white px-4'
         >
-          <PartyPopper className='w-16 h-16 mx-auto mb-4 text-[#FDB714]' />
-          <h1 className='text-5xl md:text-6xl font-bold mb-4'>Kampanjer</h1>
-          <p className='text-xl md:text-2xl text-gray-300'>
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: 'spring', delay: 0.2 }}
+            className='inline-flex items-center gap-2 bg-gradient-to-r from-[#FDB714] to-amber-500 text-black px-6 py-3 rounded-full font-bold mb-6 shadow-2xl'
+          >
+            <PartyPopper className='w-6 h-6' />
+            <span>SPAR PENGER NÅ</span>
+          </motion.div>
+
+          <h1 className='text-5xl md:text-7xl lg:text-8xl font-black mb-6'>
+            <span className='block'>Våre</span>
+            <span className='block bg-gradient-to-r from-[#FDB714] via-amber-400 to-orange-400 bg-clip-text text-transparent'>
+              Kampanjer
+            </span>
+          </h1>
+          <h2 className='text-2xl md:text-3xl lg:text-4xl text-gray-200 font-semibold'>
             Fantastiske tilbud og rabatter!
-          </p>
+          </h2>
         </motion.div>
       </section>
 
-      {/* Current Campaigns */}
-      <section className='py-20 bg-white'>
+      {/* Current Campaigns - Large Image Cards */}
+      <section className='py-20 md:py-32 bg-gradient-to-b from-white to-gray-50'>
         <div className='container mx-auto px-4'>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -140,69 +157,86 @@ export default function Kampanjer() {
             viewport={{ once: true }}
             className='text-center mb-16'
           >
-            <h2 className='text-4xl md:text-5xl font-bold text-gray-900 mb-4'>
-              Aktive Kampanjer
+            <motion.span className='inline-block text-[#FDB714] font-bold text-lg mb-4'>
+              🎉 AKTIVE TILBUD
+            </motion.span>
+            <h2 className='text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6'>
+              Spar Penger Nå
             </h2>
-            <p className='text-xl text-gray-600 mb-4'>
-              Spar penger med våre fantastiske tilbud
-            </p>
-            <div className='w-24 h-1 bg-[#FDB714] mx-auto'></div>
+            <div className='w-24 h-2 bg-gradient-to-r from-[#FDB714] to-amber-500 mx-auto mb-6 rounded-full' />
+            <h3 className='text-xl md:text-2xl text-gray-600'>
+              Våre beste tilbud og kampanjer
+            </h3>
           </motion.div>
 
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-6xl mx-auto'>
             {campaigns.map((campaign, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -10, scale: 1.02 }}
-                className='relative bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 border-[#FDB714]'
+                className='group relative bg-white rounded-3xl shadow-2xl overflow-hidden hover:shadow-3xl transition-all duration-300 border-2 border-gray-100 hover:border-[#FDB714]'
               >
-                {/* Image Background with Overlay */}
-                <div className='relative h-64 overflow-hidden'>
+                {/* Large Image Background */}
+                <div className='relative h-80 overflow-hidden'>
                   <Image
                     src={campaign.image}
                     alt={campaign.title}
                     fill
-                    className='object-cover'
+                    className='object-cover transition-transform duration-700 group-hover:scale-110'
                   />
-                  <div className='absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/80'></div>
+                  <div className='absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent' />
 
-                  {/* Content on Image */}
-                  <div className='relative h-full flex flex-col justify-between p-6 text-white'>
-                    <div>
-                      <div className='flex items-center justify-between mb-4'>
-                        <div className='bg-[#FDB714] p-3 rounded-lg shadow-lg'>
-                          <div className='text-black'>{campaign.icon}</div>
-                        </div>
-                        <div className='text-right'>
-                          <div className='text-5xl font-bold text-[#FDB714]'>
-                            {campaign.discount}
-                          </div>
-                          <div className='text-xs uppercase tracking-wider font-semibold text-white'>
-                            Rabatt
-                          </div>
-                        </div>
-                      </div>
+                  {/* Discount Badge */}
+                  <motion.div
+                    initial={{ scale: 0, rotate: -45 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ type: 'spring', delay: index * 0.1 + 0.2 }}
+                    className='absolute top-6 right-6 bg-gradient-to-br from-[#FDB714] to-amber-500 text-black rounded-2xl p-4 shadow-2xl'
+                  >
+                    <div className='text-4xl md:text-5xl font-black leading-none'>
+                      {campaign.discount}
                     </div>
-                    <div>
-                      <h3 className='text-2xl font-bold mb-2'>
-                        {campaign.title}
+                    <div className='text-xs uppercase tracking-wider font-bold mt-1'>
+                      RABATT
+                    </div>
+                  </motion.div>
+
+                  {/* Icon Badge */}
+                  <div className='absolute top-6 left-6 bg-white/90 backdrop-blur-sm p-3 rounded-xl shadow-lg'>
+                    <div className='text-[#FDB714]'>{campaign.icon}</div>
+                  </div>
+
+                  {/* Content Overlay */}
+                  <div className='absolute bottom-0 left-0 right-0 p-6 md:p-8'>
+                    <h2 className='text-3xl md:text-4xl font-black text-white mb-3'>
+                      {campaign.title}
+                    </h2>
+                    <h3 className='text-lg md:text-xl text-gray-200 leading-relaxed mb-4'>
+                      {campaign.description}
+                    </h3>
+                    <div className='flex items-center justify-between'>
+                      <h3 className='text-sm text-[#FDB714] flex items-center gap-2 font-bold'>
+                        <Clock className='w-4 h-4' />
+                        {campaign.validUntil}
                       </h3>
-                      <p className='text-gray-100 text-sm leading-relaxed mb-4'>
-                        {campaign.description}
-                      </p>
-                      <div className='flex items-center justify-between'>
-                        <span className='text-xs text-gray-300 flex items-center gap-2'>
-                          <Clock className='w-4 h-4' />
-                          {campaign.validUntil}
-                        </span>
-                        <Button variant='primary' size='sm'>
-                          Bestill Nå
-                        </Button>
-                      </div>
+                      <motion.button
+                        whileHover={{ scale: 1.05, x: 5 }}
+                        whileTap={{ scale: 0.95 }}
+                        className='bg-gradient-to-r from-[#FDB714] to-amber-500 text-black px-6 py-3 rounded-full font-bold hover:shadow-xl transition-all flex items-center gap-2'
+                      >
+                        Bestill Nå
+                        <motion.span
+                          animate={{ x: [0, 5, 0] }}
+                          transition={{ repeat: Infinity, duration: 1.5 }}
+                        >
+                          →
+                        </motion.span>
+                      </motion.button>
                     </div>
                   </div>
                 </div>
@@ -212,8 +246,8 @@ export default function Kampanjer() {
         </div>
       </section>
 
-      {/* Special Offers */}
-      <section className='py-20 bg-gray-50'>
+      {/* Special Offers - Image Focus */}
+      <section className='py-20 md:py-32 bg-white'>
         <div className='container mx-auto px-4'>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -221,44 +255,63 @@ export default function Kampanjer() {
             viewport={{ once: true }}
             className='text-center mb-16'
           >
-            <h2 className='text-4xl md:text-5xl font-bold text-gray-900 mb-4'>
-              Spesial Tilbud
+            <motion.span className='inline-block text-[#FDB714] font-bold text-lg mb-4'>
+              ⭐ SPESIAL TILBUD
+            </motion.span>
+            <h2 className='text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6'>
+              Eksklu sive Tilbud
             </h2>
-            <div className='w-24 h-1 bg-[#FDB714] mx-auto'></div>
+            <div className='w-24 h-2 bg-gradient-to-r from-[#FDB714] to-amber-500 mx-auto rounded-full' />
           </motion.div>
 
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10'>
             {specialOffers.map((offer, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className='bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300'
+                transition={{ delay: index * 0.15 }}
+                whileHover={{ y: -10, scale: 1.02 }}
+                className='group bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300'
               >
-                <div className='relative h-48'>
+                {/* Large Image */}
+                <div className='relative h-64 overflow-hidden'>
                   <Image
                     src={offer.image}
                     alt={offer.title}
                     fill
-                    className='object-cover'
+                    className='object-cover transition-transform duration-700 group-hover:scale-110'
                   />
-                  <div className='absolute top-4 right-4'>
-                    <span className='bg-[#FDB714] text-black px-3 py-1 rounded-full text-xs font-bold shadow-lg'>
-                      {offer.badge}
-                    </span>
-                  </div>
+                  <div className='absolute inset-0 bg-gradient-to-t from-black/60 to-transparent' />
+
+                  {/* Badge */}
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.15 + 0.2, type: 'spring' }}
+                    className='absolute top-4 right-4 bg-gradient-to-r from-[#FDB714] to-amber-500 text-black px-4 py-2 rounded-full text-sm font-black shadow-lg'
+                  >
+                    {offer.badge}
+                  </motion.div>
                 </div>
-                <div className='p-6'>
-                  <h3 className='text-xl font-bold text-gray-900 mb-3'>
+
+                {/* Content */}
+                <div className='p-6 md:p-8'>
+                  <h2 className='text-2xl md:text-3xl font-black text-gray-900 mb-4 group-hover:text-[#FDB714] transition-colors'>
                     {offer.title}
+                  </h2>
+                  <h3 className='text-base md:text-lg text-gray-600 mb-6 leading-relaxed'>
+                    {offer.description}
                   </h3>
-                  <p className='text-gray-600 mb-4'>{offer.description}</p>
-                  <Button variant='outline' size='sm' className='w-full'>
-                    Les Mer
-                  </Button>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className='w-full bg-gradient-to-r from-gray-100 to-gray-50 text-gray-900 py-3 rounded-xl font-bold hover:from-[#FDB714] hover:to-amber-500 hover:text-black transition-all border-2 border-gray-200 hover:border-[#FDB714]'
+                  >
+                    Les Mer →
+                  </motion.button>
                 </div>
               </motion.div>
             ))}

@@ -96,7 +96,7 @@ export default function Header() {
           borderBottomRightRadius: '60% 30px',
         }}
       >
-        <nav className='bg-gradient-to-b from-[#FDB714] via-[#F5A612] to-[#E5A613] shadow-[0_10px_40px_rgba(253,183,20,0.3)] rounded-b-[50%_30px] w-full relative min-h-[130px] md:min-h-[150px] backdrop-blur-sm'>
+        <nav className='bg-gradient-to-b from-[#fdd214] via-[#f5c412] to-[#E5A613] shadow-[0_10px_40px_rgba(253,183,20,0.3)] rounded-b-[50%_30px] w-full relative min-h-[130px] md:min-h-[150px] backdrop-blur-sm'>
           {/* Top Utilities Bar - Desktop Only */}
           <div className='hidden lg:flex absolute top-3 left-0 right-0 px-8 justify-between items-center z-30'>
             {/* Left - Location & Search */}
