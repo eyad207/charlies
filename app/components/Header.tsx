@@ -24,18 +24,27 @@ export default function Header() {
   const { toggleCart, getTotalItems } = useCart()
 
   useEffect(() => {
+    let ticking = false
+
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY
 
-      if (currentScrollY < lastScrollY || currentScrollY < 10) {
-        // Scrolling up or at top
-        setIsVisible(true)
-      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down and past threshold
-        setIsVisible(false)
+          if (currentScrollY < lastScrollY || currentScrollY < 10) {
+            // Scrolling up or at top
+            setIsVisible(true)
+          } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            // Scrolling down and past threshold
+            setIsVisible(false)
+          }
+
+          setLastScrollY(currentScrollY)
+          ticking = false
+        })
+
+        ticking = true
       }
-
-      setLastScrollY(currentScrollY)
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -79,7 +88,7 @@ export default function Header() {
       <motion.header
         initial={{ y: 0 }}
         animate={{ y: isVisible ? 0 : -250 }}
-        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+        transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
         className='bg-transparent shadow-none fixed left-0 right-0 z-50'
         style={{
           top: '40px', // Offset for announcement banner

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Carousel from './components/Carousel'
 import MenuItem from './components/MenuItem'
 import Button from './components/Button'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Star,
   Clock,
@@ -14,6 +14,8 @@ import {
   TrendingUp,
   Award,
   Users,
+  Gift,
+  Percent,
 } from 'lucide-react'
 
 const menuItems = [
@@ -60,10 +62,99 @@ const categories = ['Alle', 'Kebab', 'Pizza', 'Tallerken', 'Pakker']
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState('Alle')
+  const [currentReviewIndex, setCurrentReviewIndex] = useState(0)
 
   const filteredMenuItems = menuItems.filter((item) =>
     selectedCategory === 'Alle' ? true : item.category === selectedCategory
   )
+
+  const reviews = [
+    {
+      name: 'Lars Hansen',
+      rating: 5,
+      text: 'Fantastisk kebab! Alltid fersk og god mat. Anbefales på det sterkeste!',
+      date: '2 uker siden',
+      avatar: 'LH',
+    },
+    {
+      name: 'Maria Olsen',
+      rating: 5,
+      text: 'Best kebab i området! Rask levering og hyggelig personale.',
+      date: '1 måned siden',
+      avatar: 'MO',
+    },
+    {
+      name: 'Erik Johansen',
+      rating: 4,
+      text: 'Veldig god mat og stor porsjon. Kommer garantert tilbake!',
+      date: '3 uker siden',
+      avatar: 'EJ',
+    },
+    {
+      name: 'Sofie Berg',
+      rating: 5,
+      text: 'Herlig pizza og kebab! Alltid konsistent kvalitet.',
+      date: '1 uke siden',
+      avatar: 'SB',
+    },
+    {
+      name: 'Thomas Andersen',
+      rating: 5,
+      text: 'Utrolig god mat! Rask service og hyggelig betjening. Anbefales!',
+      date: '2 måneder siden',
+      avatar: 'TA',
+    },
+    {
+      name: 'Nina Kristiansen',
+      rating: 4,
+      text: 'God mat til rimelig pris. Perfekt for en rask lunsj!',
+      date: '3 uker siden',
+      avatar: 'NK',
+    },
+  ]
+
+  const campaigns = [
+    {
+      title: 'Familie Pakke',
+      discount: '100kr',
+      description:
+        '4 kebaber + 2 store pommes frites + 4 brus = 449kr (spar 100kr!)',
+      validUntil: 'Alltid tilgjengelig',
+      icon: <Gift className='w-8 h-8' />,
+      image: '/burger-with-cola.jpg',
+    },
+    {
+      title: 'Lykkelig Time',
+      discount: '30%',
+      description: '30% rabatt på alle drikker mellom 15:00-17:00',
+      validUntil: 'Mandag - Fredag',
+      icon: <Clock className='w-8 h-8' />,
+      image: '/kebabpizza.webp',
+    },
+    {
+      title: 'Student Rabatt',
+      discount: '15%',
+      description: 'Studenter får 15% rabatt med gyldig studentbevis',
+      validUntil: 'Hele året',
+      icon: <Percent className='w-8 h-8' />,
+      image: '/Vegetar-kebab med hjemmelaget saus - Skikkelig digg.avif',
+    },
+    {
+      title: 'Student Rabatt',
+      discount: '15%',
+      description: 'Studenter får 15% rabatt med gyldig studentbevis',
+      validUntil: 'Hele året',
+      icon: <Percent className='w-8 h-8' />,
+      image: '/Vegetar-kebab med hjemmelaget saus - Skikkelig digg.avif',
+    },
+  ]
+  // Auto-scroll reviews every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentReviewIndex((prev) => (prev + 1) % reviews.length)
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [reviews.length])
 
   return (
     <div className='bg-white overflow-hidden'>
@@ -75,7 +166,7 @@ export default function Home() {
         <Carousel />
       </div>
       {/* Featured Categories - Premium Design */}
-      <section className='py-20 md:py-10 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden'>
+      <section className='py-10 md:py-10 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden'>
         {/* Decorative Background Elements */}
         <div className='absolute top-10 right-0 w-96 h-96 bg-gradient-to-br from-[#FDB714]/5 to-amber-500/5 rounded-full blur-3xl' />
         <div className='absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-yellow-400/5 to-orange-500/5 rounded-full blur-3xl' />
@@ -142,278 +233,167 @@ export default function Home() {
                 </span>
               </div>
 
-              {/* Reviews Carousel */}
-              <div className='relative overflow-hidden'>
+              {/* Reviews Carousel - Card by Card */}
+              <div className='relative overflow-hidden px-2 sm:px-4'>
                 <motion.div
-                  animate={{ x: [0, -2000] }}
+                  key={currentReviewIndex}
+                  initial={{ opacity: 0, x: 100, scale: 0.95 }}
+                  animate={{ opacity: 1, x: 0, scale: 1 }}
+                  exit={{ opacity: 0, x: -100, scale: 0.95 }}
                   transition={{
-                    duration: 40,
-                    repeat: Infinity,
-                    ease: 'linear',
+                    duration: 0.6,
+                    ease: [0.25, 0.1, 0.25, 1],
                   }}
-                  className='flex gap-6'
+                  className='flex justify-center'
                 >
-                  {[
-                    {
-                      name: 'Lars Hansen',
-                      rating: 5,
-                      text: 'Fantastisk kebab! Alltid fersk og god mat. Anbefales på det sterkeste!',
-                      date: '2 uker siden',
-                      avatar: 'LH',
-                    },
-                    {
-                      name: 'Maria Olsen',
-                      rating: 5,
-                      text: 'Best kebab i området! Rask levering og hyggelig personale.',
-                      date: '1 måned siden',
-                      avatar: 'MO',
-                    },
-                    {
-                      name: 'Erik Johansen',
-                      rating: 4,
-                      text: 'Veldig god mat og stor porsjon. Kommer garantert tilbake!',
-                      date: '3 uker siden',
-                      avatar: 'EJ',
-                    },
-                    {
-                      name: 'Sofie Berg',
-                      rating: 5,
-                      text: 'Herlig pizza og kebab! Alltid konsistent kvalitet.',
-                      date: '1 uke siden',
-                      avatar: 'SB',
-                    },
-                    {
-                      name: 'Thomas Andersen',
-                      rating: 5,
-                      text: 'Utrolig god mat! Rask service og hyggelig betjening. Anbefales!',
-                      date: '2 måneder siden',
-                      avatar: 'TA',
-                    },
-                    {
-                      name: 'Nina Kristiansen',
-                      rating: 4,
-                      text: 'God mat til rimelig pris. Perfekt for en rask lunsj!',
-                      date: '3 uker siden',
-                      avatar: 'NK',
-                    },
-                    // Duplicate for seamless loop
-                    {
-                      name: 'Lars Hansen',
-                      rating: 5,
-                      text: 'Fantastisk kebab! Alltid fersk og god mat. Anbefales på det sterkeste!',
-                      date: '2 uker siden',
-                      avatar: 'LH',
-                    },
-                    {
-                      name: 'Maria Olsen',
-                      rating: 5,
-                      text: 'Best kebab i området! Rask levering og hyggelig personale.',
-                      date: '1 måned siden',
-                      avatar: 'MO',
-                    },
-                    {
-                      name: 'Erik Johansen',
-                      rating: 4,
-                      text: 'Veldig god mat og stor porsjon. Kommer garantert tilbake!',
-                      date: '3 uker siden',
-                      avatar: 'EJ',
-                    },
-                    {
-                      name: 'Sofie Berg',
-                      rating: 5,
-                      text: 'Herlig pizza og kebab! Alltid konsistent kvalitet.',
-                      date: '1 uke siden',
-                      avatar: 'SB',
-                    },
-                  ].map((review, index) => (
-                    <div
-                      key={index}
-                      className='flex-shrink-0 w-96 bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 md:p-7 border border-gray-200 shadow-md'
-                    >
-                      <div className='flex items-center gap-4 mb-4'>
-                        <div className='w-14 h-14 bg-gradient-to-br from-[#FDB714] to-amber-500 rounded-full flex items-center justify-center text-white font-black text-sm flex-shrink-0'>
-                          {review.avatar}
-                        </div>
-                        <div className='flex-1 min-w-0'>
-                          <div className='font-bold text-gray-900 text-base truncate'>
-                            {review.name}
-                          </div>
-                          <div className='flex items-center gap-1'>
-                            {[...Array(5)].map((_, i) => (
+                  <div className='w-full max-w-3xl bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl p-6 sm:p-8 md:p-10 border-2 border-gray-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 min-h-[280px] flex flex-col'>
+                    <div className='flex items-start gap-4 sm:gap-6 mb-6'>
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{
+                          delay: 0.2,
+                          type: 'spring',
+                          stiffness: 200,
+                        }}
+                        className='w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-[#FDB714] via-amber-500 to-orange-400 rounded-full flex items-center justify-center text-white font-black text-lg sm:text-xl flex-shrink-0 shadow-lg'
+                      >
+                        {reviews[currentReviewIndex].avatar}
+                      </motion.div>
+                      <div className='flex-1 min-w-0'>
+                        <h3 className='font-black text-gray-900 text-xl sm:text-2xl mb-2'>
+                          {reviews[currentReviewIndex].name}
+                        </h3>
+                        <div className='flex items-center gap-2 mb-2'>
+                          {[...Array(5)].map((_, i) => (
+                            <motion.div
+                              key={i}
+                              initial={{ scale: 0, rotate: -180 }}
+                              animate={{ scale: 1, rotate: 0 }}
+                              transition={{ delay: 0.3 + i * 0.05 }}
+                            >
                               <Star
-                                key={i}
-                                className={`w-4 h-4 ${
-                                  i < review.rating
+                                className={`w-5 h-5 sm:w-6 sm:h-6 ${
+                                  i < reviews[currentReviewIndex].rating
                                     ? 'text-[#FDB714] fill-[#FDB714]'
                                     : 'text-gray-300'
                                 }`}
                               />
-                            ))}
-                          </div>
+                            </motion.div>
+                          ))}
                         </div>
+                        <span className='text-sm sm:text-base text-gray-500 font-medium'>
+                          {reviews[currentReviewIndex].date}
+                        </span>
                       </div>
-                      <span className='text-xs text-gray-500 block mb-3'>
-                        {review.date}
-                      </span>
-                      <p className='text-gray-700 text-base leading-relaxed'>
-                        {review.text}
-                      </p>
                     </div>
-                  ))}
+                    <div className='flex-1 flex items-center'>
+                      <h3 className='text-gray-700 text-lg sm:text-xl md:text-2xl leading-relaxed font-medium'>
+                        &ldquo;{reviews[currentReviewIndex].text}&rdquo;
+                      </h3>
+                    </div>
+                  </div>
                 </motion.div>
+                {/* Pagination Dots */}
+                <div className='flex justify-center gap-2 sm:gap-3 mt-8'>
+                  {reviews.map((_, index) => (
+                    <motion.button
+                      key={index}
+                      onClick={() => setCurrentReviewIndex(index)}
+                      whileHover={{ scale: 1.2 }}
+                      whileTap={{ scale: 0.9 }}
+                      className={`transition-all duration-300 rounded-full cursor-pointer ${
+                        index === currentReviewIndex
+                          ? 'bg-gradient-to-r from-[#FDB714] to-amber-500 w-10 sm:w-12 h-3'
+                          : 'bg-gray-300 hover:bg-gray-400 w-3 h-3'
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className='text-center mb-20'
-          >
-            <motion.span
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className='inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FDB714]/20 via-amber-500/20 to-[#FDB714]/20 text-[#FDB714] rounded-full text-sm font-bold mb-6 border-2 border-[#FDB714]/30'
-            >
-              <Award className='w-4 h-4' />
-              PREMIUM KVALITET
-            </motion.span>
-            {/* Title with Gradient Animation */}
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className='text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-gray-900 mb-6'
-            >
-              <span className='inline-block'>Signatur</span>
-              <span className='bg-gradient-to-r from-[#FDB714] via-amber-500 to-orange-400 bg-clip-text text-transparent inline-block'>
-                retter
-              </span>
-            </motion.h2>
-            <p className='text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8'>
-              Håndlagde retter med autentiske smaker og de ferskeste
-              ingrediensene. Hver rett er laget med kjærlighet og dedikasjon til
-              kvalitet.
-            </p>
-
-            {/* Trust Badges */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className='flex flex-wrap items-center justify-center gap-4 text-sm text-gray-600'
-            >
-              <span className='flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-md'>
-                <Star className='w-4 h-4 text-[#FDB714] fill-[#FDB714]' />
-                Ferske Ingredienser
-              </span>
-              <span className='flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-md'>
-                <Clock className='w-4 h-4 text-[#FDB714]' />
-                Hurtig Levering
-              </span>
-              <span className='flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-md'>
-                <Award className='w-4 h-4 text-[#FDB714]' />
-                Prisbelønt Kvalitet
-              </span>
-            </motion.div>
-          </motion.div>
-
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8'>
-            {[
-              {
-                title: 'Kebab Klassiker',
-                desc: 'Våre mest populære kebab retter laget med premium kjøtt',
-                image: '/KebabRull.avif',
-                color: 'from-orange-500/10 to-red-500/10',
-                items: '15+ retter',
-                rating: '4.9',
-              },
-              {
-                title: 'Pizza Favoritter',
-                desc: 'Steinovnsbakte med italiensk stil og ferske ingredienser',
-                image: '/pizza.jpg',
-                color: 'from-yellow-400/10 to-amber-500/10',
-                items: '20+ varianter',
-                rating: '4.8',
-              },
-              {
-                title: 'Veganske Valg',
-                desc: 'Helt plantebaserte delikatesser for den moderne smak',
-                image:
-                  '/Vegetar-kebab med hjemmelaget saus - Skikkelig digg.avif',
-                color: 'from-green-500/10 to-emerald-500/10',
-                items: '10+ alternativer',
-                rating: '4.7',
-              },
-            ].map((category, index) => (
+          {/* Current Campaigns */}
+          <section className='py-10 bg-white'>
+            <div className='container mx-auto '>
               <motion.div
-                key={category.title}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                whileHover={{ y: -12, scale: 1.02 }}
-                className='group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer'
+                className='text-center mb-16'
               >
-                <div className='relative h-96'>
-                  <Image
-                    src={category.image}
-                    alt={category.title}
-                    fill
-                    className='object-cover transition-transform duration-700 group-hover:scale-110'
-                  />
-                  <div className='absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20 opacity-70 group-hover:opacity-90 transition-opacity duration-500' />
-
-                  {/* Animated Border */}
-                  <div className='absolute inset-0 border-4 border-[#FDB714] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl' />
-
-                  {/* Rating Badge */}
-                  <motion.div
-                    initial={{ scale: 0, rotate: -180 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 + index * 0.1, type: 'spring' }}
-                    className='absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-2 rounded-full flex items-center gap-1 shadow-lg'
-                  >
-                    <Star className='w-4 h-4 text-[#FDB714] fill-[#FDB714]' />
-                    <span className='text-sm font-black text-gray-900'>
-                      {category.rating}
-                    </span>
-                  </motion.div>
-                </div>
-
-                <div className='absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500'>
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                    className='mb-4'
-                  >
-                    <span className='inline-block px-4 py-2 bg-gradient-to-r from-[#FDB714] to-amber-500 text-black text-sm font-black rounded-full shadow-lg'>
-                      {category.items}
-                    </span>
-                  </motion.div>
-                  <h3 className='text-3xl md:text-4xl font-black mb-3 drop-shadow-lg'>
-                    {category.title}
-                  </h3>
-                  <p className='text-gray-100 text-base mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 leading-relaxed'>
-                    {category.desc}
-                  </p>
-                  <motion.div className='opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200'>
-                    <span className='inline-flex items-center gap-2 text-[#FDB714] font-black text-base bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full'>
-                      Utforsk <TrendingUp className='w-5 h-5' />
-                    </span>
-                  </motion.div>
-                </div>
+                <h2 className='text-4xl md:text-5xl font-bold text-gray-900 mb-4'>
+                  Aktive Kampanjer
+                </h2>
+                <p className='text-xl text-gray-600 mb-4'>
+                  Spar penger med våre fantastiske tilbud
+                </p>
+                <div className='w-24 h-1 bg-[#FDB714] mx-auto'></div>
               </motion.div>
-            ))}
-          </div>
+
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto'>
+                {campaigns.map((campaign, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ y: -10, scale: 1.02 }}
+                    className='relative bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 border-[#FDB714]'
+                  >
+                    {/* Image Background with Overlay */}
+                    <div className='relative h-64 overflow-hidden'>
+                      <Image
+                        src={campaign.image}
+                        alt={campaign.title}
+                        fill
+                        className='object-cover'
+                      />
+                      <div className='absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/80'></div>
+
+                      {/* Content on Image */}
+                      <div className='relative h-full flex flex-col justify-between p-6 text-white'>
+                        <div>
+                          <div className='flex items-center justify-between mb-4'>
+                            <div className='bg-[#FDB714] p-3 rounded-lg shadow-lg'>
+                              <div className='text-black'>{campaign.icon}</div>
+                            </div>
+                            <div className='text-right'>
+                              <div className='text-5xl font-bold text-[#FDB714]'>
+                                {campaign.discount}
+                              </div>
+                              <div className='text-xs uppercase tracking-wider font-semibold text-white'>
+                                Rabatt
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className='text-2xl font-bold mb-2'>
+                            {campaign.title}
+                          </h3>
+                          <p className='text-gray-100 text-sm leading-relaxed mb-4'>
+                            {campaign.description}
+                          </p>
+                          <div className='flex items-center justify-between'>
+                            <span className='text-xs text-gray-300 flex items-center gap-2'>
+                              <Clock className='w-4 h-4' />
+                              {campaign.validUntil}
+                            </span>
+                            <Button variant='primary' size='sm'>
+                              Bestill Nå
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
 
           {/* Seamless Section Divider */}
           <motion.div
@@ -436,7 +416,7 @@ export default function Home() {
       </section>
 
       {/* Menu Section with Category Filter - Enhanced & Professional */}
-      <section className='py-24 md:py-20 bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden'>
+      <section className='py-15 md:py-20 bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden'>
         {/* Decorative Background Elements - Enhanced */}
         <div className='absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-[#FDB714]/10 to-amber-500/10 rounded-full blur-3xl' />
         <div className='absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-br from-yellow-400/10 to-orange-500/10 rounded-full blur-3xl' />
@@ -447,87 +427,21 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className='text-center mb-10'
+            className='text-center mb-12'
           >
-            {/* Animated Icon */}
-            <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              whileInView={{ scale: 1, rotate: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                type: 'spring',
-                stiffness: 200,
-                damping: 15,
-                delay: 0.1,
-              }}
-              className='inline-block mb-6'
-            >
-              <div className='relative'>
-                <div className='absolute inset-0 bg-gradient-to-r from-[#FDB714] to-amber-500 rounded-full blur-xl opacity-50'></div>
-                <div className='relative bg-gradient-to-br from-[#FDB714] to-amber-500 p-5 rounded-full'>
-                  <ShoppingBag className='w-14 h-14 text-black' />
-                </div>
-              </div>
-            </motion.div>
-
             {/* Title with Gradient Animation */}
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className='text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 mb-6'
+              transition={{ delay: 0.1 }}
+              className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 mb-4'
             >
               <span className='inline-block'>Populære</span>{' '}
               <span className='bg-gradient-to-r from-[#FDB714] via-amber-500 to-orange-400 bg-clip-text text-transparent inline-block'>
                 Retter
               </span>
             </motion.h2>
-
-            {/* Description */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className='text-lg md:text-xl text-gray-600 mb-6 max-w-4xl mx-auto'
-            >
-              Utforsk våre mestselgende retter laget med lidenskap og dedikasjon
-            </motion.p>
-
-            {/* Quick Info Pills */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className='flex flex-wrap items-center justify-center gap-3 mb-8'
-            >
-              <span className='inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 rounded-full text-sm font-semibold border border-green-200'>
-                <Clock className='w-4 h-4' />
-                Klar på 20-30 min
-              </span>
-              <span className='inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 rounded-full text-sm font-semibold border border-blue-200'>
-                <Star className='w-4 h-4 fill-blue-700' />
-                Topprangerte
-              </span>
-            </motion.div>
-
-            {/* Decorative Line */}
-            <motion.div
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className='relative w-40 h-2 mx-auto rounded-full overflow-hidden'
-            >
-              <div className='absolute inset-0 bg-gradient-to-r from-transparent via-[#FDB714] to-transparent'></div>
-              <motion.div
-                animate={{ x: ['-100%', '200%'] }}
-                transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
-                className='absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent'
-              ></motion.div>
-            </motion.div>
           </motion.div>
 
           {/* Category Filter Bar - Ultra Professional */}
@@ -535,52 +449,48 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className='flex flex-wrap justify-center gap-3 md:gap-4 mb-20'
+            className='mb-20 overflow-x-auto scrollbar-hide'
           >
-            {categories.map((category, index) => (
-              <motion.button
-                key={category}
-                initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  delay: 0.5 + index * 0.06,
-                  type: 'spring',
-                  stiffness: 200,
-                }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setSelectedCategory(category)}
-                className={`relative px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-black text-sm sm:text-base md:text-lg transition-all duration-300 cursor-pointer ${
-                  selectedCategory === category
-                    ? 'bg-gradient-to-r from-[#FDB714] via-amber-500 to-[#FDB714] text-black shadow-2xl shadow-[#FDB714]/40'
-                    : 'bg-white text-gray-700 hover:bg-gray-50 border-2 border-gray-200 hover:border-[#FDB714]/50 shadow-md hover:shadow-lg'
-                }`}
-              >
-                {selectedCategory === category && (
-                  <>
+            <div className='flex justify-start md:justify-center gap-3 md:gap-4 px-4 min-w-max md:min-w-0 py-2'>
+              {categories.map((category) => (
+                <motion.button
+                  key={category}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`relative px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-black text-sm sm:text-base md:text-lg transition-all duration-300 cursor-pointer ${
+                    selectedCategory === category
+                      ? 'bg-gradient-to-r from-[#FDB714] via-amber-500 to-[#FDB714] text-black shadow-2xl shadow-[#FDB714]/40'
+                      : 'bg-white text-gray-700 hover:bg-gray-50 border-2 border-gray-200 hover:border-[#FDB714]/50 shadow-md hover:shadow-lg'
+                  }`}
+                >
+                  {selectedCategory === category && (
+                    <>
+                      <motion.div
+                        layoutId='categoryHighlight'
+                        className='absolute inset-0 bg-gradient-to-r from-[#FDB714] via-amber-500 to-[#FDB714] rounded-2xl -z-10'
+                        transition={{
+                          type: 'spring',
+                          stiffness: 400,
+                          damping: 30,
+                        }}
+                      />
+                      {/* Glow effect */}
+                      <div className='absolute inset-0 bg-gradient-to-r from-[#FDB714] to-amber-500 rounded-2xl blur-md -z-20 opacity-60'></div>
+                    </>
+                  )}
+                  <span className='relative z-10'>{category}</span>
+                  {selectedCategory === category && (
                     <motion.div
-                      layoutId='categoryHighlight'
-                      className='absolute inset-0 bg-gradient-to-r from-[#FDB714] via-amber-500 to-[#FDB714] rounded-2xl -z-10'
-                      transition={{
-                        type: 'spring',
-                        stiffness: 400,
-                        damping: 30,
-                      }}
+                      initial={{ scale: 0 }}
+                      animate={{ scale: [0, 1.2, 1] }}
+                      className='absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white'
                     />
-                    {/* Glow effect */}
-                    <div className='absolute inset-0 bg-gradient-to-r from-[#FDB714] to-amber-500 rounded-2xl blur-md -z-20 opacity-60'></div>
-                  </>
-                )}
-                <span className='relative z-10'>{category}</span>
-                {selectedCategory === category && (
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: [0, 1.2, 1] }}
-                    className='absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white'
-                  />
-                )}
-              </motion.button>
-            ))}
+                  )}
+                </motion.button>
+              ))}
+            </div>
           </motion.div>
 
           {/* Menu Items Grid - Professional Layout with Bigger Cards on Desktop */}
@@ -666,7 +576,7 @@ export default function Home() {
       </section>
 
       {/* Delivery Section - Completely Redesigned */}
-      <section className='py-20 md:py-20 bg-gradient-to-br relative overflow-hidden'>
+      <section className='py-10 md:py-20 bg-gradient-to-br relative overflow-hidden'>
         {/* Animated Background Elements */}
         <motion.div
           animate={{
@@ -691,163 +601,158 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className='text-center mb-16'
+            className='text-center mb-12 md:mb-16'
           >
             <motion.span
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className='inline-block px-6 py-2 bg-[#FDB714] text-black rounded-full text-sm font-bold mb-6'
+              className='inline-flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-[#FDB714] to-amber-500 text-black rounded-full text-sm font-bold mb-6 shadow-lg'
             >
+              <TrendingUp className='w-4 h-4' />
               RASK & PÅLITELIG
             </motion.span>
-            <h2 className='text-5xl md:text-7xl font-black text-black mb-6'>
+            <h2 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-black mb-4'>
               Mat Levert på
-              <span className='block text-[#FDB714] mt-2'>Korttid</span>
+              <span className='block bg-gradient-to-r from-[#FDB714] via-amber-500 to-orange-400 bg-clip-text text-transparent mt-2'>
+                Korttid
+              </span>
             </h2>
-            <p className='text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto'>
-              Bestill nå og få mat på døren på 20-30 minutter
-            </p>
+            <h3 className='text-lg sm:text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto font-semibold'>
+              Bestill nå → 20-30 minutter
+            </h3>
           </motion.div>
 
-          <div className='grid md:grid-cols-2 gap-8 mb-16'>
+          {/* Delivery Cards - Image Based */}
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-16'>
+            {/* Home Delivery */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              whileHover={{ scale: 1.02, y: -5 }}
-              className='relative group'
+              whileHover={{ scale: 1.02 }}
+              className='group relative rounded-3xl overflow-hidden shadow-2xl h-[450px] md:h-[500px]'
             >
-              <div className='absolute inset-0 bg-gradient-to-r from-[#FDB714] to-[#E5A613] rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500' />
-              <div className='relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 md:p-12 border border-[#FDB714]/30 hover:border-[#FDB714] transition-all duration-500'>
-                <div className='flex items-center justify-between mb-6'>
-                  <Clock className='w-16 h-16 text-[#FDB714]' />
-                  <motion.span
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className='px-4 py-2 bg-[#FDB714] text-white rounded-full text-sm font-bold'
-                  >
-                    POPULÆRT
-                  </motion.span>
-                </div>
-                <h3 className='text-3xl md:text-4xl font-black text-white mb-4'>
-                  Hjemlevering
-                </h3>
-                <p className='text-gray-300 text-lg mb-6'>
-                  Mat levert på døren din på 20-30 minutter. Spor bestillingen
-                  din i sanntid.
-                </p>
-                <div className='flex items-center gap-4 mb-6'>
-                  <div className='flex-1 h-2 bg-gray-700 rounded-full overflow-hidden'>
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: '100%' }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1.5, delay: 0.3 }}
-                      className='h-full bg-gradient-to-r from-[#FDB714] to-[#E5A613]'
-                    />
-                  </div>
-                  <span className='text-[#FDB714] font-bold text-xl'>
-                    20-30 min
-                  </span>
-                </div>
-                <ul className='space-y-3 mb-8'>
-                  {[
-                    'Gratis levering over 200,-',
-                    'Spor bestillingen live',
-                    'Kontaktløs levering',
-                  ].map((item, i) => (
-                    <motion.li
-                      key={item}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                      className='flex items-center text-gray-300'
-                    >
-                      <span className='w-2 h-2 bg-[#FDB714] rounded-full mr-3' />
-                      {item}
-                    </motion.li>
-                  ))}
-                </ul>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className='w-full bg-gradient-to-r bg-[#FDB714]  text-white font-bold py-4 rounded-2xl hover:shadow-2xl transition-all duration-300 cursor-pointer'
+              {/* Background Image */}
+              <div className='absolute inset-0'>
+                <Image
+                  src='/kebabpizza.webp'
+                  alt='Hjemlevering'
+                  fill
+                  className='object-cover transition-transform duration-700 group-hover:scale-110'
+                />
+                <div className='absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent' />
+              </div>
+
+              {/* Content */}
+              <div className='relative z-10 h-full flex flex-col justify-end p-6 md:p-8'>
+                {/* Icon Badge */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2, type: 'spring' }}
+                  className='bg-gradient-to-br from-[#FDB714] to-amber-500 w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-xl'
                 >
-                  Bestill Hjemlevering
+                  <Clock className='w-7 h-7 md:w-8 md:h-8 text-black' />
+                </motion.div>
+
+                {/* Title */}
+                <h2 className='text-4xl md:text-5xl font-black text-white mb-2'>
+                  Hjemlevering
+                </h2>
+
+                {/* Subtitle */}
+                <h3 className='text-xl md:text-2xl text-[#FDB714] font-bold mb-6 flex items-center gap-2'>
+                  <span>20-30 minutter</span>
+                  <motion.span
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ repeat: Infinity, duration: 2 }}
+                    className='inline-block w-2 h-2 bg-[#FDB714] rounded-full'
+                  />
+                </h3>
+
+                {/* CTA Button */}
+                <motion.button
+                  whileHover={{ x: 5 }}
+                  whileTap={{ scale: 0.95 }}
+                  className='bg-gradient-to-r from-[#FDB714] to-amber-500 text-black px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all flex items-center gap-3 w-fit group/btn'
+                >
+                  <span>Bestill Nå</span>
+                  <motion.span
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.5 }}
+                    className='text-xl'
+                  >
+                    →
+                  </motion.span>
                 </motion.button>
               </div>
             </motion.div>
 
-            {/* Takeaway Option */}
+            {/* Takeaway */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              whileHover={{ scale: 1.02, y: -5 }}
-              className='relative group'
+              transition={{ duration: 0.6, delay: 0.1 }}
+              whileHover={{ scale: 1.02 }}
+              className='group relative rounded-3xl overflow-hidden shadow-2xl h-[450px] md:h-[500px]'
             >
-              <div className='absolute inset-0 bg-gradient-to-r from-[#FDB714] to-[#E5A613] rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500' />
-              <div className='relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 md:p-12 border border-[#FDB714]/30 hover:border-[#FDB714] transition-all duration-500'>
-                <div className='flex items-center justify-between mb-6'>
-                  <ShoppingBag className='w-16 h-16 text-[#FDB714]' />
-                  <motion.span
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                    className='px-4 py-2 bg-[#FDB714] text-white rounded-full text-sm font-bold'
-                  >
-                    RASKEST
-                  </motion.span>
-                </div>
-                <h3 className='text-3xl md:text-4xl font-black text-white mb-4'>
-                  Hent Selv
-                </h3>
-                <p className='text-gray-300 text-lg mb-6'>
-                  Hent maten klar på bare 10 minutter. Perfekt når du er i
-                  farta!
-                </p>
-                <div className='flex items-center gap-4 mb-6'>
-                  <div className='flex-1 h-2 bg-gray-700 rounded-full overflow-hidden'>
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: '60%' }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: 0.3 }}
-                      className='h-full bg-gradient-to-r from-[#FDB714] to-[#E5A613]'
-                    />
-                  </div>
-                  <span className='text-[#FDB714] font-bold text-xl'>
-                    10 min
-                  </span>
-                </div>
-                <ul className='space-y-3 mb-8'>
-                  {[
-                    '15% rabatt på takeaway',
-                    'Ingen ventetid',
-                    'Alltid fersk og varm',
-                  ].map((item, i) => (
-                    <motion.li
-                      key={item}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                      className='flex items-center text-gray-300'
-                    >
-                      <span className='w-2 h-2 bg-[#FDB714] rounded-full mr-3' />
-                      {item}
-                    </motion.li>
-                  ))}
-                </ul>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className=' cursor-pointer w-full bg-gradient-to-r from-[#FDB714] to-[#E5A613] text-white font-bold py-4 rounded-2xl hover:shadow-2xl transition-all duration-300'
+              {/* Background Image */}
+              <div className='absolute inset-0'>
+                <Image
+                  src='/Vegetar-kebab med hjemmelaget saus - Skikkelig digg.avif'
+                  alt='Hjemlevering'
+                  fill
+                  className='object-cover transition-transform duration-700 group-hover:scale-110'
+                />
+                <div className='absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent' />
+              </div>
+
+              {/* Content */}
+              <div className='relative z-10 h-full flex flex-col justify-end p-6 md:p-8'>
+                {/* Icon Badge */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3, type: 'spring' }}
+                  className='bg-gradient-to-br from-[#FDB714] to-amber-500 w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-xl'
                 >
-                  Bestill Takeaway
+                  <ShoppingBag className='w-7 h-7 md:w-8 md:h-8 text-black' />
+                </motion.div>
+
+                {/* Title */}
+                <h2 className='text-4xl md:text-5xl font-black text-white mb-2'>
+                  Hent Selv
+                </h2>
+
+                {/* Subtitle */}
+                <h3 className='text-xl md:text-2xl text-[#FDB714] font-bold mb-6 flex items-center gap-2'>
+                  <span>Klar på 10 min</span>
+                  <motion.span
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ repeat: Infinity, duration: 2, delay: 0.5 }}
+                    className='inline-block w-2 h-2 bg-[#FDB714] rounded-full'
+                  />
+                </h3>
+
+                {/* CTA Button */}
+                <motion.button
+                  whileHover={{ x: 5 }}
+                  whileTap={{ scale: 0.95 }}
+                  className='bg-gradient-to-r from-[#FDB714] to-amber-500 text-black px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all flex items-center gap-3 w-fit group/btn'
+                >
+                  <span>Bestill Nå</span>
+                  <motion.span
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.5, delay: 0.3 }}
+                    className='text-xl'
+                  >
+                    →
+                  </motion.span>
                 </motion.button>
               </div>
             </motion.div>
@@ -879,9 +784,6 @@ export default function Home() {
             <h2 className='text-4xl md:text-6xl font-black text-gray-900 mb-6'>
               Leveringspartnere
             </h2>
-            <p className='text-xl text-gray-600 max-w-2xl mx-auto'>
-              Bestill din favorittmat gjennom våre pålitelige partnere
-            </p>
           </motion.div>
 
           <motion.div
@@ -889,23 +791,23 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className='max-w-6xl mx-auto'
+            className='max-w-6xl mx-auto '
           >
-            <div className='grid md:grid-cols-2 gap-8'>
+            <div className='grid grid-cols-2 md:grid-cols-2 gap-3 sm:gap-6 md:gap-8'>
               {/* Wolt Card */}
               <motion.div
                 whileHover={{ y: -10, scale: 1.02 }}
                 transition={{ type: 'spring', stiffness: 300 }}
                 className='group relative'
               >
-                <div className='absolute inset-0 bg-gradient-to-r from-[#14edfd] to-[#14edfd] rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-opacity duration-500' />
-                <div className='relative bg-white rounded-3xl p-8 md:p-12 shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-[#14edfd]/20 group-hover:border-[#14edfd]/40'>
+                <div className='absolute inset-0 bg-gradient-to-r from-[#14edfd] to-[#14edfd] rounded-2xl md:rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-opacity duration-500' />
+                <div className='relative bg-white rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-[#14edfd]/20 group-hover:border-[#14edfd]/40 h-full flex flex-col'>
                   <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ type: 'spring', stiffness: 200 }}
-                    className='w-32 h-32 md:w-40 md:h-40 relative mx-auto mb-8 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-[#14edfd]/20 group-hover:ring-[#14edfd]/40 transition-all duration-500'
+                    className='w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 relative mx-auto mb-4 sm:mb-6 md:mb-8 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl ring-4 ring-[#14edfd]/20 group-hover:ring-[#14edfd]/40 transition-all duration-500'
                   >
                     <Image
                       src='/wolt.jpg'
@@ -915,39 +817,17 @@ export default function Home() {
                     />
                   </motion.div>
 
-                  <h3 className='text-3xl md:text-4xl font-black text-gray-900 text-center mb-4'>
-                    Bestill på Wolt
+                  <h3 className='text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-gray-900 text-center mb-2 sm:mb-3 md:mb-4'>
+                    Wolt
                   </h3>
-                  <p className='text-gray-600 text-center mb-8 text-lg'>
-                    Rask levering direkte til døren din
+                  <p className='text-gray-600 text-center mb-4 sm:mb-6 md:mb-8 text-xs sm:text-sm md:text-base lg:text-lg'>
+                    Rask levering til døren
                   </p>
-
-                  <div className='space-y-3 mb-8'>
-                    {[
-                      'Spor ordre i sanntid',
-                      'Sikker betaling',
-                      'Tusenvis av restauranter',
-                    ].map((feature, i) => (
-                      <motion.div
-                        key={feature}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.1 }}
-                        className='flex items-center gap-3'
-                      >
-                        <div className='w-6 h-6 bg-gradient-to-r from-[#14fdfd] to-[#13b0e5] rounded-full flex items-center justify-center'>
-                          <span className='text-white text-xs'>✓</span>
-                        </div>
-                        <span className='text-gray-700'>{feature}</span>
-                      </motion.div>
-                    ))}
-                  </div>
 
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className='cursor-pointer w-full bg-gradient-to-r from-[#14fdfd] to-[#13b0e5]  text-white font-black py-4 rounded-2xl hover:shadow-2xl transition-all duration-300 text-lg group-hover:from-[#14e2fd] group-hover:to-[#1371e5]'
+                    className='cursor-pointer w-full bg-gradient-to-r from-[#14fdfd] to-[#13b0e5] text-white font-black py-2 sm:py-3 md:py-4 rounded-xl md:rounded-2xl hover:shadow-2xl transition-all duration-300 text-xs sm:text-sm md:text-base lg:text-lg group-hover:from-[#14e2fd] group-hover:to-[#1371e5]'
                   >
                     <span className='flex items-center justify-center gap-2'>
                       Bestill Nå
@@ -968,14 +848,14 @@ export default function Home() {
                 transition={{ type: 'spring', stiffness: 300 }}
                 className='group relative'
               >
-                <div className='absolute inset-0 bg-gradient-to-r from-pink-500 to-rose-600 rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-opacity duration-500' />
-                <div className='relative bg-white rounded-3xl p-8 md:p-12 shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-pink-100 group-hover:border-pink-300'>
+                <div className='absolute inset-0 bg-gradient-to-r from-pink-500 to-rose-600 rounded-2xl md:rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-opacity duration-500' />
+                <div className='relative bg-white rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-pink-100 group-hover:border-pink-300 h-full flex flex-col'>
                   <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ type: 'spring', stiffness: 200, delay: 0.1 }}
-                    className='w-32 h-32 md:w-40 md:h-40 relative mx-auto mb-8 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-pink-100 group-hover:ring-pink-300 transition-all duration-500'
+                    className='w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 relative mx-auto mb-4 sm:mb-6 md:mb-8 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl ring-4 ring-pink-100 group-hover:ring-pink-300 transition-all duration-500'
                   >
                     <Image
                       src='/foodora.png'
@@ -985,39 +865,17 @@ export default function Home() {
                     />
                   </motion.div>
 
-                  <h3 className='text-3xl md:text-4xl font-black text-gray-900 text-center mb-4'>
-                    Bestill på Foodora
+                  <h3 className='text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-gray-900 text-center mb-2 sm:mb-3 md:mb-4'>
+                    Foodora
                   </h3>
-                  <p className='text-gray-600 text-center mb-8 text-lg'>
-                    Din favorittmat levert med et smil
+                  <p className='text-gray-600 text-center mb-4 sm:mb-6 md:mb-8 text-xs sm:text-sm md:text-base lg:text-lg'>
+                    Mat levert med et smil
                   </p>
-
-                  <div className='space-y-3 mb-8'>
-                    {[
-                      'Live ordresporing',
-                      'Fleksible betalinger',
-                      'Premium utvalg',
-                    ].map((feature, i) => (
-                      <motion.div
-                        key={feature}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.1 }}
-                        className='flex items-center gap-3'
-                      >
-                        <div className='w-6 h-6 bg-gradient-to-r from-pink-500 to-rose-600 rounded-full flex items-center justify-center'>
-                          <span className='text-white text-xs'>✓</span>
-                        </div>
-                        <span className='text-gray-700'>{feature}</span>
-                      </motion.div>
-                    ))}
-                  </div>
 
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className='cursor-pointer w-full bg-gradient-to-r from-pink-600 to-rose-600 text-white font-black py-4 rounded-2xl hover:shadow-2xl transition-all duration-300 text-lg group-hover:from-pink-500 group-hover:to-rose-500'
+                    className='cursor-pointer w-full bg-gradient-to-r from-pink-600 to-rose-600 text-white font-black py-2 sm:py-3 md:py-4 rounded-xl md:rounded-2xl hover:shadow-2xl transition-all duration-300 text-xs sm:text-sm md:text-base lg:text-lg group-hover:from-pink-500 group-hover:to-rose-500'
                   >
                     <span className='flex items-center justify-center gap-2'>
                       Bestill Nå
