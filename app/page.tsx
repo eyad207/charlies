@@ -259,6 +259,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+
         {/* Menu Section with Category Filter - Enhanced & Professional */}
         <section className='py-10 md:py-20 bg-gradient-to-br relative overflow-hidden'>
           {/* Animated Background Elements */}
@@ -785,11 +786,11 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className='mb-16 overflow-hidden'
             >
-              <div className='relative bg-gradient-to-br rounded-3xl p-8 md:p-12  shadow-xl'>
+              <div className='relative bg-gradient-to-br rounded-3xl p-8 md:p-12 '>
                 {/* Google Reviews Header */}
                 <div className='flex items-center justify-center gap-4 md:gap-6 mb-8 flex-wrap'>
                   <div className='flex items-center gap-3'>
-                    <div className='w-14 h-14 bg-white rounded-lg shadow-md flex items-center justify-center'>
+                    <div className='w-14 h-14 bg-white  flex items-center justify-center'>
                       <svg viewBox='0 0 24 24' className='w-8 h-8'>
                         <path
                           fill='#4285F4'
@@ -839,7 +840,7 @@ export default function Home() {
                 </div>
 
                 {/* Reviews Carousel - Card by Card */}
-                <div className='relative overflow-hidden px-2 sm:px-4'>
+                <div className='relative overflow-hidden px-2 sm:px-4 py-10'>
                   <motion.div
                     key={currentReviewIndex}
                     initial={{ opacity: 0, x: 100, scale: 0.95 }}

@@ -46,11 +46,6 @@ export default function MenuItem({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        whileHover={{
-          y: -8,
-          scale: 1.03,
-          transition: { duration: 0.3, type: 'spring', stiffness: 300 },
-        }}
         onClick={() => setIsModalOpen(true)}
         className='w-full group relative bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 border-2 border-gray-100 hover:border-yellow-200 cursor-pointer flex flex-col h-full'
       >
