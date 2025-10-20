@@ -187,7 +187,7 @@ export default function Home() {
               rotate: [0, 90, 0],
             }}
             transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-            className='absolute top-20 left-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl'
+            className='absolute top-20 left-20 w-96 h-96 '
           />
           <motion.div
             animate={{
@@ -195,7 +195,7 @@ export default function Home() {
               rotate: [90, 0, 90],
             }}
             transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-            className='absolute bottom-20 right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl'
+            className='absolute bottom-20 right-20 w-96 h-96  '
           />
 
           <div className='container mx-auto px-4 relative z-10'>
@@ -207,7 +207,7 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className='mb-16 overflow-hidden'
             >
-              <div className='relative bg-gradient-to-br backdrop-blur-sm rounded-3xl p-8 md:p-12border-2 border-teal-100 shadow-xl'>
+              <div className='relative bg-gradient-to-br rounded-3xl p-8 md:p-12  shadow-xl'>
                 {/* Google Reviews Header */}
                 <div className='flex items-center justify-center gap-4 md:gap-6 mb-8 flex-wrap'>
                   <div className='flex items-center gap-3'>
@@ -342,7 +342,7 @@ export default function Home() {
             </motion.div>
 
             {/* Current Campaigns */}
-            <section className='py-10 bg-white/95 backdrop-blur-sm'>
+            <section className='py-10 '>
               <div className='container mx-auto '>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -453,7 +453,7 @@ export default function Home() {
               rotate: [0, 90, 0],
             }}
             transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-            className='absolute top-20 left-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl'
+            className='absolute top-20 left-20 w-96 h-96 '
           />
           <motion.div
             animate={{
@@ -461,10 +461,10 @@ export default function Home() {
               rotate: [90, 0, 90],
             }}
             transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-            className='absolute bottom-20 right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl'
+            className='absolute bottom-20 right-20 w-96 h-96 '
           />
 
-          <div className='container mx-auto px-4 relative z-10'>
+          <div className='container mx-auto px-4 relative z-10 bg-gradient-to-br'>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -599,21 +599,6 @@ export default function Home() {
                 </motion.div>
               </Link>
             </motion.div>
-          </div>
-
-          {/* Wave Divider for Seamless Transition */}
-          <div className='absolute bottom-0 left-0 right-0 overflow-hidden leading-none'>
-            <svg
-              className='relative block w-full h-16 md:h-24'
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox='0 0 1200 120'
-              preserveAspectRatio='none'
-            >
-              <path
-                d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z'
-                className='fill-white'
-              ></path>
-            </svg>
           </div>
         </section>
 
@@ -1005,7 +990,7 @@ export default function Home() {
                 transition={{ delay: 0.2 }}
                 className='text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight'
               >
-                <span className='block'>Klar for den</span>
+                <span className='block text-black'>Klar for den</span>
                 <span className='block bg-gradient-to-r from-[#FDB714] via-orange-500 to-[#FDB714] text-transparent bg-clip-text'>
                   BESTE KEBABEN?
                 </span>
@@ -1017,7 +1002,7 @@ export default function Home() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
-                className='text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed'
+                className='text-xl md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed'
               >
                 Opplev smaken av tradisjon og kvalitet. Bestill nå og få mat på
                 døren på under 30 minutter!
@@ -1061,7 +1046,7 @@ export default function Home() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <button className=' cursor-pointer group px-10 py-5 bg-white/10 backdrop-blur-md text-white font-black rounded-2xl text-lg border-2 border-white/30 hover:bg-white/20 hover:border-[#FDB714] transition-all duration-300 shadow-xl'>
+                  <button className=' cursor-pointer group px-10 py-5 bg-white/10 backdrop-blur-md text-black font-black rounded-2xl text-lg border-2 border-white/30 hover:bg-white/20 hover:border-[#FDB714] transition-all duration-300 shadow-xl'>
                     <span className='flex items-center gap-3'>
                       <Clock className='w-6 h-6' />
                       Ring: +47 123 45 678
