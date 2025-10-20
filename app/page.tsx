@@ -159,12 +159,12 @@ export default function Home() {
   return (
     <div className='relative bg-white overflow-hidden'>
       {/* Background Image */}
-      <div className='fixed inset-0 z-0'>
+      <div className='fixed inset-0 left-50 md:left-300 z-0'>
         <Image
           src='/charlies_background.png'
           alt='Background'
           fill
-          className='object-contain pl-300 pt-40 opacity-100'
+          className='object-contain pt-40 opacity-100'
           priority
         />
       </div>
@@ -188,9 +188,25 @@ export default function Home() {
               viewport={{ once: true }}
               className='text-center mb-16'
             >
-              <h2 className='text-4xl md:text-5xl font-bold text-gray-900 mb-4'>
-                Aktive Kampanjer
-              </h2>
+              <motion.div
+                initial={{ scale: 0, rotate: -180 }}
+                whileInView={{ scale: 5, rotate: 0 }}
+                viewport={{ once: true }}
+                transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+                className='relative w-30 h-30 flex-shrink-0 items-center justify-center mx-auto mt-4'
+              >
+                <Image
+                  src='/CC.png'
+                  alt='Credit Card'
+                  fill
+                  className='object-contain'
+                />
+              </motion.div>
+              <div className='flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 mb-8'>
+                <h2 className='text-4xl md:text-5xl font-bold text-gray-900'>
+                  Aktive Kampanjer
+                </h2>
+              </div>
               <p className='text-xl text-gray-600 mb-4'>
                 Spar penger med våre fantastiske tilbud
               </p>
