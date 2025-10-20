@@ -178,272 +178,87 @@ export default function Home() {
         <div className='relative pt-25 md:pt-30'>
           <Carousel />
         </div>
-        {/* Featured Categories - Premium Design */}
-        <section className='py-10 md:py-20 bg-gradient-to-br relative overflow-hidden'>
-          {/* Animated Background Elements */}
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 90, 0],
-            }}
-            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-            className='absolute top-20 left-20 w-96 h-96 '
-          />
-          <motion.div
-            animate={{
-              scale: [1.2, 1, 1.2],
-              rotate: [90, 0, 90],
-            }}
-            transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-            className='absolute bottom-20 right-20 w-96 h-96  '
-          />
 
-          <div className='container mx-auto px-4 relative z-10'>
-            {/* Google Reviews Carousel */}
+        {/* Current Campaigns */}
+        <section className='py-10 '>
+          <div className='container mx-auto '>
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className='mb-16 overflow-hidden'
+              className='text-center mb-16'
             >
-              <div className='relative bg-gradient-to-br rounded-3xl p-8 md:p-12  shadow-xl'>
-                {/* Google Reviews Header */}
-                <div className='flex items-center justify-center gap-4 md:gap-6 mb-8 flex-wrap'>
-                  <div className='flex items-center gap-3'>
-                    <div className='w-14 h-14 bg-white rounded-lg shadow-md flex items-center justify-center'>
-                      <svg viewBox='0 0 24 24' className='w-8 h-8'>
-                        <path
-                          fill='#4285F4'
-                          d='M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z'
-                        />
-                        <path
-                          fill='#34A853'
-                          d='M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z'
-                        />
-                        <path
-                          fill='#FBBC05'
-                          d='M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z'
-                        />
-                        <path
-                          fill='#EA4335'
-                          d='M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z'
-                        />
-                      </svg>
-                    </div>
-                    <div className='text-left'>
-                      <div className='text-base md:text-lg font-bold text-gray-900'>
-                        Google
-                      </div>
-                      <div className='text-sm text-gray-600'>Anmeldelser</div>
-                    </div>
-                  </div>
-                  <div className='flex items-center gap-2'>
-                    <span className='text-4xl md:text-5xl font-black text-gray-900'>
-                      4.2
-                    </span>
-                    <div className='flex'>
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`w-6 h-6 md:w-7 md:h-7 ${
-                            i < 4
-                              ? 'text-[#FDB714] fill-[#FDB714]'
-                              : 'text-gray-300'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <span className='text-base md:text-lg text-gray-600 font-semibold'>
-                    (650+ anmeldelser)
-                  </span>
-                </div>
-
-                {/* Reviews Carousel - Card by Card */}
-                <div className='relative overflow-hidden px-2 sm:px-4'>
-                  <motion.div
-                    key={currentReviewIndex}
-                    initial={{ opacity: 0, x: 100, scale: 0.95 }}
-                    animate={{ opacity: 1, x: 0, scale: 1 }}
-                    exit={{ opacity: 0, x: -100, scale: 0.95 }}
-                    transition={{
-                      duration: 0.6,
-                      ease: [0.25, 0.1, 0.25, 1],
-                    }}
-                    className='flex justify-center'
-                  >
-                    <div className='w-full max-w-3xl bg-gradient-to-br from-white/95 via-gray-50/95 to-white/95 backdrop-blur-sm rounded-3xl p-6 sm:p-8 md:p-10 border-2 border-gray-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 min-h-[280px] flex flex-col'>
-                      <div className='flex items-start gap-4 sm:gap-6 mb-6'>
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{
-                            delay: 0.2,
-                            type: 'spring',
-                            stiffness: 200,
-                          }}
-                          className='w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-[#FDB714] via-amber-500 to-orange-400 rounded-full flex items-center justify-center text-white font-black text-lg sm:text-xl flex-shrink-0 shadow-lg'
-                        >
-                          {reviews[currentReviewIndex].avatar}
-                        </motion.div>
-                        <div className='flex-1 min-w-0'>
-                          <h3 className='font-black text-gray-900 text-xl sm:text-2xl mb-2'>
-                            {reviews[currentReviewIndex].name}
-                          </h3>
-                          <div className='flex items-center gap-2 mb-2'>
-                            {[...Array(5)].map((_, i) => (
-                              <motion.div
-                                key={i}
-                                initial={{ scale: 0, rotate: -180 }}
-                                animate={{ scale: 1, rotate: 0 }}
-                                transition={{ delay: 0.3 + i * 0.05 }}
-                              >
-                                <Star
-                                  className={`w-5 h-5 sm:w-6 sm:h-6 ${
-                                    i < reviews[currentReviewIndex].rating
-                                      ? 'text-[#FDB714] fill-[#FDB714]'
-                                      : 'text-gray-300'
-                                  }`}
-                                />
-                              </motion.div>
-                            ))}
-                          </div>
-                          <span className='text-sm sm:text-base text-gray-500 font-medium'>
-                            {reviews[currentReviewIndex].date}
-                          </span>
-                        </div>
-                      </div>
-                      <div className='flex-1 flex items-center'>
-                        <h3 className='text-gray-700 text-lg sm:text-xl md:text-2xl leading-relaxed font-medium'>
-                          &ldquo;{reviews[currentReviewIndex].text}&rdquo;
-                        </h3>
-                      </div>
-                    </div>
-                  </motion.div>
-                  {/* Pagination Dots */}
-                  <div className='flex justify-center gap-2 sm:gap-3 mt-8'>
-                    {reviews.map((_, index) => (
-                      <motion.button
-                        key={index}
-                        onClick={() => setCurrentReviewIndex(index)}
-                        whileHover={{ scale: 1.2 }}
-                        whileTap={{ scale: 0.9 }}
-                        className={`transition-all duration-300 rounded-full cursor-pointer ${
-                          index === currentReviewIndex
-                            ? 'bg-gradient-to-r from-[#FDB714] to-amber-500 w-10 sm:w-12 h-3'
-                            : 'bg-gray-300 hover:bg-gray-400 w-3 h-3'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <h2 className='text-4xl md:text-5xl font-bold text-gray-900 mb-4'>
+                Aktive Kampanjer
+              </h2>
+              <p className='text-xl text-gray-600 mb-4'>
+                Spar penger med våre fantastiske tilbud
+              </p>
+              <div className='w-24 h-1 bg-[#FDB714] mx-auto'></div>
             </motion.div>
 
-            {/* Current Campaigns */}
-            <section className='py-10 '>
-              <div className='container mx-auto '>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto'>
+              {campaigns.map((campaign, index) => (
                 <motion.div
+                  key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className='text-center mb-16'
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  className='relative bg-white/95 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 border-[#FDB714]'
                 >
-                  <h2 className='text-4xl md:text-5xl font-bold text-gray-900 mb-4'>
-                    Aktive Kampanjer
-                  </h2>
-                  <p className='text-xl text-gray-600 mb-4'>
-                    Spar penger med våre fantastiske tilbud
-                  </p>
-                  <div className='w-24 h-1 bg-[#FDB714] mx-auto'></div>
-                </motion.div>
+                  {/* Image Background with Overlay */}
+                  <div className='relative h-64 overflow-hidden'>
+                    <Image
+                      src={campaign.image}
+                      alt={campaign.title}
+                      fill
+                      className='object-cover'
+                    />
+                    <div className='absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/80'></div>
 
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto'>
-                  {campaigns.map((campaign, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      whileHover={{ y: -10, scale: 1.02 }}
-                      className='relative bg-white/95 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 border-[#FDB714]'
-                    >
-                      {/* Image Background with Overlay */}
-                      <div className='relative h-64 overflow-hidden'>
-                        <Image
-                          src={campaign.image}
-                          alt={campaign.title}
-                          fill
-                          className='object-cover'
-                        />
-                        <div className='absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/80'></div>
-
-                        {/* Content on Image */}
-                        <div className='relative h-full flex flex-col justify-between p-6 text-white'>
-                          <div>
-                            <div className='flex items-center justify-between mb-4'>
-                              <div className='bg-[#FDB714] p-3 rounded-lg shadow-lg'>
-                                <div className='text-black'>
-                                  {campaign.icon}
-                                </div>
-                              </div>
-                              <div className='text-right'>
-                                <div className='text-5xl font-bold text-[#FDB714]'>
-                                  {campaign.discount}
-                                </div>
-                                <div className='text-xs uppercase tracking-wider font-semibold text-white'>
-                                  Rabatt
-                                </div>
-                              </div>
-                            </div>
+                    {/* Content on Image */}
+                    <div className='relative h-full flex flex-col justify-between p-6 text-white'>
+                      <div>
+                        <div className='flex items-center justify-between mb-4'>
+                          <div className='bg-[#FDB714] p-3 rounded-lg shadow-lg'>
+                            <div className='text-black'>{campaign.icon}</div>
                           </div>
-                          <div>
-                            <h3 className='text-2xl font-bold mb-2'>
-                              {campaign.title}
-                            </h3>
-                            <p className='text-gray-100 text-sm leading-relaxed mb-4'>
-                              {campaign.description}
-                            </p>
-                            <div className='flex items-center justify-between'>
-                              <span className='text-xs text-gray-300 flex items-center gap-2'>
-                                <Clock className='w-4 h-4' />
-                                {campaign.validUntil}
-                              </span>
-                              <Button variant='primary' size='sm'>
-                                Bestill Nå
-                              </Button>
+                          <div className='text-right'>
+                            <div className='text-5xl font-bold text-[#FDB714]'>
+                              {campaign.discount}
+                            </div>
+                            <div className='text-xs uppercase tracking-wider font-semibold text-white'>
+                              Rabatt
                             </div>
                           </div>
                         </div>
                       </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* Seamless Section Divider */}
-            <motion.div
-              initial={{ opacity: 0, scaleX: 0 }}
-              whileInView={{ opacity: 1, scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className='mt-20 mb-8 relative'
-            >
-              <div className='absolute inset-0 flex items-center'>
-                <div className='w-full border-t-2 border-gray-200'></div>
-              </div>
-              <div className='relative flex justify-center'>
-                <span className='px-6 py-3 bg-gradient-to-r from-[#FDB714] to-amber-500 text-white font-black rounded-full shadow-xl text-sm'>
-                  UTFORSK HELE MENYEN
-                </span>
-              </div>
-            </motion.div>
+                      <div>
+                        <h3 className='text-2xl font-bold mb-2'>
+                          {campaign.title}
+                        </h3>
+                        <p className='text-gray-100 text-sm leading-relaxed mb-4'>
+                          {campaign.description}
+                        </p>
+                        <div className='flex items-center justify-between'>
+                          <span className='text-xs text-gray-300 flex items-center gap-2'>
+                            <Clock className='w-4 h-4' />
+                            {campaign.validUntil}
+                          </span>
+                          <Button variant='primary' size='sm'>
+                            Bestill Nå
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
-
         {/* Menu Section with Category Filter - Enhanced & Professional */}
         <section className='py-10 md:py-20 bg-gradient-to-br relative overflow-hidden'>
           {/* Animated Background Elements */}
@@ -941,7 +756,188 @@ export default function Home() {
             </motion.div>
           </div>
         </section>
+        {/* Featured Categories - Premium Design */}
+        <section className='py-10 md:py-20 bg-gradient-to-br relative overflow-hidden'>
+          {/* Animated Background Elements */}
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              rotate: [0, 90, 0],
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+            className='absolute top-20 left-20 w-96 h-96 '
+          />
+          <motion.div
+            animate={{
+              scale: [1.2, 1, 1.2],
+              rotate: [90, 0, 90],
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+            className='absolute bottom-20 right-20 w-96 h-96  '
+          />
 
+          <div className='container mx-auto px-4 relative z-10'>
+            {/* Google Reviews Carousel */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className='mb-16 overflow-hidden'
+            >
+              <div className='relative bg-gradient-to-br rounded-3xl p-8 md:p-12  shadow-xl'>
+                {/* Google Reviews Header */}
+                <div className='flex items-center justify-center gap-4 md:gap-6 mb-8 flex-wrap'>
+                  <div className='flex items-center gap-3'>
+                    <div className='w-14 h-14 bg-white rounded-lg shadow-md flex items-center justify-center'>
+                      <svg viewBox='0 0 24 24' className='w-8 h-8'>
+                        <path
+                          fill='#4285F4'
+                          d='M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z'
+                        />
+                        <path
+                          fill='#34A853'
+                          d='M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z'
+                        />
+                        <path
+                          fill='#FBBC05'
+                          d='M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z'
+                        />
+                        <path
+                          fill='#EA4335'
+                          d='M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z'
+                        />
+                      </svg>
+                    </div>
+                    <div className='text-left'>
+                      <div className='text-base md:text-lg font-bold text-gray-900'>
+                        Google
+                      </div>
+                      <div className='text-sm text-gray-600'>Anmeldelser</div>
+                    </div>
+                  </div>
+                  <div className='flex items-center gap-2'>
+                    <span className='text-4xl md:text-5xl font-black text-gray-900'>
+                      4.2
+                    </span>
+                    <div className='flex'>
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`w-6 h-6 md:w-7 md:h-7 ${
+                            i < 4
+                              ? 'text-[#FDB714] fill-[#FDB714]'
+                              : 'text-gray-300'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <span className='text-base md:text-lg text-gray-600 font-semibold'>
+                    (650+ anmeldelser)
+                  </span>
+                </div>
+
+                {/* Reviews Carousel - Card by Card */}
+                <div className='relative overflow-hidden px-2 sm:px-4'>
+                  <motion.div
+                    key={currentReviewIndex}
+                    initial={{ opacity: 0, x: 100, scale: 0.95 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, x: -100, scale: 0.95 }}
+                    transition={{
+                      duration: 0.6,
+                      ease: [0.25, 0.1, 0.25, 1],
+                    }}
+                    className='flex justify-center'
+                  >
+                    <div className='w-full max-w-3xl bg-gradient-to-br from-white/95 via-gray-50/95 to-white/95 backdrop-blur-sm rounded-3xl p-6 sm:p-8 md:p-10 border-2 border-gray-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 min-h-[280px] flex flex-col'>
+                      <div className='flex items-start gap-4 sm:gap-6 mb-6'>
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{
+                            delay: 0.2,
+                            type: 'spring',
+                            stiffness: 200,
+                          }}
+                          className='w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-[#FDB714] via-amber-500 to-orange-400 rounded-full flex items-center justify-center text-white font-black text-lg sm:text-xl flex-shrink-0 shadow-lg'
+                        >
+                          {reviews[currentReviewIndex].avatar}
+                        </motion.div>
+                        <div className='flex-1 min-w-0'>
+                          <h3 className='font-black text-gray-900 text-xl sm:text-2xl mb-2'>
+                            {reviews[currentReviewIndex].name}
+                          </h3>
+                          <div className='flex items-center gap-2 mb-2'>
+                            {[...Array(5)].map((_, i) => (
+                              <motion.div
+                                key={i}
+                                initial={{ scale: 0, rotate: -180 }}
+                                animate={{ scale: 1, rotate: 0 }}
+                                transition={{ delay: 0.3 + i * 0.05 }}
+                              >
+                                <Star
+                                  className={`w-5 h-5 sm:w-6 sm:h-6 ${
+                                    i < reviews[currentReviewIndex].rating
+                                      ? 'text-[#FDB714] fill-[#FDB714]'
+                                      : 'text-gray-300'
+                                  }`}
+                                />
+                              </motion.div>
+                            ))}
+                          </div>
+                          <span className='text-sm sm:text-base text-gray-500 font-medium'>
+                            {reviews[currentReviewIndex].date}
+                          </span>
+                        </div>
+                      </div>
+                      <div className='flex-1 flex items-center'>
+                        <h3 className='text-gray-700 text-lg sm:text-xl md:text-2xl leading-relaxed font-medium'>
+                          &ldquo;{reviews[currentReviewIndex].text}&rdquo;
+                        </h3>
+                      </div>
+                    </div>
+                  </motion.div>
+                  {/* Pagination Dots */}
+                  <div className='flex justify-center gap-2 sm:gap-3 mt-8'>
+                    {reviews.map((_, index) => (
+                      <motion.button
+                        key={index}
+                        onClick={() => setCurrentReviewIndex(index)}
+                        whileHover={{ scale: 1.2 }}
+                        whileTap={{ scale: 0.9 }}
+                        className={`transition-all duration-300 rounded-full cursor-pointer ${
+                          index === currentReviewIndex
+                            ? 'bg-gradient-to-r from-[#FDB714] to-amber-500 w-10 sm:w-12 h-3'
+                            : 'bg-gray-300 hover:bg-gray-400 w-3 h-3'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Seamless Section Divider */}
+            <motion.div
+              initial={{ opacity: 0, scaleX: 0 }}
+              whileInView={{ opacity: 1, scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className='mt-20 mb-8 relative'
+            >
+              <div className='absolute inset-0 flex items-center'>
+                <div className='w-full border-t-2 border-gray-200'></div>
+              </div>
+              <div className='relative flex justify-center'>
+                <span className='px-6 py-3 bg-gradient-to-r from-[#FDB714] to-amber-500 text-white font-black rounded-full shadow-xl text-sm'>
+                  UTFORSK HELE MENYEN
+                </span>
+              </div>
+            </motion.div>
+          </div>
+        </section>
         {/* CTA Section - Premium Redesign */}
         <section className='py-10 md:py-20 bg-gradient-to-br text-white relative overflow-hidden'>
           {/* Animated Background Elements */}
