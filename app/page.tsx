@@ -188,20 +188,6 @@ export default function Home() {
               viewport={{ once: true }}
               className='text-center mb-16'
             >
-              <motion.div
-                initial={{ scale: 0, rotate: -180 }}
-                whileInView={{ scale: 5, rotate: 0 }}
-                viewport={{ once: true }}
-                transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-                className='relative w-30 h-30 flex-shrink-0 items-center justify-center mx-auto mt-4'
-              >
-                <Image
-                  src='/CC.png'
-                  alt='Credit Card'
-                  fill
-                  className='object-contain'
-                />
-              </motion.div>
               <div className='flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 mb-8'>
                 <h2 className='text-4xl md:text-5xl font-bold text-gray-900'>
                   Aktive Kampanjer
@@ -303,6 +289,20 @@ export default function Home() {
               viewport={{ once: true }}
               className='text-center mb-12'
             >
+              <motion.div
+                initial={{ scale: 0, rotate: -180 }}
+                whileInView={{ scale: 5, rotate: 0 }}
+                viewport={{ once: true }}
+                transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+                className='relative w-30 h-30 flex-shrink-0 items-center justify-center mx-auto mt-4'
+              >
+                <Image
+                  src='/CC.png'
+                  alt='Credit Card'
+                  fill
+                  className='object-contain'
+                />
+              </motion.div>
               {/* Title with Gradient Animation */}
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}

@@ -54,24 +54,27 @@ export default function MenuItem({
 
         {image && (
           <div className='relative h-44 md:h-52 lg:h-60 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200'>
+            {/* Price Tag */}
+            <div className=' mb-2 w-fit group absolute top-3 right-3 '>
+              <div className='absolute inset-0 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-xl blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-500'></div>
+              <div className='relative bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-400 text-black px-3 py-1.5 rounded-xl font-black text-base md:text-lg shadow-lg'>
+                {price}
+              </div>
+            </div>
             <Image
               src={image}
               alt={name}
               fill
               className='object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:rotate-1'
             />
-
-            {/* Badges */}
-            {isVegetarian && (
-              <motion.div
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-                className='absolute top-3 right-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1.5 rounded-full text-xs font-black shadow-lg backdrop-blur-sm border border-white/20'
-              >
-                🌱 Vegetar
-              </motion.div>
-            )}
+            <motion.div
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+              className='absolute top-3 right-3 bg-gradient-to-r from-yellow-400 to-amber-500 text-white px-3 py-2 rounded-full text-sm font-black shadow-lg backdrop-blur-sm border border-white/20 '
+            >
+              {price}
+            </motion.div>
 
             {/* Gradient Overlay */}
             <div className='absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
@@ -98,20 +101,7 @@ export default function MenuItem({
             <h3 className='text-lg md:text-xl font-black text-gray-900 line-clamp-1 flex-1 pr-2 group-hover:text-yellow-600 transition-colors duration-300'>
               {name}
             </h3>
-
-            {/* Price Tag */}
-            <div className='relative'>
-              <div className='absolute inset-0 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-xl blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-500'></div>
-              <div className='relative bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-400 text-black px-3 py-1.5 rounded-xl font-black text-base md:text-lg shadow-lg'>
-                {price}
-              </div>
-            </div>
           </div>
-
-          {/* Description */}
-          <p className='text-gray-600 text-xs md:text-sm leading-relaxed mb-3 flex-grow line-clamp-2 group-hover:text-gray-700 transition-colors duration-300'>
-            {description}
-          </p>
 
           {/* Rating Display */}
           <div className='flex items-center gap-1 mb-4'>

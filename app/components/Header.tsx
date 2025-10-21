@@ -34,7 +34,7 @@ export default function Header() {
           if (currentScrollY < lastScrollY || currentScrollY < 10) {
             // Scrolling up or at top
             setIsVisible(true)
-          } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+          } else if (currentScrollY > lastScrollY && currentScrollY > 300) {
             // Scrolling down and past threshold
             setIsVisible(false)
           }

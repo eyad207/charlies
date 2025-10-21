@@ -32,14 +32,14 @@ export default function OmOss() {
   return (
     <div className='bg-white'>
       {/* Hero Section - Modern & Bold */}
-      <section className='relative min-h-[600px] md:min-h-[700px] flex items-center overflow-hidden'>
+      <section className='relative mt-20 pt-30 min-h-[600px] md:min-h-[700px] flex items-center overflow-hidden'>
         {/* Background with parallax effect */}
         <div className='absolute inset-0'>
           <Image
-            src='/KebabRull.avif'
+            src='/Kebab i pita med hjemmelaget kebabsaus.jpg'
             alt="Charlie's Kebab"
             fill
-            className='object-cover scale-110'
+            className='object-cover scale-100'
             priority
           />
           <div className='absolute inset-0 bg-gradient-to-br from-black/80 via-black/70 to-black/60' />
