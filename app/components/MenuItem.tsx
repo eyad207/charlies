@@ -102,7 +102,10 @@ export default function MenuItem({
               {name}
             </h3>
           </div>
-
+          {/* Description */}
+          <p className='hidden md:block text-gray-600 text-xs md:text-sm leading-relaxed mb-3 flex-grow line-clamp-2 group-hover:text-gray-700 transition-colors duration-300'>
+            {description}
+          </p>
           {/* Rating Display */}
           <div className='flex items-center gap-1 mb-4'>
             {[...Array(5)].map((_, i) => (

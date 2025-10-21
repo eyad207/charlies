@@ -207,8 +207,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -10, scale: 1.02 }}
-                  className='relative bg-white/95 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 border-[#FDB714]'
+                  className='relative hover:scale-105 bg-white/95 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 border-[#FDB714]'
                 >
                   {/* Image Background with Overlay */}
                   <div className='relative h-64 overflow-hidden'>
@@ -263,7 +262,7 @@ export default function Home() {
         </section>
 
         {/* Menu Section with Category Filter - Enhanced & Professional */}
-        <section className='py-10 md:py-20 bg-gradient-to-br relative overflow-hidden'>
+        <section className='py-10 bg-gradient-to-br relative overflow-hidden'>
           {/* Animated Background Elements */}
           <motion.div
             animate={{
@@ -435,7 +434,7 @@ export default function Home() {
         </section>
 
         {/* Delivery Section - Completely Redesigned */}
-        <section className='py-10 md:py-20 bg-gradient-to-br relative overflow-hidden'>
+        <section className='py-10 bg-gradient-to-br relative overflow-hidden'>
           {/* Animated Background Elements */}
           <motion.div
             animate={{
@@ -462,15 +461,6 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className='text-center mb-12 md:mb-16'
             >
-              <motion.span
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className='inline-flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-[#FDB714] to-amber-500 text-black rounded-full text-sm font-bold mb-6 shadow-lg'
-              >
-                <TrendingUp className='w-4 h-4' />
-                RASK & PÅLITELIG
-              </motion.span>
               <h2 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-black mb-4'>
                 Mat Levert på
                 <span className='block bg-gradient-to-r from-[#FDB714] via-amber-500 to-orange-400 bg-clip-text text-transparent mt-2'>
@@ -507,13 +497,7 @@ export default function Home() {
                 {/* Content */}
                 <div className='relative z-10 h-full flex flex-col justify-end p-6 md:p-8'>
                   {/* Icon Badge */}
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2, type: 'spring' }}
-                    className='bg-gradient-to-br from-[#FDB714] to-amber-500 w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-xl'
-                  >
+                  <motion.div className='bg-gradient-to-br from-[#FDB714] to-amber-500 w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-xl'>
                     <Clock className='w-7 h-7 md:w-8 md:h-8 text-black' />
                   </motion.div>
 
@@ -536,7 +520,7 @@ export default function Home() {
                   <motion.button
                     whileHover={{ x: 5 }}
                     whileTap={{ scale: 0.95 }}
-                    className='bg-gradient-to-r from-[#FDB714] to-amber-500 text-black px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all flex items-center gap-3 w-fit group/btn'
+                    className='bg-gradient-to-r cursor-pointer from-[#FDB714] to-amber-500 text-black px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all flex items-center gap-3 w-fit group/btn'
                   >
                     <span>Bestill Nå</span>
                     <motion.span
@@ -573,13 +557,7 @@ export default function Home() {
                 {/* Content */}
                 <div className='relative z-10 h-full flex flex-col justify-end p-6 md:p-8'>
                   {/* Icon Badge */}
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3, type: 'spring' }}
-                    className='bg-gradient-to-br from-[#FDB714] to-amber-500 w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-xl'
-                  >
+                  <motion.div className='bg-gradient-to-br from-[#FDB714] to-amber-500 w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-xl'>
                     <ShoppingBag className='w-7 h-7 md:w-8 md:h-8 text-black' />
                   </motion.div>
 
@@ -602,7 +580,7 @@ export default function Home() {
                   <motion.button
                     whileHover={{ x: 5 }}
                     whileTap={{ scale: 0.95 }}
-                    className='bg-gradient-to-r from-[#FDB714] to-amber-500 text-black px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all flex items-center gap-3 w-fit group/btn'
+                    className='bg-gradient-to-r cursor-pointer from-[#FDB714] to-amber-500 text-black px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all flex items-center gap-3 w-fit group/btn'
                   >
                     <span>Bestill Nå</span>
                     <motion.span
@@ -678,13 +656,7 @@ export default function Home() {
                 >
                   <div className='absolute inset-0 bg-gradient-to-r from-[#14edfd] to-[#14edfd] rounded-2xl md:rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-opacity duration-500' />
                   <div className='relative bg-white/95 backdrop-blur-sm rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-[#14edfd]/20 group-hover:border-[#14edfd]/40 h-full flex flex-col'>
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ type: 'spring', stiffness: 200 }}
-                      className='w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 relative mx-auto mb-4 sm:mb-6 md:mb-8 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl ring-4 ring-[#14edfd]/20 group-hover:ring-[#14edfd]/40 transition-all duration-500'
-                    >
+                    <motion.div className='w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 relative mx-auto mb-4 sm:mb-6 md:mb-8 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl ring-4 ring-[#14edfd]/20 group-hover:ring-[#14edfd]/40 transition-all duration-500'>
                       <Image
                         src='/wolt.jpg'
                         alt='Wolt'
@@ -726,17 +698,7 @@ export default function Home() {
                 >
                   <div className='absolute inset-0 bg-gradient-to-r from-pink-500 to-rose-600 rounded-2xl md:rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-opacity duration-500' />
                   <div className='relative bg-white/95 backdrop-blur-sm rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-pink-100 group-hover:border-pink-300 h-full flex flex-col'>
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{
-                        type: 'spring',
-                        stiffness: 200,
-                        delay: 0.1,
-                      }}
-                      className='w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 relative mx-auto mb-4 sm:mb-6 md:mb-8 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl ring-4 ring-pink-100 group-hover:ring-pink-300 transition-all duration-500'
-                    >
+                    <motion.div className='w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 relative mx-auto mb-4 sm:mb-6 md:mb-8 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl ring-4 ring-[#14edfd]/20 group-hover:ring-[#14edfd]/40 transition-all duration-500'>
                       <Image
                         src='/foodora.png'
                         alt='Foodora'
