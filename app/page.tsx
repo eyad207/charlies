@@ -11,7 +11,6 @@ import {
   Star,
   Clock,
   ShoppingBag,
-  TrendingUp,
   Award,
   Users,
   Gift,
