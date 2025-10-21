@@ -3,15 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
-import {
-  Menu,
-  X,
-  ShoppingCart,
-  Search,
-  Phone,
-  MapPin,
-  Truck,
-} from 'lucide-react'
+import { Menu, X, ShoppingCart, Phone, MapPin, Truck } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { useCart } from '../context/CartContext'
 
@@ -19,8 +11,6 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
-  const [searchOpen, setSearchOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
   const { toggleCart, getTotalItems } = useCart()
 
   useEffect(() => {
@@ -110,50 +100,6 @@ export default function Header() {
                 <span className='font-semibold'>
                   Strømsveien 77, 2010 Strømmen
                 </span>
-              </motion.div>
-
-              {/* Search Bar */}
-              <motion.div
-                initial={{ width: 0, opacity: 0 }}
-                animate={{ width: searchOpen ? 320 : 40, opacity: 1 }}
-                className='relative'
-              >
-                {!searchOpen ? (
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setSearchOpen(true)}
-                    className='bg-black/20 backdrop-blur-md p-2 rounded-full text-white hover:bg-black/30 transition-all'
-                  >
-                    <Search className='w-7 h-7' />
-                  </motion.button>
-                ) : (
-                  <div className='flex items-center bg-black/20 backdrop-blur-md rounded-full px-4 py-2'>
-                    <Search className='w-5 h-5 text-white mr-2' />
-                    <input
-                      type='text'
-                      placeholder='Søk meny...'
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      onBlur={() => {
-                        if (!searchQuery) setSearchOpen(false)
-                      }}
-                      autoFocus
-                      className='bg-transparent border-none outline-none text-white placeholder-white/70 text-sm w-full'
-                    />
-                    {searchQuery && (
-                      <button
-                        onClick={() => {
-                          setSearchQuery('')
-                          setSearchOpen(false)
-                        }}
-                        className='ml-2'
-                      >
-                        <X className='w-4 h-4 text-white' />
-                      </button>
-                    )}
-                  </div>
-                )}
               </motion.div>
             </div>
 
